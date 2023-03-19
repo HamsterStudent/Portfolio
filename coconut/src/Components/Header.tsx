@@ -19,6 +19,7 @@ const Right = styled.div`
 const Item = styled.div`
   padding: 0 10px;
   border: dotted 0.7px;
+  background: plum;
 `;
 
 function Header() {
