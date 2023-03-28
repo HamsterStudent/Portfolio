@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Nav = styled.div`
@@ -23,6 +24,12 @@ const Item = styled.div`
 `;
 
 function Header() {
+  const [clock, setClock] = useState("00:00");
+  const Timer = setInterval(() => {
+    let time = new Date();
+    setClock(time.getHours() + ":" + time.getMinutes());
+  }, 1000);
+
   return (
     <Nav>
       <Dropdown>
@@ -32,7 +39,7 @@ function Header() {
       </Dropdown>
       <Right>
         <Item>fullscreen</Item>
-        <Item>clock</Item>
+        <Item>{clock}</Item>
         <Item>date</Item>
       </Right>
     </Nav>
