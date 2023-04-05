@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Nav = styled.div`
@@ -24,11 +24,20 @@ const Item = styled.div`
 `;
 
 function Header() {
-  const [clock, setClock] = useState("00:00");
+  let time = new Date();
+  const [clock, setClock] = useState(time.getHours() + ":" + time.getMinutes());
+  const [date, setDate] = useState("00/00");
+  const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  useEffect(() => {
+    setDate(week[time.getDay() - 1] + " " + time.getDate());
+  }, []);
+
   const Timer = setInterval(() => {
     let time = new Date();
     setClock(time.getHours() + ":" + time.getMinutes());
-  }, 1000);
+    console.log("dasd");
+  }, 60000);
 
   return (
     <Nav>
@@ -40,7 +49,7 @@ function Header() {
       <Right>
         <Item>fullscreen</Item>
         <Item>{clock}</Item>
-        <Item>date</Item>
+        <Item>{date}</Item>
       </Right>
     </Nav>
   );
