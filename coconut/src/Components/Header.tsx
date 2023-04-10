@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 
 const Nav = styled.div`
@@ -10,7 +11,16 @@ const Nav = styled.div`
   border-bottom: solid 0.7px;
 `;
 
-const Dropdown = styled.div``;
+const Logo = styled.div`
+  width: 150px;
+`;
+const Dropdown = styled.div`
+  width: 150px;
+  border-right: dotted 0.7px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 20px;
+`;
 
 const Right = styled.div`
   display: flex;
@@ -24,8 +34,14 @@ const Item = styled.div`
 `;
 
 function Header() {
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
+  console.log(isDesktop);
   let time = new Date();
-  const [clock, setClock] = useState(time.getHours() + ":" + time.getMinutes());
+  const hours = String(time.getHours()).padStart(2, "0");
+  const minute = String(time.getMinutes()).padStart(2, "0");
+  const [clock, setClock] = useState(hours + ":" + minute);
   const [date, setDate] = useState("00/00");
   const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -34,20 +50,29 @@ function Header() {
   }, []);
 
   const Timer = setInterval(() => {
-    let time = new Date();
-    setClock(time.getHours() + ":" + time.getMinutes());
-    console.log("dasd");
-  }, 60000);
+    setClock(hours + ":" + minute);
+  }, 30000);
+
+  const [menu, setMenu] = useState(false);
+  const toggleMenu = () => setMenu((prev) => !prev);
 
   return (
     <Nav>
-      <Dropdown>
-        Logo
-        <Item>Theme</Item>
-        <Item>Contact</Item>
-      </Dropdown>
+      {menu ? (
+        <>
+          <Logo onClick={toggleMenu}>Logo</Logo>
+          <Dropdown>
+            <Item>Theme</Item>
+            <Item>Contact</Item>
+            <Item>Guestbook</Item>
+          </Dropdown>
+        </>
+      ) : (
+        <Logo onClick={toggleMenu}>Logo</Logo>
+      )}
+
       <Right>
-        <Item>fullscreen</Item>
+        {isDesktop ? <Item>fullscreen</Item> : null}
         <Item>{clock}</Item>
         <Item>{date}</Item>
       </Right>
