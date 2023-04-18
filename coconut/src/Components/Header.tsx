@@ -37,7 +37,6 @@ function Header() {
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
-  console.log(isDesktop);
   let time = new Date();
   const hours = String(time.getHours()).padStart(2, "0");
   const minute = String(time.getMinutes()).padStart(2, "0");
