@@ -5,4 +5,4 @@
 
 ---
 
-- 2023/04/20 : gitmessage.txt 추가
+- 2023/04/20 : gitmessage.txt 추가!
