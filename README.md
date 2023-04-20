@@ -4,3 +4,5 @@
 <img src="/coconut/images/notion.png"  width="5%" height="30%">
 
 ---
+
+- 2023/04/20 : gitmessage.txt 추가
