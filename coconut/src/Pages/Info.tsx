@@ -1,28 +1,39 @@
 import styled from "styled-components";
 
 const InfoWrap = styled.div`
-  width: 500px;
-  height: 500px;
+  width: 50vw;
+  height: 50vh;
   background: plum;
   cursor: pointer;
 `;
 
 function Info() {
-  const handleDragEvent = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  let initialX;
+  let initialY;
+  let currentX;
+  let currentY;
+
+  const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    e.dataTransfer.effectAllowed = "move";
     console.log("X: " + e.clientX + " | Y: " + e.clientY);
-    console.log(e);
+    console.log(e.dataTransfer);
+    // e.preventDefault();
+    initialX = e.clientX;
+    initialY = e.clientY;
+  };
+  const onDrag = (e: React.DragEvent<HTMLDivElement>) => {
+    console.log(e.currentTarget);
   };
   const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     console.log("X: " + e.clientX + " | Y: " + e.clientY);
     console.log(e);
-    console.log("hamster");
   };
   return (
     <InfoWrap
       draggable
-      onDragStart={handleDragEvent}
+      onDragStart={onDragStart}
+      onDrag={onDrag}
       onDragEnd={onDragEnd}
     ></InfoWrap>
   );
