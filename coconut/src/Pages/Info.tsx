@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import styled from "styled-components";
 
 const InfoWrap = styled.div`
@@ -13,10 +14,12 @@ function Info() {
   let currentX;
   let currentY;
 
+  const temp = useRef(null);
+
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.effectAllowed = "move";
     console.log("X: " + e.clientX + " | Y: " + e.clientY);
-    console.log(e.dataTransfer);
+    console.log(e.currentTarget);
     // e.preventDefault();
     initialX = e.clientX;
     initialY = e.clientY;
@@ -27,7 +30,7 @@ function Info() {
   const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     console.log("X: " + e.clientX + " | Y: " + e.clientY);
-    console.log(e);
+    console.log(e.currentTarget);
   };
   return (
     <InfoWrap
@@ -35,6 +38,7 @@ function Info() {
       onDragStart={onDragStart}
       onDrag={onDrag}
       onDragEnd={onDragEnd}
+      ref={temp}
     ></InfoWrap>
   );
 }
