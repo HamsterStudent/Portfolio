@@ -8,13 +8,21 @@ const InfoWrap = styled.div`
   cursor: pointer;
 `;
 
+interface IPosition {
+  x: number;
+  y: number;
+  e: React.DragEvent<HTMLDivElement>;
+}
+
+function setTranslate({ x, y, e }: IPosition) {
+  e.currentTarget.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+}
+
 function Info() {
   let initialX;
   let initialY;
   let currentX;
   let currentY;
-
-  const temp = useRef(null);
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.effectAllowed = "move";
@@ -25,7 +33,18 @@ function Info() {
     initialY = e.clientY;
   };
   const onDrag = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log(e.currentTarget);
+    // e.preventDefault();
+    if (e.type == "drag") {
+      console.log(e);
+      e.currentTarget.style.left = `${e.clientX}px`;
+      e.currentTarget.style.top = `${e.clientY}px`;
+      initialX = e.clientX;
+      initialY = e.clientY;
+
+      let x = e.clientX;
+      let y = e.clientY;
+      setTranslate({ x, y, e });
+    }
   };
   const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -37,8 +56,7 @@ function Info() {
       draggable
       onDragStart={onDragStart}
       onDrag={onDrag}
-      onDragEnd={onDragEnd}
-      ref={temp}
+      // onDragEnd={onDragEnd}
     ></InfoWrap>
   );
 }
