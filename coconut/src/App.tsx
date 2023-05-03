@@ -10,17 +10,22 @@ const Info = styled.div`
   position: absolute;
 `;
 
-const ContainerWrap = styled.div`
+const Draggable = styled.section`
+  margin-top: -1px;
+  height: calc(100% + 1px);
   width: 100%;
   background-color: tomato;
 `;
+const AppWrap = styled.section`
+  height: 100vh;
+`;
 
 function App() {
-  const container = useRef<HTMLDivElement>(null); // 드래그 할 영역 네모 박스 Ref
-  const dragComponent = useRef<HTMLDivElement>(null); // // 움직일 드래그 박스 Ref
-  const [initialPos, setInitialPos] = useState({ x: 0, y: 0 }); // 드래그 전 포지션값 (e.target.offset의 상대 위치)
-  const [clientPos, setClientPos] = useState({ x: 0, y: 0 }); // 실시간 커서위치인 e.client를 갱신하는값
-  const [pos, setPos] = useState({ left: 0, top: 0 }); // 실제 drag할 요소가 위치하는 포지션값
+  const container = useRef<HTMLDivElement>(null);
+  const dragComponent = useRef<HTMLDivElement>(null);
+  const [initialPos, setInitialPos] = useState({ x: 0, y: 0 });
+  const [clientPos, setClientPos] = useState({ x: 0, y: 0 });
+  const [pos, setPos] = useState({ left: 0, top: 0 });
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     // 고스트이미지 제거
@@ -41,18 +46,37 @@ function App() {
     setClientPos(clientTemp);
   };
   const onDrag = (e: React.DragEvent<HTMLDivElement>) => {
-    const posTemp = { ...pos };
-    posTemp["left"] = e.currentTarget.offsetLeft + e.clientX - clientPos.x;
-    posTemp["top"] = e.currentTarget.offsetTop + e.clientY - clientPos.y;
+    if (e.currentTarget.offsetLeft < 0) {
+      const temp = { ...pos };
+      // 비져나가지 않게 하기
+      if (e.currentTarget.offsetTop < 0) {
+        temp["top"] = 0;
+        temp["left"] = e.currentTarget.offsetLeft + e.clientX - clientPos.x;
+        setPos(temp);
+      }
 
-    setPos(posTemp);
+      temp["left"] = 0;
+      temp["top"] = e.currentTarget.offsetTop + e.clientY - clientPos.y;
+      setPos(temp);
+    } else {
+      const posTemp = { ...pos };
+      posTemp["left"] = e.currentTarget.offsetLeft + e.clientX - clientPos.x;
+      posTemp["top"] = e.currentTarget.offsetTop + e.clientY - clientPos.y;
 
-    const clientPosTemp = { ...clientPos };
-    clientPosTemp["x"] = e.clientX;
-    clientPosTemp["y"] = e.clientY;
-    setClientPos(clientPosTemp);
+      setPos(posTemp);
 
-    console.log(container.current?.clientWidth);
+      const clientPosTemp = { ...clientPos };
+      clientPosTemp["x"] = e.clientX;
+      clientPosTemp["y"] = e.clientY;
+      setClientPos(clientPosTemp);
+    }
+
+    // console.log(container.current?.clientWidth);
+
+    // console.log(e.currentTarget.offsetLeft);
+    // if (e.currentTarget.offsetLeft <= 0) {
+    // } else {
+    // }
   };
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -74,9 +98,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <AppWrap className="App">
       <Header />
-      <ContainerWrap ref={container}>
+      <Draggable ref={container}>
         <Info
           ref={dragComponent}
           draggable
@@ -86,8 +110,8 @@ function App() {
           onDragEnd={(e) => onDragEnd(e)}
           style={{ left: pos.left, top: pos.top }}
         />
-      </ContainerWrap>
-    </div>
+      </Draggable>
+    </AppWrap>
   );
 }
 
