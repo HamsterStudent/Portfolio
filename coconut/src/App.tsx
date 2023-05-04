@@ -86,7 +86,7 @@ function App() {
     } else {
       setIsDrag(true);
     }
-    console.log("over");
+    console.log("over!!");
   };
   const isInsideDragArea = (e: any) => {
     if (e.clientX < 0 || e.clientY < 0) {
