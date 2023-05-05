@@ -15,6 +15,7 @@ const Draggable = styled.section`
   height: calc(100% + 1px);
   width: 100%;
   background-color: tomato;
+  position: relative;
 `;
 const AppWrap = styled.section`
   height: 100vh;
