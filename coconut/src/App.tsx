@@ -11,9 +11,11 @@ const Info = styled.div`
 `;
 
 const Draggable = styled.section`
-  margin-top: -1px;
-  height: calc(100% + 1px);
-  width: 100%;
+  /* margin-top: -1px;
+  height: calc(100% + 1px); */
+  width: 50%;
+  height: 500px;
+  margin: 0 auto;
   background-color: tomato;
   position: relative;
 `;
@@ -27,6 +29,7 @@ function App() {
   const [initialPos, setInitialPos] = useState({ x: 0, y: 0 });
   const [clientPos, setClientPos] = useState({ x: 0, y: 0 });
   const [pos, setPos] = useState({ left: 0, top: 0 });
+  const [isDrag, setIsDrag] = useState(false);
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     // 고스트이미지 제거
@@ -47,19 +50,7 @@ function App() {
     setClientPos(clientTemp);
   };
   const onDrag = (e: React.DragEvent<HTMLDivElement>) => {
-    if (e.currentTarget.offsetLeft < 0) {
-      const temp = { ...pos };
-      // 비져나가지 않게 하기
-      if (e.currentTarget.offsetTop < 0) {
-        temp["top"] = 0;
-        temp["left"] = e.currentTarget.offsetLeft + e.clientX - clientPos.x;
-        setPos(temp);
-      }
-
-      temp["left"] = 0;
-      temp["top"] = e.currentTarget.offsetTop + e.clientY - clientPos.y;
-      setPos(temp);
-    } else {
+    if (isDrag) {
       const posTemp = { ...pos };
       posTemp["left"] = e.currentTarget.offsetLeft + e.clientX - clientPos.x;
       posTemp["top"] = e.currentTarget.offsetTop + e.clientY - clientPos.y;
@@ -71,16 +62,31 @@ function App() {
       clientPosTemp["y"] = e.clientY;
       setClientPos(clientPosTemp);
     }
-
-    // console.log(container.current?.clientWidth);
-
-    // console.log(e.currentTarget.offsetLeft);
-    // if (e.currentTarget.offsetLeft <= 0) {
-    // } else {
-    // }
   };
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (e.currentTarget.offsetLeft < 0 && e.currentTarget.offsetTop < 0) {
+      setIsDrag(false);
+      setPos({
+        left: 0,
+        top: 0,
+      });
+    } else if (e.currentTarget.offsetLeft < 0) {
+      setIsDrag(false);
+      setPos({
+        left: 0,
+        top: e.currentTarget.offsetTop + e.clientY - clientPos.y,
+      });
+    } else if (e.currentTarget.offsetTop < 0) {
+      setIsDrag(false);
+      setPos({
+        left: e.currentTarget.offsetLeft + e.clientX - clientPos.x,
+        top: 0,
+      });
+    } else {
+      setIsDrag(true);
+    }
+    console.log("over!!");
   };
   const isInsideDragArea = (e: any) => {
     if (e.clientX < 0 || e.clientY < 0) {
@@ -96,6 +102,12 @@ function App() {
     //   posTemp["top"] = initialPos.y;
     //   setPos(posTemp);
     // }
+    console.log("end");
+  };
+
+  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    setIsDrag(false);
+    console.log("leave");
   };
 
   return (
@@ -109,6 +121,7 @@ function App() {
           onDrag={(e) => onDrag(e)}
           onDragOver={(e) => onDragOver(e)}
           onDragEnd={(e) => onDragEnd(e)}
+          onDragLeave={(e) => onDragLeave(e)}
           style={{ left: pos.left, top: pos.top }}
         />
       </Draggable>
