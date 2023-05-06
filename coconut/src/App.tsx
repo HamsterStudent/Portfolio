@@ -103,6 +103,7 @@ function App() {
     //   setPos(posTemp);
     // }
     console.log("end");
+    console.log("end");
   };
 
   const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
