@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Nav = styled.div`
   width: 100%;
   height: 20px;
-  background-color: pink;
+  background-color: plum;
   display: flex;
   justify-content: space-between;
   border-bottom: solid 0.7px;
