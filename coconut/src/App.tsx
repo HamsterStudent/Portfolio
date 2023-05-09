@@ -32,12 +32,6 @@ function App() {
   const [isDrag, setIsDrag] = useState(false);
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    // 고스트이미지 제거
-    // var img = new Image();
-    // img.src =
-    //   "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=";
-    // e.dataTransfer.setDragImage(img, 0, 0);
-
     const temp = { ...initialPos };
     temp["x"] = e.currentTarget.offsetLeft;
     temp["y"] = e.currentTarget.offsetTop;
