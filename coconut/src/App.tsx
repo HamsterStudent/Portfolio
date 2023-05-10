@@ -13,8 +13,8 @@ const Info = styled.div`
 const Draggable = styled.section`
   /* margin-top: -1px;
   height: calc(100% + 1px); */
-  width: 50%;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   background-color: tomato;
   position: relative;
@@ -58,7 +58,14 @@ function App() {
     }
   };
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    let parentWidth =
+      e.currentTarget.parentElement!.clientWidth - e.currentTarget.clientWidth;
+    let parentHeight =
+      e.currentTarget.parentElement!.clientHeight -
+      e.currentTarget.clientHeight;
+
     e.preventDefault();
+    console.log(e.currentTarget.offsetParent?.clientWidth);
     if (e.currentTarget.offsetLeft < 0 && e.currentTarget.offsetTop < 0) {
       setIsDrag(false);
       setPos({
@@ -77,9 +84,22 @@ function App() {
         left: e.currentTarget.offsetLeft + e.clientX - clientPos.x,
         top: 0,
       });
+    } else if (e.currentTarget.offsetLeft > parentWidth) {
+      setIsDrag(false);
+      setPos({
+        left: parentWidth,
+        top: e.currentTarget.offsetTop + e.clientY - clientPos.y,
+      });
+    } else if (e.currentTarget.offsetTop > parentHeight) {
+      setIsDrag(false);
+      setPos({
+        left: e.currentTarget.offsetLeft + e.clientX - clientPos.x,
+        top: parentHeight,
+      });
     } else {
       setIsDrag(true);
     }
+
     console.log("over!!");
   };
   const isInsideDragArea = (e: any) => {
