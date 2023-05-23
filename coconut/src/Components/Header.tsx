@@ -9,6 +9,7 @@ const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: solid 0.7px;
+  box-sizing: border-box;
 `;
 
 const Logo = styled.div`
@@ -29,8 +30,8 @@ const Right = styled.div`
 
 const Item = styled.div`
   padding: 0 10px;
-  border: dotted 0.7px;
-  background: plum;
+  border-left: dotted 0.7px;
+  box-sizing: border-box;
 `;
 
 function Header() {

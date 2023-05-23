@@ -35,8 +35,12 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
+#root{
+height: auto;
+}
 body {
   line-height: 1;
+  height: 100vh;
 }
 menu, ol, ul {
   list-style: none;
@@ -72,10 +76,10 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <GlobalStyle />
-      <App />
-    </RecoilRoot>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <RecoilRoot>
+    <GlobalStyle />
+    <App />
+  </RecoilRoot>,
+  // </React.StrictMode>,
 );
