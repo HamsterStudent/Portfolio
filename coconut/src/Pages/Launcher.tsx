@@ -48,9 +48,14 @@ const BtnTitle = styled.p`
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
+  const [test, setTest] = useState();
   useEffect(() => {
     setIcons(["resume", "Coding", "Design", "Tools", "Blog", "About"]);
   }, []);
+
+  const onClick = (e: any) => {
+    console.log(e);
+  };
   return (
     <Draggable
       nodeRef={dragRef}
@@ -64,7 +69,12 @@ function Launcher() {
           <MainImg src="img/temp.jpg" alt="temp" />
           <QuickBtnWrap>
             {icons.map((icon: any) => (
-              <QuickBtn key={icon}>
+              <QuickBtn
+                key={icon}
+                onClick={(e) => {
+                  onClick(e);
+                }}
+              >
                 <BtnImg src={`img/${icon}.gif`} />
                 <BtnTitle>{icon}</BtnTitle>
               </QuickBtn>
