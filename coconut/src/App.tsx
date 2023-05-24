@@ -1,45 +1,65 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./Components/Header";
 import styled from "styled-components";
 import Draggable, { DraggableCore } from "react-draggable";
+import Launcher from "./Pages/Launcher";
 
-const Info = styled.div`
-  width: 30vw;
-  height: 30vh;
-  background-color: plum;
-`;
-const InfoBar = styled.div`
-  width: 100%;
-  height: 30px;
-  background-color: aqua;
-`;
-
-const DragWrap = styled.section`
-  /* margin-top: -1px;
-  height: calc(100% + 1px); */
-  width: 90%;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-`;
 const AppWrap = styled.section`
   position: relative;
   height: calc(100vh - 20px);
   background-color: tomato;
 `;
+const MainIconWrap = styled.section`
+  position: absolute;
+  bottom: 0;
+`;
+const IconWrap = styled.ul`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+const IconLi = styled.li`
+  width: 80px;
+  height: auto;
+  font-size: 14px;
+  border: dotted 0.7px;
+`;
+const IconImgWrap = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 7px;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+`;
 
 function App() {
-  const dragRef = useRef<HTMLDivElement>(null);
-
   return (
     <>
       <Header />
-      <AppWrap className="wrap">
-        <Draggable handle=".bar" bounds=".wrap">
-          <Info className="container">
-            <InfoBar className="bar">bar</InfoBar>
-          </Info>
-        </Draggable>
+      <AppWrap>
+        <Launcher />
+        <MainIconWrap>
+          <IconWrap>
+            <IconLi>
+              <IconImgWrap>
+                <img src="img/design.gif" alt="" />
+              </IconImgWrap>
+              <span>Guestbook</span>
+            </IconLi>
+            <IconLi>
+              <IconImgWrap>
+                <img src="img/about.gif" alt="" />
+              </IconImgWrap>
+              <span>Dungeon</span>
+            </IconLi>
+            <IconLi>Guestbook</IconLi>
+            <IconLi>Guestbook</IconLi>
+          </IconWrap>
+        </MainIconWrap>
       </AppWrap>
     </>
   );
