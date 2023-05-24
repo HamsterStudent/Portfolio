@@ -9,6 +9,7 @@ const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: solid 0.7px;
+  z-index: 1;
 `;
 
 const Logo = styled.div`
@@ -20,6 +21,7 @@ const Dropdown = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 20px;
+  z-index: 1;
 `;
 
 const Right = styled.div`
@@ -67,7 +69,7 @@ function Header() {
           </Dropdown>
         </>
       ) : (
-        <Logo onClick={toggleMenu}>Logo</Logo>
+        <Logo onClick={toggleMenu}>Hamster</Logo>
       )}
 
       <Right>
