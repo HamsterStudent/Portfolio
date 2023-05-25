@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable";
-const Container = styled.div`
+import Guestbook from "./Guestbook";
+import Resume from "./resume";
+import Coding from "./Coding";
+
+const Container = styled.div<ILauncher>`
   width: 600px;
   height: auto;
   background-color: plum;
@@ -12,6 +16,7 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: ${(props) => props.zIndex};
 `;
 const Bar = styled.div`
   width: 100%;
@@ -45,44 +50,63 @@ const BtnTitle = styled.p`
   text-align: center;
 `;
 
+interface ILauncher {
+  zIndex?: number;
+}
+
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
-  const [test, setTest] = useState();
+  const [isResume, setIsResume] = useState(false);
+  let [zIndex, setZIndex] = useState(0);
   useEffect(() => {
     setIcons(["resume", "Coding", "Design", "Tools", "Blog", "About"]);
   }, []);
-
   const onClick = (e: any) => {
-    console.log(e);
+    if (e.currentTarget.innerText === "resume") {
+      setIsResume(true);
+    }
+    console.log(e.currentTarget.innerText);
+  };
+  const clickFront = (e: any) => {
+    setZIndex(zIndex + 3);
   };
   return (
-    <Draggable
-      nodeRef={dragRef}
-      bounds="parent"
-      handle=".bar"
-      defaultPosition={{ x: -300, y: -310 }}
-    >
-      <Container ref={dragRef} className="container">
-        <Bar className="bar">bar</Bar>
-        <ContentWrap>
-          <MainImg src="img/temp.jpg" alt="temp" />
-          <QuickBtnWrap>
-            {icons.map((icon: any) => (
-              <QuickBtn
-                key={icon}
-                onClick={(e) => {
-                  onClick(e);
-                }}
-              >
-                <BtnImg src={`img/${icon}.gif`} />
-                <BtnTitle>{icon}</BtnTitle>
-              </QuickBtn>
-            ))}
-          </QuickBtnWrap>
-        </ContentWrap>
-      </Container>
-    </Draggable>
+    <>
+      <Draggable
+        nodeRef={dragRef}
+        bounds="parent"
+        handle=".bar"
+        defaultPosition={{ x: -300, y: -310 }}
+      >
+        <Container
+          onClick={clickFront}
+          ref={dragRef}
+          className="container"
+          zIndex={zIndex}
+        >
+          <Bar className="bar">bar</Bar>
+          <ContentWrap>
+            <MainImg src="img/temp.jpg" alt="temp" />
+            <QuickBtnWrap>
+              {icons.map((icon: any) => (
+                <QuickBtn
+                  key={icon}
+                  onClick={(e) => {
+                    onClick(e);
+                  }}
+                >
+                  <BtnImg src={`img/${icon}.gif`} />
+                  <BtnTitle>{icon}</BtnTitle>
+                </QuickBtn>
+              ))}
+            </QuickBtnWrap>
+          </ContentWrap>
+        </Container>
+      </Draggable>
+      <Resume isDisplay={isResume} zIndex={zIndex++} />
+      <Coding />
+    </>
   );
 }
 
