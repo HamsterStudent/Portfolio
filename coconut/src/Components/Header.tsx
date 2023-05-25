@@ -21,7 +21,7 @@ const Dropdown = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 20px;
-  z-index: 1;
+  z-index: 200;
 `;
 
 const Right = styled.div`
@@ -44,9 +44,10 @@ function Header() {
   const minute = String(time.getMinutes()).padStart(2, "0");
   const [clock, setClock] = useState(hours + ":" + minute);
   const [date, setDate] = useState("00/00");
-  const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   useEffect(() => {
+    let time = new Date();
+    const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     setDate(week[time.getDay() - 1] + " " + time.getDate());
   }, []);
 
