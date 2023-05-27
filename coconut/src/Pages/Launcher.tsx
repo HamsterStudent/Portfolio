@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable";
-import Guestbook from "./Guestbook";
 import Resume from "./resume";
 import Coding from "./Coding";
+import Modals from "../Components/Modals";
 
 const Container = styled.div<ILauncher>`
   width: 600px;
@@ -58,13 +58,19 @@ function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
   const [isResume, setIsResume] = useState(false);
+  const [isCoading, setIsCoading] = useState(false);
   let [zIndex, setZIndex] = useState(0);
   useEffect(() => {
     setIcons(["resume", "Coding", "Design", "Tools", "Blog", "About"]);
   }, []);
   const onClick = (e: any) => {
-    if (e.currentTarget.innerText === "resume") {
+    const clickIconText = e.currentTarget.innerText;
+    if (clickIconText === "resume") {
       setIsResume(true);
+      if (isResume) {
+      }
+    } else if (clickIconText === "Coding") {
+      setIsCoading(true);
     }
     console.log(e.currentTarget.innerText);
   };
@@ -79,13 +85,10 @@ function Launcher() {
         handle=".bar"
         defaultPosition={{ x: -300, y: -310 }}
       >
-        <Container
-          onClick={clickFront}
-          ref={dragRef}
-          className="container"
-          zIndex={zIndex}
-        >
-          <Bar className="bar">bar</Bar>
+        <Container ref={dragRef} className="container" zIndex={zIndex}>
+          <Bar className="bar" onClick={clickFront}>
+            bar
+          </Bar>
           <ContentWrap>
             <MainImg src="img/temp.jpg" alt="temp" />
             <QuickBtnWrap>
@@ -104,8 +107,8 @@ function Launcher() {
           </ContentWrap>
         </Container>
       </Draggable>
-      <Resume isDisplay={isResume} zIndex={zIndex++} />
-      <Coding />
+      {isResume ? <Resume zIndex={zIndex++} /> : null}
+      {isCoading ? <Coding zIndex={zIndex++} /> : null}
     </>
   );
 }

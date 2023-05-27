@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
 import styled from "styled-components";
+import Guestbook from "../Pages/Guestbook";
+import Resume from "../Pages/resume";
+import Coding from "../Pages/Coding";
 
-const Container = styled.div<ICoding>`
+const Container = styled.div<IZIndex>`
   width: 350px;
   height: auto;
   background-color: plum;
@@ -20,27 +23,39 @@ const Bar = styled.div`
   background-color: aqua;
 `;
 interface ICoding {
-  zIndex: number;
+  defaultX: number;
+  defaultY: number;
 }
-const Coding = ({ zIndex }: ICoding) => {
+type IZIndex = {
+  zIndex: number;
+};
+const Modals = ({ zIndex }: any, { defaultX, defaultY }: ICoding) => {
   const [zIndexNum, setZIndexNum] = useState(zIndex);
   const clickFront = () => {
     setZIndexNum(zIndex++);
   };
+  console.log(defaultX);
   return (
     <>
       <Draggable
         bounds="parent"
         handle=".bar"
-        defaultPosition={{ x: 0, y: 10 }}
+        defaultPosition={{ x: defaultX, y: defaultY }}
       >
         <Container onClick={clickFront} zIndex={zIndexNum}>
-          <Bar className="bar">Bar</Bar>
-          <div>Coding</div>
+          <Bar className="bar">Im modal Bar</Bar>
+          sadsdas
+          {/* {name === "resume" ? (
+            <Resume zIndex={30} />
+          ) : name === "Guestbook" ? (
+            <Guestbook />
+          ) : name === "Coding" ? (
+            <Coding />
+          ) : null} */}
         </Container>
       </Draggable>
     </>
   );
 };
 
-export default Coding;
+export default Modals;
