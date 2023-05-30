@@ -1,22 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable";
-const Container = styled.div`
+import Resume from "./resume";
+import Coding from "./Coding";
+import Modals from "../Components/Modals";
+
+const Container = styled.div<ILauncher>`
   width: 600px;
   height: auto;
-  background-color: plum;
-  box-shadow: inset -1px -1px 0 0 var(--tertiary), inset 1px 1px 0 0 #fff,
-    5px 5px 0 #0003;
+  background-color: ${(props) => props.theme.windowBg};
+  box-shadow: ${(props) => props.theme.windowShadow};
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: ${(props) => props.zIndex};
+  border: solid 0.7px;
+  box-sizing: border-box;
 `;
 const Bar = styled.div`
   width: 100%;
   height: 20px;
-  background-color: aqua;
+  background-color: ${(props) => props.theme.windowBarColor};
 `;
 const ContentWrap = styled.section`
   width: 100%;
@@ -28,7 +34,6 @@ const MainImg = styled.img`
 `;
 const QuickBtnWrap = styled.div`
   display: flex;
-  height: 100px;
   justify-content: space-between;
   flex-wrap: wrap;
 `;
@@ -45,44 +50,66 @@ const BtnTitle = styled.p`
   text-align: center;
 `;
 
+interface ILauncher {
+  zIndex?: number;
+}
+
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
-  const [test, setTest] = useState();
+  const [isResume, setIsResume] = useState(false);
+  const [isCoading, setIsCoading] = useState(false);
+  let [zIndex, setZIndex] = useState(0);
   useEffect(() => {
     setIcons(["resume", "Coding", "Design", "Tools", "Blog", "About"]);
   }, []);
-
   const onClick = (e: any) => {
-    console.log(e);
+    const clickIconText = e.currentTarget.innerText;
+    if (clickIconText === "resume") {
+      setIsResume(true);
+      if (isResume) {
+      }
+    } else if (clickIconText === "Coding") {
+      setIsCoading(true);
+    }
+    console.log(e.currentTarget.innerText);
+  };
+  const clickFront = (e: any) => {
+    setZIndex(zIndex + 3);
   };
   return (
-    <Draggable
-      nodeRef={dragRef}
-      bounds="parent"
-      handle=".bar"
-      defaultPosition={{ x: -300, y: -310 }}
-    >
-      <Container ref={dragRef} className="container">
-        <Bar className="bar">bar</Bar>
-        <ContentWrap>
-          <MainImg src="img/temp.jpg" alt="temp" />
-          <QuickBtnWrap>
-            {icons.map((icon: any) => (
-              <QuickBtn
-                key={icon}
-                onClick={(e) => {
-                  onClick(e);
-                }}
-              >
-                <BtnImg src={`img/${icon}.gif`} />
-                <BtnTitle>{icon}</BtnTitle>
-              </QuickBtn>
-            ))}
-          </QuickBtnWrap>
-        </ContentWrap>
-      </Container>
-    </Draggable>
+    <>
+      <Draggable
+        nodeRef={dragRef}
+        bounds="parent"
+        handle=".bar"
+        defaultPosition={{ x: -300, y: -310 }}
+      >
+        <Container ref={dragRef} className="container" zIndex={zIndex}>
+          <Bar className="bar" onClick={clickFront}>
+            bar
+          </Bar>
+          <ContentWrap>
+            <MainImg src="img/temp.jpg" alt="temp" />
+            <QuickBtnWrap>
+              {icons.map((icon: any) => (
+                <QuickBtn
+                  key={icon}
+                  onClick={(e) => {
+                    onClick(e);
+                  }}
+                >
+                  <BtnImg src={`img/${icon}.gif`} />
+                  <BtnTitle>{icon}</BtnTitle>
+                </QuickBtn>
+              ))}
+            </QuickBtnWrap>
+          </ContentWrap>
+        </Container>
+      </Draggable>
+      {isResume ? <Resume zIndex={zIndex++} /> : null}
+      {isCoading ? <Coding zIndex={zIndex++} /> : null}
+    </>
   );
 }
 

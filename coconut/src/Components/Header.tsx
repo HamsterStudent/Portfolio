@@ -21,7 +21,7 @@ const Dropdown = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 20px;
-  z-index: 1;
+  z-index: 200;
 `;
 
 const Right = styled.div`
