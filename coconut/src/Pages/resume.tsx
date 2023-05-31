@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Draggable from "react-draggable";
-// import styled from "styled-components";
-import * as styled from "./pages.style";
+import styled from "styled-components";
+import { Container, Bar } from "./pages.style";
 
 type TZindex = {
   zIndex: number;
@@ -19,8 +19,8 @@ function Resume({ zIndex }: TZindex) {
         handle=".bar"
         defaultPosition={{ x: 30, y: 150 }}
       >
-        <styled.Container onClick={clickFront} zIndex={zIndexNum}>
-          <styled.Bar className="bar">bar</styled.Bar>
+        <Container onClick={clickFront} zIndex={zIndexNum}>
+          <Bar className="bar">bar</Bar>
           <div>
             디자인과 회화를 배우며 우리 주변에 있는 것들을 재구성하고 다시
             조립하면서 알게된 것 중 한가지는 세상의 많은 것들이 여러 번의
@@ -38,7 +38,7 @@ function Resume({ zIndex }: TZindex) {
             여러 번의 '수정' 이라는 과정을 통해서. 이렇게 저와 작업물들은
             끊임없이 변화하며 더 나은 모습을 꾀하고 있습니다.
           </div>
-        </styled.Container>
+        </Container>
       </Draggable>
     </>
   );

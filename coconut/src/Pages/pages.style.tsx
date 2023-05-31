@@ -1,8 +1,9 @@
 import styled from "styled-components";
-interface IResume {
+
+interface IContainer {
   zIndex: number;
 }
-export const Container = styled.div<IResume>`
+export const Container = styled.div<IContainer>`
   width: 400px;
   height: auto;
   background-color: ${(props) => props.theme.windowBg};

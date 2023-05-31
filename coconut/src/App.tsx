@@ -3,6 +3,7 @@ import Header from "./Components/Header";
 import styled from "styled-components";
 import Launcher from "./Pages/Launcher";
 import MainIcon from "./Components/MainIcon";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const AppWrap = styled.section`
   position: relative;
@@ -12,13 +13,16 @@ const AppWrap = styled.section`
 `;
 
 function App() {
+  const handle = useFullScreenHandle();
   return (
     <>
-      <Header />
-      <AppWrap>
-        <Launcher />
-        <MainIcon />
-      </AppWrap>
+      <FullScreen handle={handle}>
+        <Header {...handle} />
+        <AppWrap>
+          <Launcher />
+          <MainIcon />
+        </AppWrap>
+      </FullScreen>
     </>
   );
 }

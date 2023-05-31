@@ -4,25 +4,15 @@ import Draggable from "react-draggable";
 import Resume from "./resume";
 import Coding from "./Coding";
 import Modals from "../Components/Modals";
+import { Container, Bar } from "./pages.style";
 
-const Container = styled.div<ILauncher>`
+const LauncherContainer = styled(Container)<ILauncher>`
   width: 600px;
-  height: auto;
-  background-color: ${(props) => props.theme.windowBg};
-  box-shadow: ${(props) => props.theme.windowShadow};
-  margin: 0;
-  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: ${(props) => props.zIndex};
   border: solid 0.7px;
   box-sizing: border-box;
-`;
-const Bar = styled.div`
-  width: 100%;
-  height: 20px;
-  background-color: ${(props) => props.theme.windowBarColor};
 `;
 const ContentWrap = styled.section`
   width: 100%;
@@ -58,7 +48,7 @@ function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
   const [isResume, setIsResume] = useState(false);
-  const [isCoading, setIsCoading] = useState(false);
+  const [isCoding, setIsCoding] = useState(false);
   let [zIndex, setZIndex] = useState(0);
   useEffect(() => {
     setIcons(["resume", "Coding", "Design", "Tools", "Blog", "About"]);
@@ -68,9 +58,13 @@ function Launcher() {
     if (clickIconText === "resume") {
       setIsResume(true);
       if (isResume) {
+        setIsResume(false);
       }
     } else if (clickIconText === "Coding") {
-      setIsCoading(true);
+      setIsCoding(true);
+      if (isCoding) {
+        setIsCoding(false);
+      }
     }
     console.log(e.currentTarget.innerText);
   };
@@ -85,7 +79,7 @@ function Launcher() {
         handle=".bar"
         defaultPosition={{ x: -300, y: -310 }}
       >
-        <Container ref={dragRef} className="container" zIndex={zIndex}>
+        <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}>
           <Bar className="bar" onClick={clickFront}>
             bar
           </Bar>
@@ -105,10 +99,10 @@ function Launcher() {
               ))}
             </QuickBtnWrap>
           </ContentWrap>
-        </Container>
+        </LauncherContainer>
       </Draggable>
       {isResume ? <Resume zIndex={zIndex++} /> : null}
-      {isCoading ? <Coding zIndex={zIndex++} /> : null}
+      {isCoding ? <Coding zIndex={zIndex++} /> : null}
     </>
   );
 }

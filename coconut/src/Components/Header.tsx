@@ -1,4 +1,5 @@
 import { Children, useEffect, useState } from "react";
+import { FullScreenHandle, FullScreenProps } from "react-full-screen";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 
@@ -35,7 +36,7 @@ const Item = styled.div`
   background: plum;
 `;
 
-function Header() {
+function Header({ enter }: FullScreenHandle) {
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
@@ -74,7 +75,7 @@ function Header() {
       )}
 
       <Right>
-        {isDesktop ? <Item>fullscreen</Item> : null}
+        {isDesktop ? <Item onClick={enter}>fullscreen</Item> : null}
         <Item>{clock}</Item>
         <Item>{date}</Item>
       </Right>

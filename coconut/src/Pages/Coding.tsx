@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
 // import styled from "styled-components";
-import * as styled from "./pages.style";
+import { Container, Bar } from "./pages.style";
 
 interface ICoding {
   zIndex: number;
@@ -18,10 +18,10 @@ const Coding = ({ zIndex }: ICoding) => {
         handle=".bar"
         defaultPosition={{ x: 350, y: 10 }}
       >
-        <styled.Container onClick={clickFront} zIndex={zIndexNum}>
-          <styled.Bar className="bar">Bar</styled.Bar>
+        <Container onClick={clickFront} zIndex={zIndexNum}>
+          <Bar className="bar">Bar</Bar>
           <div>Coding</div>
-        </styled.Container>
+        </Container>
       </Draggable>
     </>
   );
