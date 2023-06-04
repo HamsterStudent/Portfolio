@@ -1,31 +1,29 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Draggable from "react-draggable";
+import { Container, Bar } from "./pages.style";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-
-const Container = styled.div`
-  width: 350px;
-  height: auto;
-  background-color: ${(props) => props.theme.windowBg};
-  box-shadow: ${(props) => props.theme.windowShadow};
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  right: 0;
-`;
-const Bar = styled.div`
-  width: 100%;
-  height: 20px;
-  background-color: aqua;
-`;
+import { highestZIndexAtom } from "../atom";
 
 function Guestbook() {
+  let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
+  let [zIndex, setZIndex] = useState(0);
+  useEffect(() => {
+    setZIndex(highestZIndex);
+  }, []);
+  const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (highestZIndex >= zIndex) {
+      setZIndex(highestZIndex++);
+      setHighestZIndex(highestZIndex++);
+    }
+  };
   return (
     <Draggable
       bounds="parent"
       handle=".bar"
       defaultPosition={{ x: 30, y: 150 }}
     >
-      <Container>
+      <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
         <Bar className="bar">bar</Bar>
         <div>helloWorld</div>
       </Container>

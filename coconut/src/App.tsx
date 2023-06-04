@@ -8,7 +8,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 const AppWrap = styled.section`
   position: relative;
   height: calc(100vh - 20px);
-  background-color: tomato;
+  background-color: ${(props) => props.theme.backgroundColor};
   overflow: hidden;
 `;
 

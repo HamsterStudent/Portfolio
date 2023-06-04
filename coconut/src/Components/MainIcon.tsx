@@ -55,7 +55,7 @@ const MainIcon = () => {
               }}
             >
               <IconImgWrap>
-                <img src={`img/Design.gif`} />
+                <img src={`img/Project.gif`} alt="" />
               </IconImgWrap>
               <IconTitle>{icon}</IconTitle>
             </IconLi>

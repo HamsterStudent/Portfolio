@@ -5,6 +5,8 @@ import Resume from "./resume";
 import Coding from "./Coding";
 import Modals from "../Components/Modals";
 import { Container, Bar } from "./pages.style";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { highestZIndexAtom } from "../atom";
 
 const LauncherContainer = styled(Container)<ILauncher>`
   width: 600px;
@@ -17,27 +19,32 @@ const LauncherContainer = styled(Container)<ILauncher>`
 const ContentWrap = styled.section`
   width: 100%;
   height: auto;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
 `;
-const MainImg = styled.img`
-  width: 100%;
-  object-fit: contain;
+const ImageWrap = styled.div`
+  width: 98.2%;
+  margin-bottom: 10px;
+  margin: 5px;
+  img {
+    border: solid 1px;
+    box-sizing: border-box;
+  }
 `;
 const QuickBtnWrap = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-`;
-const QuickBtn = styled.div`
-  width: 16.6%;
-  border-right: dotted 0.7px;
-  background-color: aqua;
-`;
-const BtnImg = styled.img`
-  width: 100%;
-  object-fit: contain;
-`;
-const BtnTitle = styled.p`
-  text-align: center;
+  border-top: solid 1px;
+  div {
+    width: 16.6%;
+    border-right: dotted 0.7px;
+    p {
+      text-align: center;
+    }
+  }
 `;
 
 interface ILauncher {
@@ -49,10 +56,14 @@ function Launcher() {
   const [icons, setIcons] = useState<any>([]);
   const [isResume, setIsResume] = useState(false);
   const [isCoding, setIsCoding] = useState(false);
+
+  let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
+
   useEffect(() => {
-    setIcons(["resume", "Coding", "Design", "Tools", "Blog", "About"]);
+    setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
   }, []);
+
   const onClick = (e: any) => {
     const clickIconText = e.currentTarget.innerText;
     if (clickIconText === "resume") {
@@ -68,9 +79,16 @@ function Launcher() {
     }
     console.log(e.currentTarget.innerText);
   };
-  const clickFront = (e: any) => {
-    setZIndex(zIndex + 3);
+  const resumeclose = () => {
+    setIsResume(false);
   };
+  const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (highestZIndex >= zIndex) {
+      setZIndex(highestZIndex++);
+      setHighestZIndex(highestZIndex++);
+    }
+  };
+
   return (
     <>
       <Draggable
@@ -81,28 +99,30 @@ function Launcher() {
       >
         <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}>
           <Bar className="bar" onClick={clickFront}>
-            bar
+            <div></div>
           </Bar>
           <ContentWrap>
-            <MainImg src="img/temp.jpg" alt="temp" />
+            <ImageWrap>
+              <img src="img/temp.jpg" alt="temp" />
+            </ImageWrap>
             <QuickBtnWrap>
               {icons.map((icon: any) => (
-                <QuickBtn
+                <div
                   key={icon}
                   onClick={(e) => {
                     onClick(e);
                   }}
                 >
-                  <BtnImg src={`img/${icon}.gif`} />
-                  <BtnTitle>{icon}</BtnTitle>
-                </QuickBtn>
+                  <img src={`img/${icon}.gif`} alt="" />
+                  <p>{icon}</p>
+                </div>
               ))}
             </QuickBtnWrap>
           </ContentWrap>
         </LauncherContainer>
       </Draggable>
-      {isResume ? <Resume zIndex={zIndex++} /> : null}
-      {isCoding ? <Coding zIndex={zIndex++} /> : null}
+      {isResume ? <Resume resumeclose={resumeclose} /> : null}
+      {isCoding ? <Coding /> : null}
     </>
   );
 }

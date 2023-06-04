@@ -74,12 +74,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   // <React.StrictMode>
-  <ThemeProvider theme={lightTheme}>
-    <RecoilRoot>
-      <GlobalStyle />
-      <App />
-    </RecoilRoot>
-  </ThemeProvider>,
+  <RecoilRoot>
+    <ThemeProvider theme={lightTheme}>
+      <RecoilRoot>
+        <GlobalStyle />
+        <App />
+      </RecoilRoot>
+    </ThemeProvider>
+  </RecoilRoot>,
 
   // </React.StrictMode>,
 );
