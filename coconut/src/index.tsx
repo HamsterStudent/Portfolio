@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createGlobalStyle } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import App from "./App";
 import { RecoilRoot } from "recoil";
+import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -72,10 +73,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <GlobalStyle />
-      <App />
-    </RecoilRoot>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <RecoilRoot>
+    <ThemeProvider theme={lightTheme}>
+      <RecoilRoot>
+        <GlobalStyle />
+        <App />
+      </RecoilRoot>
+    </ThemeProvider>
+  </RecoilRoot>,
+
+  // </React.StrictMode>,
 );
