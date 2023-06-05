@@ -4,6 +4,9 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import App from "./App";
 import { RecoilRoot } from "recoil";
 import { darkTheme, lightTheme } from "./theme";
+import { dbService } from "./firebase";
+
+console.log(dbService);
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
