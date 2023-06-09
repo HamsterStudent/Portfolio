@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Guestbook from "../Pages/Guestbook";
+import Dungeon from "../Pages/Dungeon";
 const MainIconWrap = styled.section`
   position: absolute;
   bottom: 0;
@@ -33,6 +34,7 @@ const IconTitle = styled.p``;
 const MainIcon = () => {
   const [icons, setIcons] = useState<string[]>([]);
   const [isGuestbook, setIsGuestbook] = useState(false);
+  const [isDungeon, setIsDungeon] = useState(false);
   useEffect(() => {
     setIcons(["Guestbook", "Dungeon", "Design", "Tools"]);
   }, []);
@@ -41,6 +43,8 @@ const MainIcon = () => {
     console.log(clickIconText);
     if (clickIconText === "Guestbook") {
       setIsGuestbook(true);
+    } else if (clickIconText === "Dungeon") {
+      setIsDungeon(true);
     }
   };
   return (
@@ -63,6 +67,7 @@ const MainIcon = () => {
         </IconWrap>
       </MainIconWrap>
       {isGuestbook ? <Guestbook /> : null}
+      {isDungeon ? <Dungeon /> : null}
     </>
   );
 };
