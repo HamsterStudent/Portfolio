@@ -13,8 +13,64 @@ import {
   query,
   orderBy,
   onSnapshot,
+  limit,
+  startAfter,
+  getDocs,
 } from "firebase/firestore";
 import { dbService } from "../firebase";
+
+const ContentWrap = styled.section`
+  padding: 20px;
+`;
+
+const InputWrap = styled.div`
+  margin-bottom: 15px;
+  position: relative;
+`;
+
+const IconButton = styled.button`
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: solid 1px;
+`;
+
+const EmojiBox = styled.div`
+  position: fixed;
+  top: 80px;
+  left: 20px;
+`;
+
+const FormBox = styled.form`
+  display: inline;
+  input {
+    background-color: transparent;
+    border: solid 1px;
+    height: 30px;
+    border-radius: 15px;
+    margin-left: 10px;
+  }
+`;
+
+const GuestMemo = styled.div`
+  border: solid 1px;
+  margin-bottom: 10px;
+  padding: 10px 5px;
+  p {
+    font-size: 14px;
+  }
+`;
+const GuestText = styled.div`
+  /* background-color: azure; */
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  div {
+    font-size: 22px;
+    margin-right: 10px;
+  }
+`;
 
 function Guestbook() {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
@@ -27,6 +83,7 @@ function Guestbook() {
     const qu = query(
       collection(dbService, "memos"),
       orderBy("createdAt", "desc"),
+      limit(5),
     );
     onSnapshot(qu, (snapshot) => {
       const memoArr = snapshot.docs.map((doc) => ({
@@ -57,6 +114,7 @@ function Guestbook() {
     } catch (error) {
       console.error("error : ", error);
     }
+    setEmojiIcon("");
     setMemo("");
   };
 
@@ -66,6 +124,23 @@ function Guestbook() {
     setMemo(value);
   };
 
+  // pagenation
+  const qu = query(
+    collection(dbService, "memos"),
+    orderBy("createdAt", "desc"),
+  );
+  const page = async () => {
+    const documentSnapshots = await getDocs(qu);
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    console.log("last", lastVisible);
+    const next = query(
+      collection(dbService, "memos"),
+      orderBy("createdAt", "desc"),
+      startAfter(lastVisible),
+      limit(5),
+    );
+  };
   return (
     <Draggable
       bounds="parent"
@@ -74,36 +149,45 @@ function Guestbook() {
     >
       <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
         <Bar className="bar">bar</Bar>
-        <button onClick={() => setShowEmojis(!showEmojis)}>{emojiIcon}</button>
-        {showEmojis && (
-          <div>
-            <EmojiPicker
-              height={400}
-              width={300}
-              onEmojiClick={(e) => {
-                setEmojiIcon(e.emoji);
-                setShowEmojis(false);
-              }}
-            />
-          </div>
-        )}
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            value={memo}
-            onChange={onChange}
-            placeholder="What's on your mind?"
-            maxLength={120}
-          />
-          <input type="submit" value="memo" />
-        </form>
-        {memos.map((eachMemo: any) => (
-          <div key={eachMemo.id}>
-            <div>{eachMemo.createdAt.toDate().toISOString()}</div>
-            <div>{eachMemo.emojiIcon}</div>
-            <h4>{eachMemo.memo}</h4>
-          </div>
-        ))}
+        <ContentWrap>
+          <InputWrap>
+            <IconButton onClick={() => setShowEmojis(!showEmojis)}>
+              {emojiIcon ? emojiIcon : "+"}
+            </IconButton>
+            {showEmojis && (
+              <EmojiBox>
+                <EmojiPicker
+                  height={400}
+                  width={300}
+                  onEmojiClick={(e) => {
+                    setEmojiIcon(e.emoji);
+                    setShowEmojis(false);
+                  }}
+                />
+              </EmojiBox>
+            )}
+            <FormBox onSubmit={onSubmit}>
+              <input
+                type="text"
+                value={memo}
+                onChange={onChange}
+                placeholder="What's on your mind?"
+                maxLength={120}
+              />
+              <input type="submit" value="memo" />
+            </FormBox>
+          </InputWrap>
+
+          {memos.map((eachMemo: any) => (
+            <GuestMemo key={eachMemo.id}>
+              {/* <p>{eachMemo.createdAt.toDate().toISOString()}</p> */}
+              <GuestText>
+                <div>{eachMemo.emojiIcon}</div>
+                <p>{eachMemo.memo}</p>
+              </GuestText>
+            </GuestMemo>
+          ))}
+        </ContentWrap>
       </Container>
     </Draggable>
   );
