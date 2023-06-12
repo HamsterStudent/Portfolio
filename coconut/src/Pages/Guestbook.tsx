@@ -94,6 +94,22 @@ function Guestbook() {
       setMemos(memoArr);
     });
     setZIndex(highestZIndex);
+
+    // pagenation
+    async function page() {
+      const documentSnapshots = await getDocs(qu);
+      const lastVisible =
+        documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      console.log("last", lastVisible);
+      const next = query(
+        collection(dbService, "memos"),
+        orderBy("createdAt", "desc"),
+        startAfter(lastVisible),
+        limit(5),
+      );
+      console.log(next);
+    }
+    page();
   }, []);
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
     if (highestZIndex >= zIndex) {
@@ -124,23 +140,6 @@ function Guestbook() {
     setMemo(value);
   };
 
-  // pagenation
-  const qu = query(
-    collection(dbService, "memos"),
-    orderBy("createdAt", "desc"),
-  );
-  const page = async () => {
-    const documentSnapshots = await getDocs(qu);
-    const lastVisible =
-      documentSnapshots.docs[documentSnapshots.docs.length - 1];
-    console.log("last", lastVisible);
-    const next = query(
-      collection(dbService, "memos"),
-      orderBy("createdAt", "desc"),
-      startAfter(lastVisible),
-      limit(5),
-    );
-  };
   return (
     <Draggable
       bounds="parent"
