@@ -94,23 +94,33 @@ function Guestbook() {
       setMemos(memoArr);
     });
     setZIndex(highestZIndex);
-
-    // pagenation
-    async function page() {
-      const documentSnapshots = await getDocs(qu);
-      const lastVisible =
-        documentSnapshots.docs[documentSnapshots.docs.length - 1];
-      console.log("last", lastVisible);
-      const next = query(
-        collection(dbService, "memos"),
-        orderBy("createdAt", "desc"),
-        startAfter(lastVisible),
-        limit(5),
-      );
-      console.log(next);
-    }
-    page();
   }, []);
+  // pagenation
+  const temp = async () => {
+    const qu = query(
+      collection(dbService, "memos"),
+      orderBy("createdAt", "desc"),
+      limit(5),
+    );
+    const documentSnapshots = await getDocs(qu);
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    console.log("last", lastVisible);
+    const next = query(
+      collection(dbService, "memos"),
+      orderBy("createdAt", "desc"),
+      startAfter(lastVisible),
+      limit(5),
+    );
+    onSnapshot(next, (snapshot) => {
+      const memoArr = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setMemos(memoArr);
+    });
+  };
+
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
     if (highestZIndex >= zIndex) {
       setZIndex(highestZIndex++);
@@ -186,6 +196,7 @@ function Guestbook() {
               </GuestText>
             </GuestMemo>
           ))}
+          <div onClick={temp}>next</div>
         </ContentWrap>
       </Container>
     </Draggable>
