@@ -16,6 +16,9 @@ import {
   limit,
   startAfter,
   getDocs,
+  Query,
+  DocumentData,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { dbService } from "../firebase";
 
@@ -78,41 +81,40 @@ function Guestbook() {
   const [showEmojis, setShowEmojis] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("");
   const [memo, setMemo] = useState("");
-  const [memos, setMemos] = useState<any>([]);
+  const [memos, setMemos] = useState<{ id: string }[]>([]);
+  const [key, setKey] = useState<QueryDocumentSnapshot<DocumentData>>();
+  const [noMore, setNoMore] = useState(false);
+  const start = query(
+    collection(dbService, "memos"),
+    orderBy("createdAt", "desc"),
+    limit(5),
+  );
+
   useEffect(() => {
-    const qu = query(
-      collection(dbService, "memos"),
-      orderBy("createdAt", "desc"),
-      limit(5),
-    );
-    onSnapshot(qu, (snapshot) => {
+    onSnapshot(start, (snapshot) => {
       const memoArr = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       console.log(memoArr);
       setMemos(memoArr);
+      setKey(snapshot.docs[snapshot.docs.length - 1]);
     });
     setZIndex(highestZIndex);
   }, []);
-  // pagenation
+
   const temp = async () => {
-    const qu = query(
+    const queryRef = query(
       collection(dbService, "memos"),
       orderBy("createdAt", "desc"),
+      startAfter(key),
       limit(5),
     );
-    const documentSnapshots = await getDocs(qu);
-    const lastVisible =
-      documentSnapshots.docs[documentSnapshots.docs.length - 1];
-    console.log("last", lastVisible);
-    const next = query(
-      collection(dbService, "memos"),
-      orderBy("createdAt", "desc"),
-      startAfter(lastVisible),
-      limit(5),
-    );
-    onSnapshot(next, (snapshot) => {
+
+    const snap = await getDocs(queryRef);
+    snap.empty ? setNoMore(true) : setKey(snap.docs[snap.docs.length - 1]);
+
+    onSnapshot(queryRef, (snapshot) => {
       const memoArr = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
