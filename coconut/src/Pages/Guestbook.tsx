@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 import { Container, Bar } from "./pages.style";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import EmojiPicker, { EmojiStyle } from "emoji-picker-react";
 
-import { highestZIndexAtom } from "../atom";
+import { displayGuestbookAtom, highestZIndexAtom } from "../atom";
 import {
   collection,
   addDoc,
@@ -84,6 +84,8 @@ function Guestbook() {
   const [memos, setMemos] = useState<{ id: string }[]>([]);
   const [key, setKey] = useState<QueryDocumentSnapshot<DocumentData>>();
   const [noMore, setNoMore] = useState(false);
+  const setIsdisplay = useSetRecoilState(displayGuestbookAtom);
+
   const start = query(
     collection(dbService, "memos"),
     orderBy("createdAt", "desc"),
@@ -159,7 +161,13 @@ function Guestbook() {
       defaultPosition={{ x: 30, y: 150 }}
     >
       <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
-        <Bar className="bar">bar</Bar>
+        <Bar className="bar">
+          <div
+            onClick={() => {
+              setIsdisplay(false);
+            }}
+          ></div>
+        </Bar>
         <ContentWrap>
           <InputWrap>
             <IconButton onClick={() => setShowEmojis(!showEmojis)}>

@@ -4,6 +4,10 @@ import styled from "styled-components";
 import Launcher from "./Pages/Launcher";
 import MainIcon from "./Components/MainIcon";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import Guestbook from "./Pages/Guestbook";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { displayGuestbookAtom, displayThemeAtom } from "./atom";
+import ChooseTheme from "./Pages/Theme";
 
 const AppWrap = styled.section`
   position: relative;
@@ -13,6 +17,9 @@ const AppWrap = styled.section`
 `;
 
 function App() {
+  const isGuestbook = useRecoilValue(displayGuestbookAtom);
+  const isTheme = useRecoilValue(displayThemeAtom);
+
   const handle = useFullScreenHandle();
   return (
     <>
@@ -21,6 +28,8 @@ function App() {
         <AppWrap>
           <Launcher />
           <MainIcon />
+          {isGuestbook ? <Guestbook /> : null}
+          {isTheme ? <ChooseTheme /> : null}
         </AppWrap>
       </FullScreen>
     </>

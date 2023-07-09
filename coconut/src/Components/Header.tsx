@@ -2,6 +2,9 @@ import { Children, useEffect, useState } from "react";
 import { FullScreenHandle, FullScreenProps } from "react-full-screen";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
+import Guestbook from "../Pages/Guestbook";
+import { displayGuestbookAtom, displayThemeAtom } from "../atom";
+import { useSetRecoilState } from "recoil";
 
 const Nav = styled.div`
   width: 100%;
@@ -37,6 +40,8 @@ const Item = styled.div`
 `;
 
 function Header({ enter }: FullScreenHandle) {
+  const setIsdisplay = useSetRecoilState(displayGuestbookAtom);
+  const setIsTheme = useSetRecoilState(displayThemeAtom);
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
@@ -60,26 +65,41 @@ function Header({ enter }: FullScreenHandle) {
   const toggleMenu = () => setMenu((prev) => !prev);
 
   return (
-    <Nav>
-      {menu ? (
-        <>
-          <Logo onClick={toggleMenu}>Logo</Logo>
-          <Dropdown>
-            <Item>Theme</Item>
-            <Item>Contact</Item>
-            <Item>Guestbook</Item>
-          </Dropdown>
-        </>
-      ) : (
-        <Logo onClick={toggleMenu}>Hamster</Logo>
-      )}
+    <>
+      <Nav>
+        {menu ? (
+          <>
+            <Logo onClick={toggleMenu}>Logo</Logo>
+            <Dropdown>
+              <Item
+                onClick={() => {
+                  setIsTheme(true);
+                }}
+              >
+                Theme
+              </Item>
+              <Item>Contact</Item>
+              <Item
+                onClick={() => {
+                  setIsdisplay(true);
+                }}
+              >
+                Guestbook
+              </Item>
+            </Dropdown>
+          </>
+        ) : (
+          <Logo onClick={toggleMenu}>Hamster</Logo>
+        )}
 
-      <Right>
-        {isDesktop ? <Item onClick={enter}>fullscreen</Item> : null}
-        <Item>{clock}</Item>
-        <Item>{date}</Item>
-      </Right>
-    </Nav>
+        <Right>
+          {isDesktop ? <Item onClick={enter}>fullscreen</Item> : null}
+          <Item>{clock}</Item>
+          <Item>{date}</Item>
+        </Right>
+      </Nav>
+      <Guestbook />
+    </>
   );
 }
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Guestbook from "../Pages/Guestbook";
 import Dungeon from "../Pages/Dungeon";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { displayGuestbookAtom } from "../atom";
 const MainIconWrap = styled.section`
   position: absolute;
   bottom: 0;
@@ -33,8 +35,9 @@ const IconImgWrap = styled.div`
 const IconTitle = styled.p``;
 const MainIcon = () => {
   const [icons, setIcons] = useState<string[]>([]);
-  const [isGuestbook, setIsGuestbook] = useState(false);
   const [isDungeon, setIsDungeon] = useState(false);
+  const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
+
   useEffect(() => {
     setIcons(["Guestbook", "Dungeon", "Design", "Tools"]);
   }, []);
@@ -66,7 +69,6 @@ const MainIcon = () => {
           ))}
         </IconWrap>
       </MainIconWrap>
-      {isGuestbook ? <Guestbook /> : null}
       {isDungeon ? <Dungeon /> : null}
     </>
   );
