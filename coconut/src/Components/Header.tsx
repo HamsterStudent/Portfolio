@@ -1,5 +1,5 @@
-import { Children, useEffect, useState } from "react";
-import { FullScreenHandle, FullScreenProps } from "react-full-screen";
+import { useEffect, useState } from "react";
+import { FullScreenHandle } from "react-full-screen";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Guestbook from "../Pages/Guestbook";
@@ -9,18 +9,35 @@ import { useSetRecoilState } from "recoil";
 const Nav = styled.div`
   width: 100%;
   height: 20px;
-  background-color: plum;
+  background-color: ${(props) => props.theme.windowBg};
   display: flex;
   justify-content: space-between;
   border-bottom: solid 0.7px;
   z-index: 1;
+  .active {
+    background-color: #252525;
+    color: white;
+    img {
+      transform: none;
+      filter: invert(100%);
+    }
+  }
 `;
 
 const Logo = styled.div`
-  width: 150px;
+  width: 120.7px;
+  display: flex;
+  align-items: center;
+  border-right: 0.7px dotted;
+  img {
+    height: 5px;
+    transform: rotate(180deg);
+    margin-left: 10px;
+  }
 `;
+
 const Dropdown = styled.div`
-  width: 150px;
+  width: 120px;
   border-right: dotted 0.7px;
   box-sizing: border-box;
   position: absolute;
@@ -36,11 +53,11 @@ const Right = styled.div`
 const Item = styled.div`
   padding: 0 10px;
   border: dotted 0.7px;
-  background: plum;
+  background: ${(props) => props.theme.windowBg};
 `;
 
 function Header({ enter }: FullScreenHandle) {
-  const setIsdisplay = useSetRecoilState(displayGuestbookAtom);
+  const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
   const setIsTheme = useSetRecoilState(displayThemeAtom);
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
@@ -50,6 +67,7 @@ function Header({ enter }: FullScreenHandle) {
   const minute = String(time.getMinutes()).padStart(2, "0");
   const [clock, setClock] = useState(hours + ":" + minute);
   const [date, setDate] = useState("00/00");
+  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     let time = new Date();
@@ -61,7 +79,6 @@ function Header({ enter }: FullScreenHandle) {
     setClock(hours + ":" + minute);
   }, 30000);
 
-  const [menu, setMenu] = useState(false);
   const toggleMenu = () => setMenu((prev) => !prev);
 
   return (
@@ -69,11 +86,15 @@ function Header({ enter }: FullScreenHandle) {
       <Nav>
         {menu ? (
           <>
-            <Logo onClick={toggleMenu}>Logo</Logo>
+            <Logo onClick={toggleMenu} className={menu ? "active" : undefined}>
+              SeedMiner
+              <img src={`img/arrow.png`} alt="" />
+            </Logo>
             <Dropdown>
               <Item
                 onClick={() => {
                   setIsTheme(true);
+                  toggleMenu();
                 }}
               >
                 Theme
@@ -81,7 +102,8 @@ function Header({ enter }: FullScreenHandle) {
               <Item>Contact</Item>
               <Item
                 onClick={() => {
-                  setIsdisplay(true);
+                  setIsGuestbook(true);
+                  toggleMenu();
                 }}
               >
                 Guestbook
@@ -89,7 +111,10 @@ function Header({ enter }: FullScreenHandle) {
             </Dropdown>
           </>
         ) : (
-          <Logo onClick={toggleMenu}>Hamster</Logo>
+          <Logo onClick={toggleMenu} className={menu ? "active" : undefined}>
+            SeedMiner
+            <img src={`img/arrow.png`} alt="" />
+          </Logo>
         )}
 
         <Right>
