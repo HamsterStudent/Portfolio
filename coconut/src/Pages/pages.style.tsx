@@ -10,10 +10,11 @@ export const Container = styled.div<IContainer>`
   background-color: ${(props) => props.theme.windowBg};
   box-shadow: ${(props) => props.theme.windowShadow};
   margin: 0;
-  border: solid 0.7;
   box-sizing: content-box;
   position: absolute;
   z-index: ${(props) => props.zIndex};
+  border: 0.7px solid;
+  color: ${(props) => props.theme.textColor};
 `;
 export const Bar = styled.div`
   width: 100%;

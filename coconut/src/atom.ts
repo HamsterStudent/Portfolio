@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { defaultTheme } from "./theme";
 
 export const basicZIndexAtom = atom({
   key: "basicIndex",
@@ -12,7 +13,7 @@ export const highestZIndexAtom = atom({
 
 export const themeAtom = atom({
   key: "theme",
-  default: "lightTheme",
+  default: defaultTheme,
 });
 
 export const displayGuestbookAtom = atom({
