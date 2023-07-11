@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Guestbook from "../Pages/Guestbook";
 import Dungeon from "../Pages/Dungeon";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { displayGuestbookAtom } from "../atom";
+import {
+  displayDungeonAtom,
+  displayGuestbookAtom,
+  displayLauncherAtom,
+} from "../atom";
+
 const MainIconWrap = styled.section`
   position: absolute;
   bottom: 0;
@@ -35,16 +39,19 @@ const IconImgWrap = styled.div`
 const IconTitle = styled.p``;
 const MainIcon = () => {
   const [icons, setIcons] = useState<string[]>([]);
-  const [isDungeon, setIsDungeon] = useState(false);
   const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
+  const [isDungeon, setIsDungeon] = useRecoilState(displayDungeonAtom);
+  const [isLauncher, setIsLauncher] = useRecoilState(displayLauncherAtom);
 
   useEffect(() => {
-    setIcons(["Guestbook", "Dungeon", "Design", "Tools"]);
+    setIcons(["Launcher", "Guestbook", "Dungeon", "Design", "Tools"]);
   }, []);
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const clickIconText = e.currentTarget.innerText;
     console.log(clickIconText);
-    if (clickIconText === "Guestbook") {
+    if (clickIconText === "Launcher") {
+      setIsLauncher(true);
+    } else if (clickIconText === "Guestbook") {
       setIsGuestbook(true);
     } else if (clickIconText === "Dungeon") {
       setIsDungeon(true);
@@ -69,7 +76,6 @@ const MainIcon = () => {
           ))}
         </IconWrap>
       </MainIconWrap>
-      {isDungeon ? <Dungeon /> : null}
     </>
   );
 };

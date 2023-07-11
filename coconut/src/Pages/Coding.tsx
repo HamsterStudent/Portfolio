@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 import styled from "styled-components";
 import { Container, Bar } from "./pages.style";
-import { useRecoilState } from "recoil";
-import { highestZIndexAtom } from "../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { displayCodingAtom, highestZIndexAtom } from "../atom";
 
 const ContentWrap = styled.section`
-  /* width: 100%; */
   font-size: 14px;
   border: solid 1px;
-  /* padding: 20px; */
   margin: 5px;
   display: flex;
   justify-content: space-between;
-  /* box-shadow: #f0f0f042 1px 1px inset; */
   h2 {
     font-size: 22px;
     padding: 10px 0;
@@ -33,7 +30,6 @@ const CardWrap = styled.ul`
   scrollbar-width: none; /* 파이어폭스 */
 `;
 const Card = styled.li`
-  /* border: solid 1px; */
   width: 48.6%;
   background-color: antiquewhite;
   padding: 10px;
@@ -54,6 +50,8 @@ const ImageWrap = styled.div`
 const Coding = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
+  const setIsdisplay = useSetRecoilState(displayCodingAtom);
+
   useEffect(() => {
     setZIndex(highestZIndex);
   }, []);
@@ -76,7 +74,12 @@ const Coding = () => {
           zIndex={zIndex}
         >
           <Bar className="bar">
-            <div></div>
+            <span>Coding</span>
+            <div
+              onClick={() => {
+                setIsdisplay(false);
+              }}
+            ></div>
           </Bar>
           <ContentWrap>
             <CardWrap>

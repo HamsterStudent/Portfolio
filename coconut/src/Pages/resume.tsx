@@ -3,7 +3,7 @@ import Draggable from "react-draggable";
 import styled from "styled-components";
 import { Container, Bar } from "./pages.style";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { highestZIndexAtom } from "../atom";
+import { displayResumeAtom, highestZIndexAtom } from "../atom";
 
 const ContentWrap = styled.section`
   /* width: 100%; */
@@ -51,13 +51,10 @@ const ContentBox = styled.div`
   }
 `;
 
-type TResume = {
-  resumeclose: () => void;
-};
-
-function Resume({ resumeclose }: TResume) {
+function Resume() {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
+  const setIsdisplay = useSetRecoilState(displayResumeAtom);
 
   useEffect(() => {
     setZIndex(highestZIndex);
@@ -68,9 +65,6 @@ function Resume({ resumeclose }: TResume) {
       setZIndex(highestZIndex++);
       setHighestZIndex(highestZIndex++);
     }
-  };
-  const closeClick = () => {
-    resumeclose();
   };
 
   return (
@@ -86,7 +80,12 @@ function Resume({ resumeclose }: TResume) {
           windowWidth={`${850}px`}
         >
           <Bar className="bar">
-            <div onClick={closeClick}></div>
+            Resume
+            <div
+              onClick={() => {
+                setIsdisplay(false);
+              }}
+            ></div>
           </Bar>
           <ContentWrap>
             <ContentBox>
