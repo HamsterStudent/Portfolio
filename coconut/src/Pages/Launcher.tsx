@@ -6,7 +6,13 @@ import Coding from "./Coding";
 import Modals from "../Components/Modals";
 import { Container, Bar } from "./pages.style";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { highestZIndexAtom } from "../atom";
+import {
+  displayBlogAtom,
+  displayCodingAtom,
+  displayLauncherAtom,
+  displayResumeAtom,
+  highestZIndexAtom,
+} from "../atom";
 
 const LauncherContainer = styled(Container)<ILauncher>`
   width: 600px;
@@ -54,8 +60,10 @@ interface ILauncher {
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
-  const [isResume, setIsResume] = useState(false);
-  const [isCoding, setIsCoding] = useState(false);
+  const [isResume, setIsResume] = useRecoilState(displayResumeAtom);
+  const [isCoding, setIsCoding] = useRecoilState(displayCodingAtom);
+  const [isBlog, setIsBlog] = useRecoilState(displayBlogAtom);
+  const setIsdisplay = useSetRecoilState(displayLauncherAtom);
 
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
@@ -76,11 +84,13 @@ function Launcher() {
       if (isCoding) {
         setIsCoding(false);
       }
+    } else if (clickIconText === "Blog") {
+      setIsBlog(true);
+      if (isCoding) {
+        setIsCoding(false);
+      }
     }
     console.log(e.currentTarget.innerText);
-  };
-  const resumeclose = () => {
-    setIsResume(false);
   };
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
     if (highestZIndex >= zIndex) {
@@ -99,7 +109,12 @@ function Launcher() {
       >
         <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}>
           <Bar className="bar" onClick={clickFront}>
-            <div></div>
+            Launcher
+            <div
+              onClick={() => {
+                setIsdisplay(false);
+              }}
+            ></div>
           </Bar>
           <ContentWrap>
             <ImageWrap>
@@ -121,7 +136,6 @@ function Launcher() {
           </ContentWrap>
         </LauncherContainer>
       </Draggable>
-      {isResume ? <Resume resumeclose={resumeclose} /> : null}
       {isCoding ? <Coding /> : null}
     </>
   );

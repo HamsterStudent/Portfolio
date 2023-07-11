@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { Bar, Container } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { displayDungeonAtom, highestZIndexAtom } from "../atom";
+import { displayBlogAtom, highestZIndexAtom } from "../atom";
 
-const Dungeon = () => {
+const Blog = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
-  const setIsdisplay = useSetRecoilState(displayDungeonAtom);
+  const setIsdisplay = useSetRecoilState(displayBlogAtom);
 
   useEffect(() => {
     setZIndex(highestZIndex);
@@ -21,20 +21,35 @@ const Dungeon = () => {
   };
 
   return (
-    <Draggable bounds="parent" handle=".bar" defaultPosition={{ x: 30, y: 50 }}>
+    <Draggable
+      bounds="parent"
+      handle=".bar"
+      defaultPosition={{ x: 300, y: 200 }}
+    >
       <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
         <Bar className="bar">
-          Dungeon
+          <p>Blog</p>
           <div
             onClick={() => {
               setIsdisplay(false);
             }}
           ></div>
         </Bar>
-        <div>dungeon</div>
+        <div>
+          <span>Github : </span>
+          <a href="https://github.com/HamsterStudent">
+            https://github.com/HamsterStudent
+          </a>
+        </div>
+        <div>
+          <span>Blog : </span>
+          <a href="https://hamsterstudent.github.io/">
+            https://hamsterstudent.github.io/
+          </a>
+        </div>
       </Container>
     </Draggable>
   );
 };
 
-export default Dungeon;
+export default Blog;

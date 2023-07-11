@@ -16,7 +16,6 @@ import {
   limit,
   startAfter,
   getDocs,
-  Query,
   DocumentData,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
@@ -162,6 +161,7 @@ function Guestbook() {
     >
       <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
         <Bar className="bar">
+          Guestbook
           <div
             onClick={() => {
               setIsdisplay(false);
@@ -196,7 +196,6 @@ function Guestbook() {
               <input type="submit" value="memo" />
             </FormBox>
           </InputWrap>
-
           {memos.map((eachMemo: any) => (
             <GuestMemo key={eachMemo.id}>
               {/* <p>{eachMemo.createdAt.toDate().toISOString()}</p> */}

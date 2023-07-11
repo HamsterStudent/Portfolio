@@ -3,7 +3,11 @@ import { FullScreenHandle } from "react-full-screen";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Guestbook from "../Pages/Guestbook";
-import { displayGuestbookAtom, displayThemeAtom } from "../atom";
+import {
+  displayGuestbookAtom,
+  displayLauncherAtom,
+  displayThemeAtom,
+} from "../atom";
 import { useSetRecoilState } from "recoil";
 
 const Nav = styled.div`
@@ -59,6 +63,7 @@ const Item = styled.div`
 function Header({ enter }: FullScreenHandle) {
   const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
   const setIsTheme = useSetRecoilState(displayThemeAtom);
+  const setIsLauncher = useSetRecoilState(displayLauncherAtom);
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
@@ -91,6 +96,14 @@ function Header({ enter }: FullScreenHandle) {
               <img src={`img/arrow.png`} alt="" />
             </Logo>
             <Dropdown>
+              <Item
+                onClick={() => {
+                  setIsLauncher(true);
+                  toggleMenu();
+                }}
+              >
+                Launcher
+              </Item>
               <Item
                 onClick={() => {
                   setIsTheme(true);
