@@ -50,3 +50,8 @@ export const displayDungeonAtom = atom({
   key: "displayDungeon",
   default: false,
 });
+
+export const displayContactAtom = atom({
+  key: "displayContact",
+  default: false,
+});

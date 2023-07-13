@@ -86,9 +86,6 @@ function Launcher() {
       }
     } else if (clickIconText === "Blog") {
       setIsBlog(true);
-      if (isCoding) {
-        setIsCoding(false);
-      }
     }
     console.log(e.currentTarget.innerText);
   };
@@ -136,7 +133,6 @@ function Launcher() {
           </ContentWrap>
         </LauncherContainer>
       </Draggable>
-      {isCoding ? <Coding /> : null}
     </>
   );
 }
