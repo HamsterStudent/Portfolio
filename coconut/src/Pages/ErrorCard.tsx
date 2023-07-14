@@ -2,12 +2,26 @@ import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { Bar, Container } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { displayContactAtom, highestZIndexAtom } from "../atom";
+import { displayErrorCardAtom, highestZIndexAtom } from "../atom";
+import styled from "styled-components";
 
-const Blog = () => {
+const CardWrap = styled.section`
+  display: flex;
+  justify-content: space-around;
+`;
+const Card = styled.div`
+  width: 150px;
+  height: 200px;
+  margin: 30px;
+  border: 0.7px dotted;
+`;
+
+const ErrorCard = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
-  const setIsdisplay = useSetRecoilState(displayContactAtom);
+  const setIsdisplay = useSetRecoilState(displayErrorCardAtom);
+
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     setZIndex(highestZIndex);
@@ -28,17 +42,22 @@ const Blog = () => {
     >
       <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
         <Bar className="bar">
-          <p>Contact</p>
+          <p>ErrorCard</p>
           <div
             onClick={() => {
               setIsdisplay(false);
             }}
           ></div>
         </Bar>
-        <div>Contact</div>
+        <div>
+          <CardWrap>
+            <Card></Card>
+            <Card></Card>
+          </CardWrap>
+        </div>
       </Container>
     </Draggable>
   );
 };
 
-export default Blog;
+export default ErrorCard;

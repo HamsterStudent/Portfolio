@@ -16,6 +16,11 @@ export const themeAtom = atom({
   default: defaultTheme,
 });
 
+export const collectError = atom({
+  key: "collectError",
+  default: [{}],
+});
+
 export const displayLauncherAtom = atom({
   key: "displayLauncher",
   default: true,
@@ -51,7 +56,7 @@ export const displayDungeonAtom = atom({
   default: false,
 });
 
-export const displayContactAtom = atom({
+export const displayErrorCardAtom = atom({
   key: "displayContact",
   default: false,
 });

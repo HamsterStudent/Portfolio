@@ -10,7 +10,7 @@ import { useRecoilValue } from "recoil";
 import {
   displayBlogAtom,
   displayCodingAtom,
-  displayContactAtom,
+  displayErrorCardAtom,
   displayDungeonAtom,
   displayGuestbookAtom,
   displayLauncherAtom,
@@ -21,7 +21,7 @@ import {
 import Resume from "./Pages/resume";
 import Blog from "./Pages/Blog";
 import Dungeon from "./Pages/Dungeon";
-import Contact from "./Pages/Contact";
+import ErrorCard from "./Pages/ErrorCard";
 import Coding from "./Pages/Coding";
 
 const AppWrap = styled.section`
@@ -38,7 +38,7 @@ function App() {
   const isResume = useRecoilValue(displayResumeAtom);
   const isBlog = useRecoilValue(displayBlogAtom);
   const isDungeon = useRecoilValue(displayDungeonAtom);
-  const isContact = useRecoilValue(displayContactAtom);
+  const isErrorCard = useRecoilValue(displayErrorCardAtom);
   const isCoding = useRecoilValue(displayCodingAtom);
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);
@@ -56,7 +56,7 @@ function App() {
             {isBlog ? <Blog /> : null}
             {isDungeon ? <Dungeon /> : null}
             {isCoding ? <Coding /> : null}
-            {isContact ? <Contact /> : null}
+            {isErrorCard ? <ErrorCard /> : null}
           </AppWrap>
         </FullScreen>
       </ThemeProvider>
