@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { Bar, Container } from "./pages.style";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { displayErrorCardAtom, highestZIndexAtom } from "../atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { collectError, displayErrorCardAtom, highestZIndexAtom } from "../atom";
 import styled from "styled-components";
 
 const CardWrap = styled.section`
@@ -20,11 +20,19 @@ const ErrorCard = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
   const setIsdisplay = useSetRecoilState(displayErrorCardAtom);
+  const temp = useRecoilValue(collectError);
+
+  const cardList = [
+    { name: "hamster", get: false, data: "Hamster is cute" },
+    { name: "duck", get: false, data: "duck is cute" },
+    { name: "jelly", get: false, data: "jelly is delicious" },
+  ];
 
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
     setZIndex(highestZIndex);
+    console.log(temp);
   }, []);
 
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {

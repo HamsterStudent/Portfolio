@@ -10,6 +10,8 @@ const Dungeon = () => {
   let [zIndex, setZIndex] = useState(0);
   const setIsdisplay = useSetRecoilState(displayDungeonAtom);
 
+  const text = "hamster";
+
   useEffect(() => {
     setZIndex(highestZIndex);
   }, []);
@@ -33,7 +35,7 @@ const Dungeon = () => {
           ></div>
         </Bar>
         <div>dungeon</div>
-        <ErrorIcon itemName="hamster" />
+        <ErrorIcon name={"hamster"} />
       </Container>
     </Draggable>
   );

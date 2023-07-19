@@ -1,6 +1,12 @@
 import { atom } from "recoil";
 import { defaultTheme } from "./theme";
 
+export interface ICardTypes {
+  name: string;
+  isGet: boolean;
+  describe: string;
+}
+
 export const basicZIndexAtom = atom({
   key: "basicIndex",
   default: 0,
@@ -16,9 +22,13 @@ export const themeAtom = atom({
   default: defaultTheme,
 });
 
-export const collectError = atom({
+export const collectError = atom<ICardTypes[]>({
   key: "collectError",
-  default: [{}],
+  default: [
+    { name: "hamster", isGet: false, describe: "Hamster is cute" },
+    { name: "duck", isGet: false, describe: "duck is cute" },
+    { name: "jelly", isGet: false, describe: "jelly is delicious" },
+  ],
 });
 
 export const displayLauncherAtom = atom({
