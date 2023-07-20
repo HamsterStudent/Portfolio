@@ -15,15 +15,23 @@ const Card = styled.div`
 const ErrorIcon = ({ name }: IError) => {
   const [cards, setCards] = useRecoilState(collectError);
 
-  const onClick = () => {
+  const onClick = (iconName: string) => {
     setCards(
       cards.map((card: ICardTypes) => {
-        return card.name === name ? { ...card, isGet: true } : card;
+        return card.name === iconName ? { ...card, isGet: true } : card;
       }),
     );
-    console.log(cards);
   };
-  return <Card onClick={onClick}>{name}</Card>;
+
+  return (
+    <Card
+      onClick={() => {
+        onClick(name);
+      }}
+    >
+      {name}
+    </Card>
+  );
 };
 
 export default ErrorIcon;

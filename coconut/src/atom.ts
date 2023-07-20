@@ -28,6 +28,9 @@ export const collectError = atom<ICardTypes[]>({
     { name: "hamster", isGet: false, describe: "Hamster is cute" },
     { name: "duck", isGet: false, describe: "duck is cute" },
     { name: "jelly", isGet: false, describe: "jelly is delicious" },
+    { name: "git", isGet: false, describe: "git is good" },
+    { name: "cat", isGet: false, describe: "cat is good" },
+    { name: "dog", isGet: false, describe: "dog is good" },
   ],
 });
 

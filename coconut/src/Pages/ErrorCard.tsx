@@ -8,38 +8,58 @@ import styled from "styled-components";
 const CardWrap = styled.section`
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 `;
-const Card = styled.div`
-  width: 150px;
-  height: 200px;
-  margin: 30px;
+const CardPlace = styled.div`
+  width: 120px;
+  height: 150px;
+  margin-bottom: 10px;
   border: 0.7px dotted;
 `;
 
+const Card = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: 0.4s;
+`;
+const CardFront = styled.div`
+  /*
+  background-color: pink;
+  width: 100%;
+  height: 100%; */
+`;
+const CardBack = styled.div``;
+const DanceFloor = styled.div`
+  width: 100%;
+  height: 150px;
+`;
 const ErrorCard = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
   const setIsdisplay = useSetRecoilState(displayErrorCardAtom);
-  const temp = useRecoilValue(collectError);
-
-  const cardList = [
-    { name: "hamster", get: false, data: "Hamster is cute" },
-    { name: "duck", get: false, data: "duck is cute" },
-    { name: "jelly", get: false, data: "jelly is delicious" },
-  ];
-
-  const [cards, setCards] = useState([]);
+  const [cardList, setCardList] = useRecoilState(collectError);
 
   useEffect(() => {
     setZIndex(highestZIndex);
-    console.log(temp);
   }, []);
+
+  const allComplete = () => {
+    console.log("!!!!congratulation!!!!");
+  };
 
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
     if (highestZIndex >= zIndex) {
       setZIndex(highestZIndex++);
       setHighestZIndex(highestZIndex++);
     }
+  };
+
+  const cardFlip = (e: React.MouseEvent) => {
+    console.log("flip!", e.currentTarget);
+    const {
+      currentTarget: { children },
+    } = e;
   };
 
   return (
@@ -59,10 +79,19 @@ const ErrorCard = () => {
         </Bar>
         <div>
           <CardWrap>
-            <Card></Card>
-            <Card></Card>
+            {cardList.map((card, index) => (
+              <CardPlace key={index}>
+                {card.isGet ? (
+                  <Card onClick={cardFlip}>
+                    <CardFront>{card.name}</CardFront>
+                    <CardBack>{card.describe}</CardBack>
+                  </Card>
+                ) : null}
+              </CardPlace>
+            ))}
           </CardWrap>
         </div>
+        <DanceFloor></DanceFloor>
       </Container>
     </Draggable>
   );
