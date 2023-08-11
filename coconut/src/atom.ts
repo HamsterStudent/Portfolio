@@ -26,9 +26,9 @@ export const collectError = atom<ICardTypes[]>({
   key: "collectError",
   default: [
     { name: "hamster", isGet: false, describe: "Hamster is cute" },
-    { name: "duck", isGet: false, describe: "duck is cute" },
+    { name: "graphql", isGet: false, describe: "graphQL" },
     { name: "jelly", isGet: false, describe: "jelly is delicious" },
-    { name: "git", isGet: false, describe: "git is good" },
+    { name: "css", isGet: false, describe: "css" },
     { name: "cat", isGet: false, describe: "cat is good" },
     { name: "dog", isGet: false, describe: "dog is good" },
   ],

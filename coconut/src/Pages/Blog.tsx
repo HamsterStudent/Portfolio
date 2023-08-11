@@ -3,6 +3,7 @@ import Draggable from "react-draggable";
 import { Bar, Container } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { displayBlogAtom, highestZIndexAtom } from "../atom";
+import ErrorIcon from "../Components/ErrorIcon";
 
 const Blog = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
@@ -47,6 +48,7 @@ const Blog = () => {
             https://hamsterstudent.github.io/
           </a>
         </div>
+        <ErrorIcon name={"css"} />
       </Container>
     </Draggable>
   );

@@ -33,7 +33,7 @@ const Dungeon = () => {
           ></div>
         </Bar>
         <div>dungeon</div>
-        <ErrorIcon name={"duck"} />
+        <ErrorIcon name={"graphql"} />
       </Container>
     </Draggable>
   );

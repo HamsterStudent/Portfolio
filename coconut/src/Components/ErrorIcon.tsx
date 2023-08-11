@@ -10,6 +10,7 @@ type IError = {
 const Card = styled.div`
   background-color: #c23838;
   display: inline-block;
+  padding: 5px;
 `;
 
 const ErrorIcon = ({ name }: IError) => {
@@ -29,6 +30,7 @@ const ErrorIcon = ({ name }: IError) => {
         onClick(name);
       }}
     >
+      <img src={`img/${name}.png`} alt={`${name}`} />
       {name}
     </Card>
   );
