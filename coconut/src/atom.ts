@@ -1,6 +1,12 @@
 import { atom } from "recoil";
 import { defaultTheme } from "./theme";
 
+export interface ICardTypes {
+  name: string;
+  isGet: boolean;
+  describe: string;
+}
+
 export const basicZIndexAtom = atom({
   key: "basicIndex",
   default: 0,
@@ -14,6 +20,18 @@ export const highestZIndexAtom = atom({
 export const themeAtom = atom({
   key: "theme",
   default: defaultTheme,
+});
+
+export const collectError = atom<ICardTypes[]>({
+  key: "collectError",
+  default: [
+    { name: "hamster", isGet: false, describe: "Hamster is cute" },
+    { name: "graphql", isGet: false, describe: "graphQL" },
+    { name: "jelly", isGet: false, describe: "jelly is delicious" },
+    { name: "css", isGet: false, describe: "css" },
+    { name: "cat", isGet: false, describe: "cat is good" },
+    { name: "dog", isGet: false, describe: "dog is good" },
+  ],
 });
 
 export const displayLauncherAtom = atom({
@@ -51,7 +69,7 @@ export const displayDungeonAtom = atom({
   default: false,
 });
 
-export const displayContactAtom = atom({
+export const displayErrorCardAtom = atom({
   key: "displayContact",
   default: false,
 });

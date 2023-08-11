@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Guestbook from "../Pages/Guestbook";
 import {
-  displayContactAtom,
+  displayErrorCardAtom,
   displayGuestbookAtom,
   displayLauncherAtom,
   displayThemeAtom,
@@ -63,7 +63,7 @@ const Item = styled.div`
 
 function Header({ enter }: FullScreenHandle) {
   const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
-  const setIsContact = useSetRecoilState(displayContactAtom);
+  const setIsContact = useSetRecoilState(displayErrorCardAtom);
   const setIsTheme = useSetRecoilState(displayThemeAtom);
   const setIsLauncher = useSetRecoilState(displayLauncherAtom);
   const isDesktop = useMediaQuery({
@@ -120,7 +120,7 @@ function Header({ enter }: FullScreenHandle) {
                   toggleMenu();
                 }}
               >
-                Contact
+                ErrorCard
               </Item>
               <Item
                 onClick={() => {

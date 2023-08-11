@@ -3,6 +3,7 @@ import Draggable from "react-draggable";
 import { Bar, Container } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { displayDungeonAtom, highestZIndexAtom } from "../atom";
+import ErrorIcon from "../Components/ErrorIcon";
 
 const Dungeon = () => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
@@ -32,6 +33,7 @@ const Dungeon = () => {
           ></div>
         </Bar>
         <div>dungeon</div>
+        <ErrorIcon name={"graphql"} />
       </Container>
     </Draggable>
   );
