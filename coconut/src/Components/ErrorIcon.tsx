@@ -1,9 +1,9 @@
 import React from "react";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import styled from "styled-components";
-import { ICardTypes, collectError } from "../atom";
+import { ICardTypes, collectTool } from "../atom";
 
-type IError = {
+type ITool = {
   name: string;
 };
 
@@ -13,8 +13,8 @@ const Card = styled.div`
   padding: 5px;
 `;
 
-const ErrorIcon = ({ name }: IError) => {
-  const [cards, setCards] = useRecoilState(collectError);
+const ToolIcon = ({ name }: ITool) => {
+  const [cards, setCards] = useRecoilState(collectTool);
 
   const onClick = (iconName: string) => {
     setCards(
@@ -36,4 +36,4 @@ const ErrorIcon = ({ name }: IError) => {
   );
 };
 
-export default ErrorIcon;
+export default ToolIcon;
