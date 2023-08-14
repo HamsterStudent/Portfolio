@@ -1,75 +1,90 @@
 import { atom } from "recoil";
 import { defaultTheme } from "./theme";
+import { v1 } from "uuid";
 
 export interface ICardTypes {
   name: string;
   isGet: boolean;
   describe: string;
+  fruit?: string;
+  img?: string;
 }
 
 export const basicZIndexAtom = atom({
-  key: "basicIndex",
+  key: `basicIndex/${v1()}`,
   default: 0,
 });
 
 export const highestZIndexAtom = atom({
-  key: "windowIndex",
+  key: `windowIndex/${v1()}`,
   default: 0,
 });
 
 export const themeAtom = atom({
-  key: "theme",
+  key: `theme/${v1()}`,
   default: defaultTheme,
 });
 
-export const collectError = atom<ICardTypes[]>({
-  key: "collectError",
+export const collectTool = atom<ICardTypes[]>({
+  key: `collectTool/${v1()}`,
   default: [
     { name: "hamster", isGet: false, describe: "Hamster is cute" },
-    { name: "graphql", isGet: false, describe: "graphQL" },
+    {
+      name: "graphql",
+      isGet: false,
+      describe: "graphQL",
+      fruit: "img/watermalon.png",
+      img: "img/graphql.png",
+    },
     { name: "jelly", isGet: false, describe: "jelly is delicious" },
-    { name: "css", isGet: false, describe: "css" },
+    {
+      name: "css",
+      isGet: false,
+      describe: "css",
+      fruit: "img/orange.png",
+      img: "img/css.png",
+    },
     { name: "cat", isGet: false, describe: "cat is good" },
     { name: "dog", isGet: false, describe: "dog is good" },
   ],
 });
 
 export const displayLauncherAtom = atom({
-  key: "displayLauncher",
+  key: `displayLauncher/${v1()}`,
   default: true,
 });
 
 export const displayGuestbookAtom = atom({
-  key: "displayGuestbook",
+  key: `displayGuestbook/${v1()}`,
   default: false,
 });
 
 export const displayThemeAtom = atom({
-  key: "displayTheme",
+  key: `displayTheme/${v1()}`,
   default: false,
 });
 
 export const displayResumeAtom = atom({
-  key: "displayResume",
+  key: `displayResume/${v1()}`,
   default: false,
 });
 
 export const displayCodingAtom = atom({
-  key: "displayCoding",
+  key: `displayCoding/${v1()}`,
   default: false,
 });
 
 export const displayBlogAtom = atom({
-  key: "displayBlog",
+  key: `displayBlog/${v1()}`,
   default: false,
 });
 
 export const displayDungeonAtom = atom({
-  key: "displayDungeon",
+  key: `displayDungeon/${v1()}`,
   default: false,
 });
 
-export const displayErrorCardAtom = atom({
-  key: "displayContact",
+export const displayToolsAtom = atom({
+  key: `displayTools/${v1()}`,
   default: false,
 });
