@@ -11,6 +11,7 @@ import {
   displayCodingAtom,
   displayLauncherAtom,
   displayResumeAtom,
+  displayToolsAtom,
   highestZIndexAtom,
 } from "../atom";
 
@@ -63,6 +64,7 @@ function Launcher() {
   const [isResume, setIsResume] = useRecoilState(displayResumeAtom);
   const [isCoding, setIsCoding] = useRecoilState(displayCodingAtom);
   const [isBlog, setIsBlog] = useRecoilState(displayBlogAtom);
+  const [isTools, setIsTools] = useRecoilState(displayToolsAtom);
   const setIsdisplay = useSetRecoilState(displayLauncherAtom);
 
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
@@ -86,6 +88,8 @@ function Launcher() {
       }
     } else if (clickIconText === "Blog") {
       setIsBlog(true);
+    } else if (clickIconText === "Tools") {
+      setIsTools(true);
     }
     console.log(e.currentTarget.innerText);
   };
