@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { Container, Bar } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { displayCodingAtom, highestZIndexAtom } from "../atom";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import MarkdownRenderer from "../Components/MarkdownRenderer";
+import { Cute, Hamster } from "./CodingPosts/PostList";
 
 const ContentWrap = styled.section`
   font-size: 14px;
@@ -48,6 +51,7 @@ const ImageWrap = styled.div`
 `;
 
 const Coding = () => {
+  const [temp, setTemp] = useState(false);
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
   const setIsdisplay = useSetRecoilState(displayCodingAtom);
@@ -99,7 +103,10 @@ const Coding = () => {
                 <div>
                   <h2>title</h2>
                   <div>
-                    <button>JS</button>
+                    <button onClick={() => setTemp(true)}>JS</button>
+                    {temp ? (
+                      <MarkdownRenderer>{Hamster}</MarkdownRenderer>
+                    ) : null}
                     <button>CSS</button>
                   </div>
                 </div>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Draggable from "react-draggable";
 import Resume from "./resume";
 import Coding from "./Coding";
-import Modals from "../Components/Modals";
 import { Container, Bar } from "./pages.style";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
@@ -13,6 +12,7 @@ import {
   displayResumeAtom,
   displayToolsAtom,
   highestZIndexAtom,
+  windowDisplayAtom,
 } from "../atom";
 
 const LauncherContainer = styled(Container)<ILauncher>`
@@ -70,6 +70,8 @@ function Launcher() {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
 
+  const [isDisplay, setIsDisplay] = useRecoilState(windowDisplayAtom);
+
   useEffect(() => {
     setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
   }, []);
@@ -87,7 +89,11 @@ function Launcher() {
         setIsCoding(false);
       }
     } else if (clickIconText === "Blog") {
-      setIsBlog(true);
+      setIsDisplay(
+        isDisplay.map((window) => {
+          return window.name === "Blog" ? { ...window, display: true } : window;
+        }),
+      );
     } else if (clickIconText === "Tools") {
       setIsTools(true);
     }

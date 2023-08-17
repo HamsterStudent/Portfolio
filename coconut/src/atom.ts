@@ -49,6 +49,14 @@ export const collectTool = atom<ICardTypes[]>({
   ],
 });
 
+export const windowDisplayAtom = atom({
+  key: `windowDisplay/${v1()}`,
+  default: [
+    { name: "Dungeon", display: false },
+    { name: "Blog", display: false },
+  ],
+});
+
 export const displayLauncherAtom = atom({
   key: `displayLauncher/${v1()}`,
   default: true,

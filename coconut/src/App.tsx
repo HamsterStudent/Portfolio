@@ -17,6 +17,7 @@ import {
   displayThemeAtom,
   themeAtom,
   displayToolsAtom,
+  windowDisplayAtom,
 } from "./atom";
 import Resume from "./Pages/resume";
 import Blog from "./Pages/Blog";
@@ -40,8 +41,10 @@ function App() {
   const isDungeon = useRecoilValue(displayDungeonAtom);
   const isTools = useRecoilValue(displayToolsAtom);
   const isCoding = useRecoilValue(displayCodingAtom);
+  const isDisplay = useRecoilValue(windowDisplayAtom);
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);
+  console.log(isDisplay);
   return (
     <>
       <ThemeProvider theme={currentTheme}>
