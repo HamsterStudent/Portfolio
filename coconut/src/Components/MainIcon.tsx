@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Dungeon from "../Pages/Dungeon";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  displayDungeonAtom,
-  displayGuestbookAtom,
-  displayLauncherAtom,
-} from "../atom";
+import { displayLauncherAtom, windowDisplayAtom } from "../recoil/atom";
 
 const MainIconWrap = styled.section`
   position: absolute;
@@ -39,9 +35,9 @@ const IconImgWrap = styled.div`
 const IconTitle = styled.p``;
 const MainIcon = () => {
   const [icons, setIcons] = useState<string[]>([]);
-  const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
-  const [isDungeon, setIsDungeon] = useRecoilState(displayDungeonAtom);
   const [isLauncher, setIsLauncher] = useRecoilState(displayLauncherAtom);
+
+  const [isDisplay, setIsDisplay] = useRecoilState(windowDisplayAtom);
 
   useEffect(() => {
     setIcons(["Launcher", "Guestbook", "Dungeon", "Design", "Tools"]);
@@ -52,9 +48,13 @@ const MainIcon = () => {
     if (clickIconText === "Launcher") {
       setIsLauncher(true);
     } else if (clickIconText === "Guestbook") {
-      setIsGuestbook(true);
+      setIsDisplay((cur) => {
+        return { ...cur, Guestbook: true };
+      });
     } else if (clickIconText === "Dungeon") {
-      setIsDungeon(true);
+      setIsDisplay((cur) => {
+        return { ...cur, Dungeon: true };
+      });
     }
   };
   return (

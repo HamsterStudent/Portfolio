@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import { Bar, Container } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { highestZIndexAtom, themeAtom } from "../atom";
+import { themeAtom } from "../recoil/atom";
 import {
   darkTheme,
   lightTheme,
   summerTheme,
   cherryBlossom,
   defaultTheme,
-} from "../theme";
-import { displayThemeAtom } from "../atom";
+} from "../style/theme";
 import styled from "styled-components";
+import ModalWindow from "../Components/ModalWindow";
 
 const ScreenWrap = styled.div`
   height: 200px;
@@ -84,24 +83,11 @@ const U = styled.span`
 `;
 
 const ChooseTheme = () => {
-  let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
-  let [zIndex, setZIndex] = useState(0);
   const [selected, setSelected] = useState("");
   const [theme, setTheme] = useRecoilState(themeAtom);
-  const setIsdisplay = useSetRecoilState(displayThemeAtom);
-
   useEffect(() => {
-    setZIndex(highestZIndex);
     setSelected(`${theme.name}`);
   }, []);
-
-  const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (highestZIndex >= zIndex) {
-      setZIndex(highestZIndex++);
-      setHighestZIndex(highestZIndex++);
-    }
-  };
-
   const themeClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const {
       currentTarget: { textContent },
@@ -119,71 +105,61 @@ const ChooseTheme = () => {
     }
     setSelected(`${textContent}`);
   };
-
   return (
-    <Draggable
-      bounds="parent"
-      handle=".bar"
+    <ModalWindow
+      width={300}
+      windowName="Theme"
       defaultPosition={{ x: 150, y: 50 }}
     >
-      <Container windowWidth={`${300}px`} onClick={clickFront} zIndex={zIndex}>
-        <Bar className="bar">
-          <div
-            onClick={() => {
-              setIsdisplay(false);
-            }}
-          ></div>
-        </Bar>
-        <ScreenWrap>
-          <PreviewScreen></PreviewScreen>
-        </ScreenWrap>
-        <WallpaperWrap>
-          <Wallpaper>
-            <p>Wallpaper</p>
-            <div>
-              <U>S</U>elete an HTML Document or a picture:
-            </div>
-            <ThemeList>
-              <li
-                onClick={themeClick}
-                className={selected === "defaultTheme" ? "active" : undefined}
-              >
-                <div></div>
-                <span>defaultTheme</span>
-              </li>
-              <li
-                onClick={themeClick}
-                className={selected === "darkTheme" ? "active" : undefined}
-              >
-                <div></div>
-                <span>darkTheme</span>
-              </li>
-              <li
-                onClick={themeClick}
-                className={selected === "lightTheme" ? "active" : undefined}
-              >
-                <div></div>
-                <span>lightTheme</span>
-              </li>
-              <li
-                onClick={themeClick}
-                className={selected === "summerTheme" ? "active" : undefined}
-              >
-                <div></div>
-                <span>summerTheme</span>
-              </li>
-              <li
-                onClick={themeClick}
-                className={selected === "cherryBlossom" ? "active" : undefined}
-              >
-                <div></div>
-                <span>cherryBlossom</span>
-              </li>
-            </ThemeList>
-          </Wallpaper>
-        </WallpaperWrap>
-      </Container>
-    </Draggable>
+      <ScreenWrap>
+        <PreviewScreen></PreviewScreen>
+      </ScreenWrap>
+      <WallpaperWrap>
+        <Wallpaper>
+          <p>Wallpaper</p>
+          <div>
+            <U>S</U>elete an HTML Document or a picture:
+          </div>
+          <ThemeList>
+            <li
+              onClick={themeClick}
+              className={selected === "defaultTheme" ? "active" : undefined}
+            >
+              <div></div>
+              <span>defaultTheme</span>
+            </li>
+            <li
+              onClick={themeClick}
+              className={selected === "darkTheme" ? "active" : undefined}
+            >
+              <div></div>
+              <span>darkTheme</span>
+            </li>
+            <li
+              onClick={themeClick}
+              className={selected === "lightTheme" ? "active" : undefined}
+            >
+              <div></div>
+              <span>lightTheme</span>
+            </li>
+            <li
+              onClick={themeClick}
+              className={selected === "summerTheme" ? "active" : undefined}
+            >
+              <div></div>
+              <span>summerTheme</span>
+            </li>
+            <li
+              onClick={themeClick}
+              className={selected === "cherryBlossom" ? "active" : undefined}
+            >
+              <div></div>
+              <span>cherryBlossom</span>
+            </li>
+          </ThemeList>
+        </Wallpaper>
+      </WallpaperWrap>
+    </ModalWindow>
   );
 };
 

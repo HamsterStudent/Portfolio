@@ -1,19 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable";
-import Resume from "./resume";
-import Coding from "./Coding";
-import { Container, Bar } from "./pages.style";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-  displayBlogAtom,
-  displayCodingAtom,
   displayLauncherAtom,
-  displayResumeAtom,
-  displayToolsAtom,
   highestZIndexAtom,
   windowDisplayAtom,
-} from "../atom";
+} from "../recoil/atom";
+
+interface IContainer {
+  zIndex: number;
+  windowWidth?: string;
+}
+const Container = styled.div<IContainer>`
+  width: ${(props) => props.windowWidth};
+  height: auto;
+  background-color: ${(props) => props.theme.windowBg};
+  box-shadow: ${(props) => props.theme.windowShadow};
+  margin: 0;
+  box-sizing: content-box;
+  position: absolute;
+  z-index: ${(props) => props.zIndex};
+  border: 0.7px solid;
+  color: ${(props) => props.theme.textColor};
+`;
+const Bar = styled.div`
+  width: 100%;
+  height: 20px;
+  padding-left: 5px;
+  position: relative;
+  div {
+    width: 15px;
+    height: 15px;
+    border: solid 1px;
+    top: 5px;
+    right: 6px;
+    position: absolute;
+  }
+`;
+const ContentsWrap = styled.section``;
 
 const LauncherContainer = styled(Container)<ILauncher>`
   width: 600px;
@@ -61,16 +86,12 @@ interface ILauncher {
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<any>([]);
-  const [isResume, setIsResume] = useRecoilState(displayResumeAtom);
-  const [isCoding, setIsCoding] = useRecoilState(displayCodingAtom);
-  const [isBlog, setIsBlog] = useRecoilState(displayBlogAtom);
-  const [isTools, setIsTools] = useRecoilState(displayToolsAtom);
   const setIsdisplay = useSetRecoilState(displayLauncherAtom);
 
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
 
-  const [isDisplay, setIsDisplay] = useRecoilState(windowDisplayAtom);
+  const setIsDisplay = useSetRecoilState(windowDisplayAtom);
 
   useEffect(() => {
     setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
@@ -79,23 +100,21 @@ function Launcher() {
   const onClick = (e: any) => {
     const clickIconText = e.currentTarget.innerText;
     if (clickIconText === "resume") {
-      setIsResume(true);
-      if (isResume) {
-        setIsResume(false);
-      }
+      setIsDisplay((cur) => {
+        return { ...cur, Resume: true };
+      });
     } else if (clickIconText === "Coding") {
-      setIsCoding(true);
-      if (isCoding) {
-        setIsCoding(false);
-      }
+      setIsDisplay((cur) => {
+        return { ...cur, Coding: true };
+      });
     } else if (clickIconText === "Blog") {
-      setIsDisplay(
-        isDisplay.map((window) => {
-          return window.name === "Blog" ? { ...window, display: true } : window;
-        }),
-      );
+      setIsDisplay((cur) => {
+        return { ...cur, Blog: true };
+      });
     } else if (clickIconText === "Tools") {
-      setIsTools(true);
+      setIsDisplay((cur) => {
+        return { ...cur, Tools: true };
+      });
     }
     console.log(e.currentTarget.innerText);
   };
@@ -107,43 +126,41 @@ function Launcher() {
   };
 
   return (
-    <>
-      <Draggable
-        nodeRef={dragRef}
-        bounds="parent"
-        handle=".bar"
-        defaultPosition={{ x: -300, y: -310 }}
-      >
-        <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}>
-          <Bar className="bar" onClick={clickFront}>
-            Launcher
-            <div
-              onClick={() => {
-                setIsdisplay(false);
-              }}
-            ></div>
-          </Bar>
-          <ContentWrap>
-            <ImageWrap>
-              <img src="img/temp.jpg" alt="temp" />
-            </ImageWrap>
-            <QuickBtnWrap>
-              {icons.map((icon: any) => (
-                <div
-                  key={icon}
-                  onClick={(e) => {
-                    onClick(e);
-                  }}
-                >
-                  <img src={`img/${icon}.gif`} alt="" />
-                  <p>{icon}</p>
-                </div>
-              ))}
-            </QuickBtnWrap>
-          </ContentWrap>
-        </LauncherContainer>
-      </Draggable>
-    </>
+    <Draggable
+      nodeRef={dragRef}
+      bounds="parent"
+      handle=".bar"
+      defaultPosition={{ x: -300, y: -310 }}
+    >
+      <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}>
+        <Bar className="bar" onClick={clickFront}>
+          Launcher
+          <div
+            onClick={() => {
+              setIsdisplay(false);
+            }}
+          ></div>
+        </Bar>
+        <ContentWrap>
+          <ImageWrap>
+            <img src="img/temp.jpg" alt="temp" />
+          </ImageWrap>
+          <QuickBtnWrap>
+            {icons.map((icon: any) => (
+              <div
+                key={icon}
+                onClick={(e) => {
+                  onClick(e);
+                }}
+              >
+                <img src={`img/${icon}.gif`} alt="" />
+                <p>{icon}</p>
+              </div>
+            ))}
+          </QuickBtnWrap>
+        </ContentWrap>
+      </LauncherContainer>
+    </Draggable>
   );
 }
 

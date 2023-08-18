@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { defaultTheme } from "./theme";
+import { defaultTheme } from "../style/theme";
 import { v1 } from "uuid";
 
 export interface ICardTypes {
@@ -49,50 +49,24 @@ export const collectTool = atom<ICardTypes[]>({
   ],
 });
 
-export const windowDisplayAtom = atom({
+interface IWindowDisplayAtom {
+  [key: string]: boolean;
+}
+export const windowDisplayAtom = atom<IWindowDisplayAtom>({
   key: `windowDisplay/${v1()}`,
-  default: [
-    { name: "Dungeon", display: false },
-    { name: "Blog", display: false },
-  ],
+  default: {
+    Launcher: true,
+    Blog: false,
+    Coding: false,
+    Resume: false,
+    Guestbook: false,
+    Dungeon: false,
+    Tools: false,
+    Theme: false,
+  },
 });
 
 export const displayLauncherAtom = atom({
   key: `displayLauncher/${v1()}`,
   default: true,
-});
-
-export const displayGuestbookAtom = atom({
-  key: `displayGuestbook/${v1()}`,
-  default: false,
-});
-
-export const displayThemeAtom = atom({
-  key: `displayTheme/${v1()}`,
-  default: false,
-});
-
-export const displayResumeAtom = atom({
-  key: `displayResume/${v1()}`,
-  default: false,
-});
-
-export const displayCodingAtom = atom({
-  key: `displayCoding/${v1()}`,
-  default: false,
-});
-
-export const displayBlogAtom = atom({
-  key: `displayBlog/${v1()}`,
-  default: false,
-});
-
-export const displayDungeonAtom = atom({
-  key: `displayDungeon/${v1()}`,
-  default: false,
-});
-
-export const displayToolsAtom = atom({
-  key: `displayTools/${v1()}`,
-  default: false,
 });
