@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
-import { Container, Bar } from "./pages.style";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import EmojiPicker, { EmojiStyle } from "emoji-picker-react";
 
-import { displayGuestbookAtom, highestZIndexAtom } from "../atom";
+import { highestZIndexAtom } from "../recoil/atom";
 import {
   collection,
   addDoc,
@@ -20,6 +19,7 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { dbService } from "../firebase";
+import ModalWindow from "../Components/ModalWindow";
 
 const ContentWrap = styled.section`
   padding: 20px;
@@ -75,15 +75,12 @@ const GuestText = styled.div`
 `;
 
 function Guestbook() {
-  let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
-  let [zIndex, setZIndex] = useState(0);
   const [showEmojis, setShowEmojis] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("");
   const [memo, setMemo] = useState("");
   const [memos, setMemos] = useState<{ id: string }[]>([]);
   const [key, setKey] = useState<QueryDocumentSnapshot<DocumentData>>();
   const [noMore, setNoMore] = useState(false);
-  const setIsdisplay = useSetRecoilState(displayGuestbookAtom);
 
   const start = query(
     collection(dbService, "memos"),
@@ -101,7 +98,6 @@ function Guestbook() {
       setMemos(memoArr);
       setKey(snapshot.docs[snapshot.docs.length - 1]);
     });
-    setZIndex(highestZIndex);
   }, []);
 
   const temp = async () => {
@@ -122,13 +118,6 @@ function Guestbook() {
       }));
       setMemos(memoArr);
     });
-  };
-
-  const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (highestZIndex >= zIndex) {
-      setZIndex(highestZIndex++);
-      setHighestZIndex(highestZIndex++);
-    }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -154,61 +143,51 @@ function Guestbook() {
   };
 
   return (
-    <Draggable
-      bounds="parent"
-      handle=".bar"
+    <ModalWindow
+      width={400}
       defaultPosition={{ x: 30, y: 150 }}
+      windowName={"Guestbook"}
     >
-      <Container windowWidth={`${400}px`} onClick={clickFront} zIndex={zIndex}>
-        <Bar className="bar">
-          Guestbook
-          <div
-            onClick={() => {
-              setIsdisplay(false);
-            }}
-          ></div>
-        </Bar>
-        <ContentWrap>
-          <InputWrap>
-            <IconButton onClick={() => setShowEmojis(!showEmojis)}>
-              {emojiIcon ? emojiIcon : "+"}
-            </IconButton>
-            {showEmojis && (
-              <EmojiBox>
-                <EmojiPicker
-                  height={400}
-                  width={300}
-                  onEmojiClick={(e) => {
-                    setEmojiIcon(e.emoji);
-                    setShowEmojis(false);
-                  }}
-                />
-              </EmojiBox>
-            )}
-            <FormBox onSubmit={onSubmit}>
-              <input
-                type="text"
-                value={memo}
-                onChange={onChange}
-                placeholder="What's on your mind?"
-                maxLength={120}
+      <ContentWrap>
+        <InputWrap>
+          <IconButton onClick={() => setShowEmojis(!showEmojis)}>
+            {emojiIcon ? emojiIcon : "+"}
+          </IconButton>
+          {showEmojis && (
+            <EmojiBox>
+              <EmojiPicker
+                height={400}
+                width={300}
+                onEmojiClick={(e) => {
+                  setEmojiIcon(e.emoji);
+                  setShowEmojis(false);
+                }}
               />
-              <input type="submit" value="memo" />
-            </FormBox>
-          </InputWrap>
-          {memos.map((eachMemo: any) => (
-            <GuestMemo key={eachMemo.id}>
-              {/* <p>{eachMemo.createdAt.toDate().toISOString()}</p> */}
-              <GuestText>
-                <div>{eachMemo.emojiIcon}</div>
-                <p>{eachMemo.memo}</p>
-              </GuestText>
-            </GuestMemo>
-          ))}
-          <div onClick={temp}>next</div>
-        </ContentWrap>
-      </Container>
-    </Draggable>
+            </EmojiBox>
+          )}
+          <FormBox onSubmit={onSubmit}>
+            <input
+              type="text"
+              value={memo}
+              onChange={onChange}
+              placeholder="What's on your mind?"
+              maxLength={120}
+            />
+            <input type="submit" value="memo" />
+          </FormBox>
+        </InputWrap>
+        {memos.map((eachMemo: any) => (
+          <GuestMemo key={eachMemo.id}>
+            {/* <p>{eachMemo.createdAt.toDate().toISOString()}</p> */}
+            <GuestText>
+              <div>{eachMemo.emojiIcon}</div>
+              <p>{eachMemo.memo}</p>
+            </GuestText>
+          </GuestMemo>
+        ))}
+        <div onClick={temp}>next</div>
+      </ContentWrap>
+    </ModalWindow>
   );
 }
 

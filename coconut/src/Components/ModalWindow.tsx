@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { highestZIndexAtom, windowDisplayAtom } from "../atom";
-import ErrorIcon from "./ErrorIcon";
+import { highestZIndexAtom, windowDisplayAtom } from "../recoil/atom";
 import styled from "styled-components";
 
 interface IContainer {
   zIndex: number;
   windowWidth?: string;
 }
-const Container = styled.div<IContainer>`
+export const Container = styled.div<IContainer>`
   width: ${(props) => props.windowWidth};
   height: auto;
   background-color: ${(props) => props.theme.windowBg};
@@ -40,12 +39,20 @@ const ContentsWrap = styled.section``;
 interface IWindow {
   width: number;
   windowName: string;
+  defaultPosition: { x: number; y: number };
   children?: any;
+  dragRef?: any;
 }
-const ModalWindow = ({ width, windowName, children }: IWindow) => {
+const ModalWindow = ({
+  width,
+  windowName,
+  defaultPosition,
+  children,
+  dragRef,
+}: IWindow) => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
-  const [isDisplay, setIsdisplay] = useRecoilState(windowDisplayAtom);
+  const setIsdisplay = useSetRecoilState(windowDisplayAtom);
 
   useEffect(() => {
     setZIndex(highestZIndex);
@@ -59,17 +66,18 @@ const ModalWindow = ({ width, windowName, children }: IWindow) => {
   };
 
   const clickClose = () => {
-    setIsdisplay(
-      isDisplay.map((window) => {
-        return window.name === windowName
-          ? { ...window, display: false }
-          : window;
-      }),
-    );
+    setIsdisplay((cur) => {
+      return { ...cur, [`${windowName}`]: false };
+    });
   };
 
   return (
-    <Draggable bounds="parent" handle=".bar" defaultPosition={{ x: 30, y: 50 }}>
+    <Draggable
+      bounds="parent"
+      handle=".bar"
+      defaultPosition={defaultPosition}
+      nodeRef={dragRef}
+    >
       <Container
         windowWidth={`${width}px`}
         onClick={clickFront}

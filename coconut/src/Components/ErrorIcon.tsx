@@ -1,7 +1,7 @@
 import React from "react";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import styled from "styled-components";
-import { ICardTypes, collectTool } from "../atom";
+import { ICardTypes, collectTool } from "../recoil/atom";
 
 type ITool = {
   name: string;

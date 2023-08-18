@@ -3,12 +3,8 @@ import { FullScreenHandle } from "react-full-screen";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Guestbook from "../Pages/Guestbook";
-import {
-  displayGuestbookAtom,
-  displayLauncherAtom,
-  displayThemeAtom,
-} from "../atom";
-import { useSetRecoilState } from "recoil";
+import { displayLauncherAtom, windowDisplayAtom } from "../recoil/atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 const Nav = styled.div`
   width: 100%;
@@ -61,9 +57,9 @@ const Item = styled.div`
 `;
 
 function Header({ enter }: FullScreenHandle) {
-  const setIsGuestbook = useSetRecoilState(displayGuestbookAtom);
-  const setIsTheme = useSetRecoilState(displayThemeAtom);
   const setIsLauncher = useSetRecoilState(displayLauncherAtom);
+  const [isDisplay, setIsDisplay] = useRecoilState(windowDisplayAtom);
+
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
@@ -106,7 +102,9 @@ function Header({ enter }: FullScreenHandle) {
               </Item>
               <Item
                 onClick={() => {
-                  setIsTheme(true);
+                  setIsDisplay((cur) => {
+                    return { ...cur, Theme: true };
+                  });
                   toggleMenu();
                 }}
               >
@@ -114,7 +112,9 @@ function Header({ enter }: FullScreenHandle) {
               </Item>
               <Item
                 onClick={() => {
-                  setIsGuestbook(true);
+                  setIsDisplay((cur) => {
+                    return { ...cur, Guestbook: true };
+                  });
                   toggleMenu();
                 }}
               >

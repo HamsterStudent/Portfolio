@@ -8,17 +8,10 @@ import ChooseTheme from "./Pages/ThemeScreen";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { useRecoilValue } from "recoil";
 import {
-  displayBlogAtom,
-  displayCodingAtom,
-  displayDungeonAtom,
-  displayGuestbookAtom,
   displayLauncherAtom,
-  displayResumeAtom,
-  displayThemeAtom,
   themeAtom,
-  displayToolsAtom,
   windowDisplayAtom,
-} from "./atom";
+} from "./recoil/atom";
 import Resume from "./Pages/resume";
 import Blog from "./Pages/Blog";
 import Dungeon from "./Pages/Dungeon";
@@ -34,13 +27,6 @@ const AppWrap = styled.section`
 
 function App() {
   const isLauncher = useRecoilValue(displayLauncherAtom);
-  const isGuestbook = useRecoilValue(displayGuestbookAtom);
-  const isTheme = useRecoilValue(displayThemeAtom);
-  const isResume = useRecoilValue(displayResumeAtom);
-  const isBlog = useRecoilValue(displayBlogAtom);
-  const isDungeon = useRecoilValue(displayDungeonAtom);
-  const isTools = useRecoilValue(displayToolsAtom);
-  const isCoding = useRecoilValue(displayCodingAtom);
   const isDisplay = useRecoilValue(windowDisplayAtom);
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);
@@ -53,13 +39,13 @@ function App() {
           <AppWrap>
             <MainIcon />
             {isLauncher ? <Launcher /> : null}
-            {isResume ? <Resume /> : null}
-            {isGuestbook ? <Guestbook /> : null}
-            {isTheme ? <ChooseTheme /> : null}
-            {isBlog ? <Blog /> : null}
-            {isDungeon ? <Dungeon /> : null}
-            {isCoding ? <Coding /> : null}
-            {isTools ? <Tools /> : null}
+            {isDisplay["Resume"] ? <Resume /> : null}
+            {isDisplay["Guestbook"] ? <Guestbook /> : null}
+            {isDisplay["Theme"] ? <ChooseTheme /> : null}
+            {isDisplay["Blog"] ? <Blog /> : null}
+            {isDisplay["Dungeon"] ? <Dungeon /> : null}
+            {isDisplay["Coding"] ? <Coding /> : null}
+            {isDisplay["Tools"] ? <Tools /> : null}
           </AppWrap>
         </FullScreen>
       </ThemeProvider>
