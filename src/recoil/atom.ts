@@ -2,7 +2,7 @@ import { atom } from "recoil";
 import { defaultTheme } from "../style/theme";
 import { v1 } from "uuid";
 
-export interface ICardTypes {
+export interface IStickerTypes {
   name: string;
   isGet: boolean;
   describe: string;
@@ -25,8 +25,13 @@ export const themeAtom = atom({
   default: defaultTheme,
 });
 
-export const collectTool = atom<ICardTypes[]>({
-  key: `collectTool/${v1()}`,
+export const displayLauncherAtom = atom({
+  key: `displayLauncher/${v1()}`,
+  default: true,
+});
+
+export const collectSticker = atom<IStickerTypes[]>({
+  key: `collectSticker/${v1()}`,
   default: [
     { name: "hamster", isGet: false, describe: "Hamster is cute" },
     {
@@ -66,7 +71,7 @@ export const windowDisplayAtom = atom<IWindowDisplayAtom>({
   },
 });
 
-export const displayLauncherAtom = atom({
-  key: `displayLauncher/${v1()}`,
-  default: true,
+export const ToolsAlertAtom = atom({
+  key: `ToolsAlertAtom/${v1()}`,
+  default: false,
 });
