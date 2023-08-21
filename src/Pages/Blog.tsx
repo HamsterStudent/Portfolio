@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
-import ErrorIcon from "../Components/ErrorIcon";
 import ModalWindow from "../Components/ModalWindow";
+import Sticker from "../Components/Sticker";
+import { collectSticker } from "../recoil/atom";
+import { useRecoilState } from "recoil";
+import useDisplaySticker from "../Hooks/useDisplaySticker";
 
 const Blog = () => {
+  const stickerName = "css";
+  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
+
   return (
     <ModalWindow
       width={400}
@@ -21,7 +27,9 @@ const Blog = () => {
           https://hamsterstudent.github.io/
         </a>
       </div>
-      <ErrorIcon name={"css"} />
+      {displaySticker ? (
+        <Sticker name={stickerName} setSricker={setDisplaySticker} />
+      ) : null}
     </ModalWindow>
   );
 };

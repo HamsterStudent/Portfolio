@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Draggable from "react-draggable";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
+  ToolsAlertAtom,
   displayLauncherAtom,
   highestZIndexAtom,
   windowDisplayAtom,
@@ -65,6 +66,20 @@ const ImageWrap = styled.div`
     box-sizing: border-box;
   }
 `;
+
+const animation = keyframes`
+  0% {
+    opacity: 0;
+  }
+  8%{
+    opacity:1;
+  }
+  100%{
+    opacity: 1;
+
+  }
+`;
+
 const QuickBtnWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -76,6 +91,23 @@ const QuickBtnWrap = styled.div`
     p {
       text-align: center;
     }
+  }
+  .active {
+    position: relative;
+    p {
+      color: pink;
+    }
+  }
+  .active::before {
+    content: "";
+    position: absolute;
+    right: 20%;
+    bottom: 9%;
+    width: 8px;
+    height: 8px;
+    background-color: pink;
+    border-radius: 4px;
+    animation: ${animation} 2s linear infinite;
   }
 `;
 
@@ -92,6 +124,7 @@ function Launcher() {
   let [zIndex, setZIndex] = useState(0);
 
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
+  const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
 
   useEffect(() => {
     setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
@@ -115,6 +148,7 @@ function Launcher() {
       setIsDisplay((cur) => {
         return { ...cur, Tools: true };
       });
+      setToolsEnter(false);
     }
     console.log(e.currentTarget.innerText);
   };
@@ -148,12 +182,15 @@ function Launcher() {
           <QuickBtnWrap>
             {icons.map((icon: any) => (
               <div
+                className={
+                  icon === "Tools" && toolsEnter ? "active" : undefined
+                }
                 key={icon}
                 onClick={(e) => {
                   onClick(e);
                 }}
               >
-                <img src={`img/${icon}.gif`} alt="" />
+                <img src={`img/${icon}.gif`} alt={icon} />
                 <p>{icon}</p>
               </div>
             ))}

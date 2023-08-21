@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { collectTool } from "../recoil/atom";
+import { collectSticker } from "../recoil/atom";
 import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 
@@ -44,7 +44,7 @@ const DanceFloor = styled.div`
 `;
 
 const Tools = () => {
-  const [cardList, setCardList] = useRecoilState(collectTool);
+  const [cardList, setCardList] = useRecoilState(collectSticker);
 
   const allComplete = () => {
     console.log("!!!!congratulation!!!!");
