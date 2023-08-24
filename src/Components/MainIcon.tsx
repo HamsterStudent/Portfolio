@@ -9,25 +9,28 @@ const MainIconWrap = styled.section`
   bottom: 0;
 `;
 const IconWrap = styled.ul`
-  width: 320px;
+  width: 300px;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-wrap: wrap-reverse;
+  margin: 15px;
 `;
 const IconLi = styled.li`
   width: 25%;
   height: auto;
   font-size: 14px;
-  border: dotted 0.7px;
+  text-align: center;
+  /* border: dotted 0.7px; */
+  margin-top: 10px;
 `;
 const IconImgWrap = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-bottom: 7px;
+  /* margin-bottom: 7px; */
   img {
-    width: 100%;
+    width: 60%;
     object-fit: contain;
   }
 `;
@@ -69,7 +72,7 @@ const MainIcon = () => {
               }}
             >
               <IconImgWrap>
-                <img src={`img/Project.gif`} alt="" />
+                <img src={`img/${icon}.png`} alt="" />
               </IconImgWrap>
               <IconTitle>{icon}</IconTitle>
             </IconLi>

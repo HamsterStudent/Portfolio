@@ -9,6 +9,7 @@
 - React-markdown
 - Firebase
 - React-draggable
+- re-resizable
 
 ### 파일 구조
 

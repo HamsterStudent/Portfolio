@@ -3,6 +3,7 @@ import Draggable from "react-draggable";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { highestZIndexAtom, windowDisplayAtom } from "../recoil/atom";
 import styled from "styled-components";
+import { Resizable } from "re-resizable";
 
 interface IContainer {
   zIndex: number;
@@ -34,6 +35,13 @@ const Bar = styled.div`
     position: absolute;
   }
 `;
+const style = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  border: "solid 1px #ddd",
+  background: "#f0f0f0",
+} as const;
 const ContentsWrap = styled.section``;
 
 interface IWindow {
@@ -41,14 +49,14 @@ interface IWindow {
   windowName: string;
   defaultPosition: { x: number; y: number };
   children?: any;
-  dragRef?: any;
+  resize?: boolean;
 }
 const ModalWindow = ({
   width,
   windowName,
   defaultPosition,
   children,
-  dragRef,
+  resize,
 }: IWindow) => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
@@ -72,14 +80,9 @@ const ModalWindow = ({
   };
 
   return (
-    <Draggable
-      bounds="parent"
-      handle=".bar"
-      defaultPosition={defaultPosition}
-      nodeRef={dragRef}
-    >
+    <Draggable bounds="parent" handle=".bar" defaultPosition={defaultPosition}>
       <Container
-        windowWidth={`${width}px`}
+        windowWidth={resize ? "auto" : `${width}px`}
         onClick={clickFront}
         zIndex={zIndex}
       >
@@ -87,7 +90,19 @@ const ModalWindow = ({
           {windowName}
           <div onClick={clickClose}></div>
         </Bar>
-        <ContentsWrap>{children}</ContentsWrap>
+        {resize ? (
+          <Resizable
+            style={style}
+            defaultSize={{
+              width: 200,
+              height: 200,
+            }}
+          >
+            {children}
+          </Resizable>
+        ) : (
+          <ContentsWrap>{children}</ContentsWrap>
+        )}
       </Container>
     </Draggable>
   );

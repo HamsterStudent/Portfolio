@@ -17,6 +17,7 @@ import Blog from "./Pages/Blog";
 import Dungeon from "./Pages/Dungeon";
 import Coding from "./Pages/Coding";
 import Tools from "./Pages/Tools";
+import ProdList from "./Pages/CodingPosts/ProdList";
 
 const AppWrap = styled.section`
   position: relative;
@@ -46,6 +47,7 @@ function App() {
             {isDisplay["Dungeon"] ? <Dungeon /> : null}
             {isDisplay["Coding"] ? <Coding /> : null}
             {isDisplay["Tools"] ? <Tools /> : null}
+            {isDisplay["ProdList"] ? <ProdList /> : null}
           </AppWrap>
         </FullScreen>
       </ThemeProvider>

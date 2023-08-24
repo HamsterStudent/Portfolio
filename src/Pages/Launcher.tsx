@@ -52,21 +52,17 @@ const LauncherContainer = styled(Container)<ILauncher>`
 const ContentWrap = styled.section`
   width: 100%;
   height: auto;
-  img {
-    width: 100%;
-    object-fit: contain;
-  }
 `;
 const ImageWrap = styled.div`
   width: 98.2%;
   margin-bottom: 10px;
   margin: 5px;
   img {
+    width: 100%;
     border: solid 1px;
     box-sizing: border-box;
   }
 `;
-
 const animation = keyframes`
   0% {
     opacity: 0;
@@ -79,18 +75,22 @@ const animation = keyframes`
 
   }
 `;
-
-const QuickBtnWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  border-top: solid 1px;
-  div {
-    width: 16.6%;
-    border-right: dotted 0.7px;
-    p {
-      text-align: center;
-    }
+const IconWrap = styled.div<{ btnClick: boolean }>`
+  padding: 10px 0;
+  width: 16.6%;
+  text-align: center;
+  box-shadow: ${(props) =>
+    props.btnClick
+      ? `-1px -1px 0px 0px inset,
+     rgba(255, 255, 255, 0.25) -2px -2px 0px 0px inset;`
+      : `-1px -1px 0px 0px inset,
+    rgba(255, 255, 255, 0.3) 1px 1px 0px 0px inset`};
+  p {
+    text-align: center;
+  }
+  img {
+    width: 50%;
+    object-fit: contain;
   }
   .active {
     position: relative;
@@ -111,13 +111,20 @@ const QuickBtnWrap = styled.div`
   }
 `;
 
+const QuickBtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: solid 1px;
+`;
+
 interface ILauncher {
   zIndex?: number;
 }
 
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
-  const [icons, setIcons] = useState<any>([]);
+  const [icons, setIcons] = useState<string[]>([]);
   const setIsdisplay = useSetRecoilState(displayLauncherAtom);
 
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
@@ -126,37 +133,46 @@ function Launcher() {
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
 
+  const [btnClick, setBtnClick] = useState(false);
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
   }, []);
 
-  const onClick = (e: any) => {
-    const clickIconText = e.currentTarget.innerText;
-    if (clickIconText === "resume") {
+  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const {
+      currentTarget: { innerText },
+    } = e;
+    if (innerText === "resume") {
       setIsDisplay((cur) => {
         return { ...cur, Resume: true };
       });
-    } else if (clickIconText === "Coding") {
+    } else if (innerText === "Coding") {
       setIsDisplay((cur) => {
         return { ...cur, Coding: true };
       });
-    } else if (clickIconText === "Blog") {
+    } else if (innerText === "Blog") {
       setIsDisplay((cur) => {
         return { ...cur, Blog: true };
       });
-    } else if (clickIconText === "Tools") {
+    } else if (innerText === "Tools") {
       setIsDisplay((cur) => {
         return { ...cur, Tools: true };
       });
+
       setToolsEnter(false);
     }
-    console.log(e.currentTarget.innerText);
   };
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
     if (highestZIndex >= zIndex) {
       setZIndex(highestZIndex++);
       setHighestZIndex(highestZIndex++);
     }
+  };
+
+  const onMouseDown = (index: number) => {
+    setCount(index);
   };
 
   return (
@@ -180,19 +196,26 @@ function Launcher() {
             <img src="img/temp.jpg" alt="temp" />
           </ImageWrap>
           <QuickBtnWrap>
-            {icons.map((icon: any) => (
-              <div
-                className={
-                  icon === "Tools" && toolsEnter ? "active" : undefined
-                }
+            {icons.map((icon, index) => (
+              <IconWrap
+                btnClick={btnClick}
+                className={`hamster ${
+                  icon === "Tools" && toolsEnter ? "active" : ""
+                }`}
                 key={icon}
                 onClick={(e) => {
                   onClick(e);
                 }}
+                onMouseDown={() => {
+                  onMouseDown(index);
+                }}
+                onMouseUp={(e) => {
+                  setBtnClick(false);
+                }}
               >
-                <img src={`img/${icon}.gif`} alt={icon} />
+                <img src={`img/${icon}.png`} alt={icon} />
                 <p>{icon}</p>
-              </div>
+              </IconWrap>
             ))}
           </QuickBtnWrap>
         </ContentWrap>
