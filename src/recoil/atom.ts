@@ -68,6 +68,7 @@ export const windowDisplayAtom = atom<IWindowDisplayAtom>({
     Dungeon: false,
     Tools: false,
     Theme: false,
+    ProdList: false,
   },
 });
 

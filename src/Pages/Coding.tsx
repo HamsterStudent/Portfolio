@@ -3,6 +3,8 @@ import styled from "styled-components";
 import MarkdownRenderer from "../Components/MarkdownRenderer";
 import { Cute, Hamster } from "./CodingPosts/PostList";
 import ModalWindow from "../Components/ModalWindow";
+import { useSetRecoilState } from "recoil";
+import { windowDisplayAtom } from "../recoil/atom";
 
 const CodingWrap = styled.section`
   font-size: 14px;
@@ -48,6 +50,7 @@ const ImageWrap = styled.div`
 
 const Coding = () => {
   const [temp, setTemp] = useState(false);
+  const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   return (
     <ModalWindow
       width={400}
@@ -72,7 +75,15 @@ const Coding = () => {
             <div>
               <h2>title</h2>
               <div>
-                <button onClick={() => setTemp(true)}>JS</button>
+                <button
+                  onClick={() => {
+                    setIsDisplay((cur) => {
+                      return { ...cur, ProdList: true };
+                    });
+                  }}
+                >
+                  JS
+                </button>
                 {temp ? <MarkdownRenderer>{Hamster}</MarkdownRenderer> : null}
                 <button>CSS</button>
               </div>
