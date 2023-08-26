@@ -36,12 +36,22 @@ const Bar = styled.div`
   }
 `;
 const style = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  border: "solid 1px #ddd",
-  background: "#f0f0f0",
+  heigth: "auto",
+  background: "pink",
+  overflowY: "hidden",
+  overflowX: "hidden",
 } as const;
+
+const bottomRight = {
+  bottomRight: {
+    bottom: "0",
+    right: "0",
+    width: "60px",
+    height: "30px",
+    background: "plum",
+  },
+};
+
 const ContentsWrap = styled.section``;
 
 interface IWindow {
@@ -94,9 +104,13 @@ const ModalWindow = ({
           <Resizable
             style={style}
             defaultSize={{
-              width: 200,
+              width: 600,
               height: 200,
             }}
+            maxWidth={1000}
+            minWidth={200}
+            maxHeight={850}
+            handleStyles={bottomRight}
           >
             {children}
           </Resizable>
