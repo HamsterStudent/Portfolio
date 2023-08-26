@@ -75,22 +75,15 @@ const animation = keyframes`
 
   }
 `;
-const IconWrap = styled.div<{ btnClick: boolean }>`
-  padding: 10px 0;
-  width: 16.6%;
-  text-align: center;
-  box-shadow: ${(props) =>
-    props.btnClick
-      ? `-1px -1px 0px 0px inset,
-     rgba(255, 255, 255, 0.25) -2px -2px 0px 0px inset;`
-      : `-1px -1px 0px 0px inset,
-    rgba(255, 255, 255, 0.3) 1px 1px 0px 0px inset`};
-  p {
-    text-align: center;
-  }
-  img {
-    width: 50%;
-    object-fit: contain;
+
+const QuickBtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: solid 1px;
+  .pressed {
+    box-shadow: -1px -1px 0px 0px inset,
+      rgba(255, 255, 255, 0.25) -2px -2px 0px 0px inset;
   }
   .active {
     position: relative;
@@ -111,11 +104,19 @@ const IconWrap = styled.div<{ btnClick: boolean }>`
   }
 `;
 
-const QuickBtnWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  border-top: solid 1px;
+const IconWrap = styled.div`
+  padding: 10px 0;
+  width: 16.6%;
+  text-align: center;
+  box-shadow: -1px -1px 0px 0px inset,
+    rgba(255, 255, 255, 0.3) 1px 1px 0px 0px inset;
+  p {
+    text-align: center;
+  }
+  img {
+    width: 50%;
+    object-fit: contain;
+  }
 `;
 
 interface ILauncher {
@@ -132,9 +133,6 @@ function Launcher() {
 
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
-
-  const [btnClick, setBtnClick] = useState(false);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
@@ -171,9 +169,8 @@ function Launcher() {
     }
   };
 
-  const onMouseDown = (index: number) => {
-    setCount(index);
-  };
+  const [countIndex, setCountIndex] = useState(-1);
+  const onMouseDown = (index: number) => {};
 
   return (
     <Draggable
@@ -198,19 +195,18 @@ function Launcher() {
           <QuickBtnWrap>
             {icons.map((icon, index) => (
               <IconWrap
-                btnClick={btnClick}
-                className={`hamster ${
-                  icon === "Tools" && toolsEnter ? "active" : ""
+                className={`${icon === "Tools" && toolsEnter ? "active" : ""} ${
+                  countIndex === index && "pressed"
                 }`}
-                key={icon}
+                key={index}
                 onClick={(e) => {
                   onClick(e);
                 }}
                 onMouseDown={() => {
-                  onMouseDown(index);
+                  setCountIndex(index);
                 }}
-                onMouseUp={(e) => {
-                  setBtnClick(false);
+                onMouseUp={() => {
+                  setCountIndex(-1);
                 }}
               >
                 <img src={`img/${icon}.png`} alt={icon} />
