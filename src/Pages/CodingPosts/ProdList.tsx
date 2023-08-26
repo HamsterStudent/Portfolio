@@ -1,7 +1,13 @@
+import styled from "styled-components";
 import MarkdownRenderer from "../../Components/MarkdownRenderer";
 import ModalWindow from "../../Components/ModalWindow";
-import { Hamster } from "./PostList";
-import { Resizable } from "re-resizable";
+import { Cute, Hamster } from "./PostList";
+
+const MarkdownWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+`;
 
 const ProdList = () => {
   return (
@@ -11,7 +17,9 @@ const ProdList = () => {
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}
     >
-      001
+      <MarkdownWrap>
+        <MarkdownRenderer>{Cute}</MarkdownRenderer>
+      </MarkdownWrap>
     </ModalWindow>
   );
 };
