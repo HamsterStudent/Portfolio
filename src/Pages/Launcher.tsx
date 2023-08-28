@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Draggable from "react-draggable";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  ToolsAlertAtom,
-  displayLauncherAtom,
-  highestZIndexAtom,
-  windowDisplayAtom,
-} from "../recoil/atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { displayLauncherAtom, highestZIndexAtom } from "../recoil/atom";
+import LauncherIcon from "../Components/LauncherIcon";
 
 interface IContainer {
   zIndex: number;
@@ -39,7 +35,6 @@ const Bar = styled.div`
     position: absolute;
   }
 `;
-const ContentsWrap = styled.section``;
 
 const LauncherContainer = styled(Container)<ILauncher>`
   width: 600px;
@@ -104,21 +99,6 @@ const QuickBtnWrap = styled.div`
   }
 `;
 
-const IconWrap = styled.div`
-  padding: 10px 0;
-  width: 16.6%;
-  text-align: center;
-  box-shadow: -1px -1px 0px 0px inset,
-    rgba(255, 255, 255, 0.3) 1px 1px 0px 0px inset;
-  p {
-    text-align: center;
-  }
-  img {
-    width: 50%;
-    object-fit: contain;
-  }
-`;
-
 interface ILauncher {
   zIndex?: number;
 }
@@ -131,46 +111,16 @@ function Launcher() {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
 
-  const setIsDisplay = useSetRecoilState(windowDisplayAtom);
-  const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
-
   useEffect(() => {
     setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
   }, []);
 
-  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const {
-      currentTarget: { innerText },
-    } = e;
-    if (innerText === "resume") {
-      setIsDisplay((cur) => {
-        return { ...cur, Resume: true };
-      });
-    } else if (innerText === "Coding") {
-      setIsDisplay((cur) => {
-        return { ...cur, Coding: true };
-      });
-    } else if (innerText === "Blog") {
-      setIsDisplay((cur) => {
-        return { ...cur, Blog: true };
-      });
-    } else if (innerText === "Tools") {
-      setIsDisplay((cur) => {
-        return { ...cur, Tools: true };
-      });
-
-      setToolsEnter(false);
-    }
-  };
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
     if (highestZIndex >= zIndex) {
       setZIndex(highestZIndex++);
       setHighestZIndex(highestZIndex++);
     }
   };
-
-  const [countIndex, setCountIndex] = useState(-1);
-  const onMouseDown = (index: number) => {};
 
   return (
     <Draggable
@@ -193,25 +143,8 @@ function Launcher() {
             <img src="img/temp.jpg" alt="temp" />
           </ImageWrap>
           <QuickBtnWrap>
-            {icons.map((icon, index) => (
-              <IconWrap
-                className={`${icon === "Tools" && toolsEnter ? "active" : ""} ${
-                  countIndex === index && "pressed"
-                }`}
-                key={index}
-                onClick={(e) => {
-                  onClick(e);
-                }}
-                onMouseDown={() => {
-                  setCountIndex(index);
-                }}
-                onMouseUp={() => {
-                  setCountIndex(-1);
-                }}
-              >
-                <img src={`img/${icon}.png`} alt={icon} />
-                <p>{icon}</p>
-              </IconWrap>
+            {icons.map((name, index) => (
+              <LauncherIcon name={name} index={index} />
             ))}
           </QuickBtnWrap>
         </ContentWrap>
