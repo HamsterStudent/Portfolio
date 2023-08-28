@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MarkdownRenderer from "../Components/MarkdownRenderer";
-import { Cute, Hamster } from "./CodingPosts/PostList";
+import { Hamster } from "./CodingPosts/PostList";
 import ModalWindow from "../Components/ModalWindow";
 import { useSetRecoilState } from "recoil";
 import { windowDisplayAtom } from "../recoil/atom";

@@ -60,14 +60,19 @@ interface IWindowDisplayAtom {
 export const windowDisplayAtom = atom<IWindowDisplayAtom>({
   key: `windowDisplay/${v1()}`,
   default: {
+    // 상단바 아이콘
     Launcher: true,
-    Blog: false,
-    Coding: false,
-    Resume: false,
     Guestbook: false,
-    Dungeon: false,
-    Tools: false,
     Theme: false,
+    // 런처 아이콘
+    Resume: false,
+    Coding: false,
+    Tools: false,
+    Blog: false,
+    About: false,
+    // 배경화면 아이콘
+    Dungeon: false,
+    // 포스트 리스트
     ProdList: false,
   },
 });

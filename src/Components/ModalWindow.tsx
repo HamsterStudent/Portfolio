@@ -37,7 +37,6 @@ const Bar = styled.div`
 `;
 const style = {
   heigth: "auto",
-  background: "pink",
   overflowY: "hidden",
   overflowX: "hidden",
 } as const;
@@ -107,9 +106,10 @@ const ModalWindow = ({
               width: 600,
               height: 200,
             }}
-            maxWidth={1000}
+            maxWidth={900}
             minWidth={200}
-            maxHeight={850}
+            minHeight={200}
+            maxHeight={800}
             handleStyles={bottomRight}
           >
             {children}
