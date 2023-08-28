@@ -17,11 +17,14 @@
 🌳src
 ┣🍀components
 ┃┣🌱ErrorIcon.tsx
+┃┣🌱LauncherIcon.tsx
 ┃┣🌱Header.tsx
 ┃┣🌱Mainicon.tsx
 ┃┣🌱MarkdownRenderer.tsx
 ┃┣🌱ModalWindow.tsx
+┃┣🌱Sticker.tsx
 ┣🍀pages
+┃┣🌱About.tsx
 ┃┣🌱Blog.tsx
 ┃┣🌱Coding.tsx
 ┃┣🌱Dungeon.tsx
