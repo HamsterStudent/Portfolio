@@ -29,6 +29,17 @@ const WallpaperWrap = styled.section`
   display: flex;
   padding: 15px 0;
   justify-content: center;
+  button {
+    margin-top: 10px;
+    background-color: transparent;
+    padding: 7px 10px;
+    border: solid 0.7px;
+  }
+  .clicked {
+    background-color: #252525;
+    color: #fff;
+    border-color: #252525;
+  }
 `;
 
 const Wallpaper = styled.div`
@@ -85,6 +96,9 @@ const U = styled.span`
 const ChooseTheme = () => {
   const [selected, setSelected] = useState("");
   const [theme, setTheme] = useRecoilState(themeAtom);
+  const [chooseTheme, setChooseTheme] = useState(theme);
+  const [btnClick, setBtnClick] = useState(false);
+
   useEffect(() => {
     setSelected(`${theme.name}`);
   }, []);
@@ -93,17 +107,21 @@ const ChooseTheme = () => {
       currentTarget: { textContent },
     } = e;
     if (textContent === "defaultTheme") {
-      setTheme(defaultTheme);
+      setChooseTheme(defaultTheme);
     } else if (textContent === "darkTheme") {
-      setTheme(darkTheme);
+      setChooseTheme(darkTheme);
     } else if (textContent === "lightTheme") {
-      setTheme(lightTheme);
+      setChooseTheme(lightTheme);
     } else if (textContent === "summerTheme") {
-      setTheme(summerTheme);
+      setChooseTheme(summerTheme);
     } else if (textContent === "cherryBlossom") {
-      setTheme(cherryBlossom);
+      setChooseTheme(cherryBlossom);
     }
     setSelected(`${textContent}`);
+  };
+
+  const themeApply = () => {
+    setTheme(chooseTheme);
   };
   return (
     <ModalWindow
@@ -157,6 +175,18 @@ const ChooseTheme = () => {
               <span>cherryBlossom</span>
             </li>
           </ThemeList>
+          <button
+            className={btnClick ? "clicked" : undefined}
+            onMouseDown={() => {
+              setBtnClick(true);
+            }}
+            onMouseUp={() => {
+              setBtnClick(false);
+            }}
+            onClick={themeApply}
+          >
+            Apply
+          </button>
         </Wallpaper>
       </WallpaperWrap>
     </ModalWindow>
