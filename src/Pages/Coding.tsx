@@ -21,7 +21,12 @@ const CodingWrap = styled.section`
     margin: 10px 0;
   }
 `;
+const ImageSection = styled.section`
+  width: 29%;
+  background-color: pink;
+`;
 const CardWrap = styled.ul`
+  width: 70%;
   height: 500px;
   display: flex;
   justify-content: space-between;
@@ -31,10 +36,19 @@ const CardWrap = styled.ul`
   scrollbar-width: none; /* 파이어폭스 */
 `;
 const Card = styled.li`
-  width: 48.6%;
+  width: 100%;
   background-color: antiquewhite;
   padding: 10px;
   margin-bottom: 10px;
+  h3 {
+    margin: 10px 0;
+  }
+  a {
+    border: dotted 0.7px;
+    padding: 3px 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+  }
 `;
 
 const ImageWrap = styled.div`
@@ -48,33 +62,40 @@ const ImageWrap = styled.div`
   }
 `;
 
+const data = [
+  {
+    title: "🧮Name Sticker",
+    describe: "네임스티커를 출력할 수 있는 웹사이트입니다.",
+    tag: ["React", "TypeScript", "styled-components"],
+    postComponent: ["ProdList"],
+    Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
+    Github: "https://github.com/HamsterStudent/name-sticker",
+    projectImg: "https://huchu.link/FihXTqD",
+  },
+];
+
 const Coding = () => {
-  const [temp, setTemp] = useState(false);
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   return (
     <ModalWindow
-      width={400}
+      width={600}
       windowName="Coding"
       defaultPosition={{ x: 350, y: 10 }}
     >
       <CodingWrap>
+        <ImageSection>image</ImageSection>
         <CardWrap>
           <Card>
-            <ImageWrap>
-              <img src="https://huchu.link/FihXTqD" alt="" />
-            </ImageWrap>
             <div>
-              <h2>title</h2>
-              <div>see more</div>
-            </div>
-          </Card>
-          <Card>
-            <ImageWrap>
-              <img src="https://huchu.link/MAZKzk3" alt="" />
-            </ImageWrap>
-            <div>
-              <h2>title</h2>
+              <h2>{data[0].title}</h2>
+              <p>{data[0].describe}</p>
+              <ul>
+                {data[0].tag.map((x) => {
+                  return <li>{x}</li>;
+                })}
+              </ul>
               <div>
+                <h3>log</h3>
                 <button
                   onClick={() => {
                     setIsDisplay((cur) => {
@@ -82,35 +103,54 @@ const Coding = () => {
                     });
                   }}
                 >
-                  JS
+                  sessionStorage 구현
                 </button>
-                {temp ? <MarkdownRenderer>{Hamster}</MarkdownRenderer> : null}
-                <button>CSS</button>
+                <button
+                  onClick={() => {
+                    setIsDisplay((cur) => {
+                      return { ...cur, ProdList: true };
+                    });
+                  }}
+                >
+                  폰트 변경 구현
+                </button>
+                <h3>code</h3>
+                <a
+                  href="https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Demo
+                </a>
+                <a
+                  href="https://github.com/HamsterStudent/name-sticker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github
+                </a>
               </div>
             </div>
           </Card>
           <Card>
-            <ImageWrap>
-              <img src="https://huchu.link/MVUT0fY" alt="" />
-            </ImageWrap>
             <div>
               <h2>title</h2>
               <div>see more</div>
             </div>
           </Card>
           <Card>
-            <ImageWrap>
-              <img src="https://huchu.link/IFh5Kto" alt="" />
-            </ImageWrap>
             <div>
               <h2>title</h2>
               <div>see more</div>
             </div>
           </Card>
           <Card>
-            <ImageWrap>
-              <img src="https://huchu.link/IFh5Kto" alt="" />
-            </ImageWrap>
+            <div>
+              <h2>title</h2>
+              <div>see more</div>
+            </div>
+          </Card>
+          <Card>
             <div>
               <h2>title</h2>
               <div>see more</div>
