@@ -65,6 +65,7 @@ const FlexBox = styled.div`
     width: 49.5%;
   }
   .education {
+    margin: 10px 0;
     p {
       margin: 0;
     }
