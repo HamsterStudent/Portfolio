@@ -95,6 +95,21 @@ const Coding = () => {
                 })}
               </ul>
               <div>
+                <h3>code</h3>
+                <a
+                  href="https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Demo
+                </a>
+                <a
+                  href="https://github.com/HamsterStudent/name-sticker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github
+                </a>
                 <h3>log</h3>
                 <button
                   onClick={() => {
@@ -114,21 +129,6 @@ const Coding = () => {
                 >
                   폰트 변경 구현
                 </button>
-                <h3>code</h3>
-                <a
-                  href="https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Demo
-                </a>
-                <a
-                  href="https://github.com/HamsterStudent/name-sticker"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Github
-                </a>
               </div>
             </div>
           </Card>
