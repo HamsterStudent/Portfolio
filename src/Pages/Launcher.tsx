@@ -52,10 +52,19 @@ const ImageWrap = styled.div`
   width: 98.2%;
   margin-bottom: 10px;
   margin: 5px;
+  position: relative;
   img {
     width: 100%;
     border: solid 1px;
     box-sizing: border-box;
+  }
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: url("img/dot.png");
+    background-size: 2px 2px;
+    position: absolute;
+    top: 0;
   }
 `;
 const animation = keyframes`
@@ -69,6 +78,7 @@ const animation = keyframes`
     opacity: 1;
 
   }
+ 
 `;
 
 const QuickBtnWrap = styled.div`
@@ -141,6 +151,7 @@ function Launcher() {
         <ContentWrap>
           <ImageWrap>
             <img src="img/temp.jpg" alt="temp" />
+            <div className="overlay" data-overlay></div>
           </ImageWrap>
           <QuickBtnWrap>
             {icons.map((name, index) => (

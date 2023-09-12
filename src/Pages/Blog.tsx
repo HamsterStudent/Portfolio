@@ -28,7 +28,12 @@ const Blog = () => {
         </a>
       </div>
       {displaySticker ? (
-        <Sticker name={stickerName} setSricker={setDisplaySticker} />
+        <Sticker
+          name={stickerName}
+          width={100}
+          defaultPosition={{ x: 300, y: 200 }}
+          setSricker={setDisplaySticker}
+        />
       ) : null}
     </ModalWindow>
   );
