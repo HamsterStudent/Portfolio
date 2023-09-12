@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Dungeon from "../Pages/Dungeon";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { displayLauncherAtom, windowDisplayAtom } from "../recoil/atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  displayLauncherAtom,
+  themeAtom,
+  windowDisplayAtom,
+} from "../recoil/atom";
 
 const MainIconWrap = styled.section`
   position: absolute;
@@ -39,8 +43,8 @@ const IconTitle = styled.p``;
 const MainIcon = () => {
   const [icons, setIcons] = useState<string[]>([]);
   const [isLauncher, setIsLauncher] = useRecoilState(displayLauncherAtom);
-
   const [isDisplay, setIsDisplay] = useRecoilState(windowDisplayAtom);
+  const currentheme = useRecoilValue(themeAtom);
 
   useEffect(() => {
     setIcons(["Launcher", "Guestbook", "Dungeon", "Design", "Tools"]);
@@ -72,7 +76,7 @@ const MainIcon = () => {
               }}
             >
               <IconImgWrap>
-                <img src={`img/${icon}.png`} alt="" />
+                <img src={`img/theme/${currentheme.name}/${icon}.png`} alt="" />
               </IconImgWrap>
               <IconTitle>{icon}</IconTitle>
             </IconLi>

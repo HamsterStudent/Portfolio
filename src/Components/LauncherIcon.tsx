@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { ToolsAlertAtom, windowDisplayAtom } from "../recoil/atom";
+import { ToolsAlertAtom, themeAtom, windowDisplayAtom } from "../recoil/atom";
 
 const IconWrap = styled.div`
   padding: 10px 0;
@@ -26,6 +26,8 @@ interface ILauncherIcon {
 const LauncherIcon = ({ name, index }: ILauncherIcon) => {
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
+  const currentheme = useRecoilValue(themeAtom);
+
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const {
       currentTarget: { innerText },
@@ -70,7 +72,7 @@ const LauncherIcon = ({ name, index }: ILauncherIcon) => {
         setCountIndex(-1);
       }}
     >
-      <img src={`img/${name}.png`} alt={name} />
+      <img src={`img/theme/${currentheme.name}/${name}.png`} alt={name} />
       <p>{name}</p>
     </IconWrap>
   );
