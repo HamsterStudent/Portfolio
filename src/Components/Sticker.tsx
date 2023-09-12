@@ -5,7 +5,15 @@ import { IStickerTypes, ToolsAlertAtom, collectSticker } from "../recoil/atom";
 
 type ITool = {
   name: string;
+  width: number;
+  defaultPosition: { x: number; y: number };
   setSricker?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type ICard = {
+  width: number;
+  top: number;
+  left: number;
 };
 
 const animation = keyframes`
@@ -23,14 +31,21 @@ const animation = keyframes`
   }
 `;
 
-const Card = styled.div`
+const Card = styled.div<ICard>`
   position: absolute;
+  top: ${({ top }) => top}px;
+  left: ${({ left }) => left}px;
   display: inline-block;
   padding: 5px;
   animation: ${animation} 0.3s ease-in-out forwards;
+  width: ${({ width }) => width}px;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
 `;
 
-const Sticker = ({ name, setSricker }: ITool) => {
+const Sticker = ({ name, width, defaultPosition, setSricker }: ITool) => {
   const [cards, setCards] = useRecoilState(collectSticker);
   const setToolsEnter = useSetRecoilState(ToolsAlertAtom);
 
@@ -55,8 +70,11 @@ const Sticker = ({ name, setSricker }: ITool) => {
       onClick={() => {
         onClick(name);
       }}
+      width={width}
+      top={defaultPosition.y}
+      left={defaultPosition.x}
     >
-      <img src={`img/${name}.png`} alt={`${name}`} />
+      <img src={`img/sticker/${name}.png`} alt={`${name}`} />
     </Card>
   );
 };

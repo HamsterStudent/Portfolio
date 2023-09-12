@@ -23,13 +23,24 @@ const ContentWrap = styled.section`
 `;
 
 const ImageWrap = styled.div`
-  width: 300px;
+  width: 301px;
+  height: 203px;
   margin-bottom: 10px;
+  position: relative;
   img {
     width: 100%;
     object-fit: contain;
     border: solid 1px;
     box-sizing: content-box;
+  }
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: url("img/dot.png");
+    background-size: 2px 2px;
+    position: absolute;
+    top: 0;
+    opacity: 0.5;
   }
 `;
 
@@ -48,6 +59,8 @@ const ContentBox = styled.div`
   }
   p {
     /* text-indent: 5px; */
+    font-size: 14px;
+    word-break: keep-all;
   }
   a {
     :hover {
@@ -107,6 +120,7 @@ function Resume() {
         <ContentBox>
           <ImageWrap>
             <img src="img/profile.jpg" alt="" />
+            <div className="overlay" data-overlay></div>
           </ImageWrap>
           <h2>엄진주 | JINJU UM</h2>
           <p>1996.03.25</p>

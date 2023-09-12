@@ -19,6 +19,8 @@ import Coding from "./Pages/Coding";
 import Tools from "./Pages/Tools";
 import ProdList from "./Pages/CodingPosts/ProdList";
 import About from "./Pages/About";
+import useDisplaySticker from "./Hooks/useDisplaySticker";
+import Sticker from "./Components/Sticker";
 
 const AppWrap = styled.section`
   position: relative;
@@ -32,6 +34,9 @@ function App() {
   const isDisplay = useRecoilValue(windowDisplayAtom);
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);
+  const stickerName = "typescript";
+  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
+
   console.log(isDisplay);
   return (
     <>
@@ -50,6 +55,14 @@ function App() {
             {isDisplay["Tools"] ? <Tools /> : null}
             {isDisplay["ProdList"] ? <ProdList /> : null}
             {isDisplay["About"] ? <About /> : null}
+            {displaySticker ? (
+              <Sticker
+                width={220}
+                name={stickerName}
+                defaultPosition={{ x: 300, y: 200 }}
+                setSricker={setDisplaySticker}
+              />
+            ) : null}
           </AppWrap>
         </FullScreen>
       </ThemeProvider>

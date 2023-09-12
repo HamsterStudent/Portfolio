@@ -7,6 +7,7 @@ import { useSetRecoilState } from "recoil";
 import { windowDisplayAtom } from "../recoil/atom";
 
 const CodingWrap = styled.section`
+  padding: 5px;
   font-size: 14px;
   border: solid 1px;
   margin: 5px;
@@ -37,6 +38,9 @@ const Card = styled.li`
   border: solid 0.7px;
   padding: 10px;
   margin-bottom: 10px;
+  :hover {
+    border: solid 0.7px white;
+  }
   h3 {
     margin: 10px 0;
   }
@@ -48,12 +52,15 @@ const Card = styled.li`
   }
 `;
 
-const ImageSection = styled.section`
+const ImageSection = styled.div`
   width: 34%;
+  height: 500px;
+  overflow: hidden;
   background-color: pink;
   img {
     width: 100%;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
     border: solid 1px;
     box-sizing: content-box;
   }
@@ -65,9 +72,7 @@ const data = [
     describe: "포트폴리오 웹사이트 입니다.",
     tags: ["React", "TypeScript", "styled-components"],
     postComponent: ["ProdList"],
-    Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
-    Github: "https://github.com/HamsterStudent/name-sticker",
-    projectImg: "https://huchu.link/FihXTqD",
+    projectImg: "img/coding/portfolio.png",
   },
   {
     title: "🧮Name Sticker",
@@ -76,16 +81,16 @@ const data = [
     postComponent: ["ProdList"],
     Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
     Github: "https://github.com/HamsterStudent/name-sticker",
-    projectImg: "https://huchu.link/MVUT0fY",
+    projectImg: "img/coding/sticker.png",
   },
   {
     title: "💉Pfizer",
-    describe: "국내 화이자 웹페이지 리디자인 입니다.",
+    describe: "국내 화이자 메인 페이지 리디자인 입니다.",
     tags: ["HTML", "SASS", "JavavScirpt"],
     postComponent: ["ProdList"],
-    Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
-    Github: "https://github.com/HamsterStudent/name-sticker",
-    projectImg: "https://huchu.link/IFh5Kto",
+    Demo: "https://hamsterstudent.github.io/pfizer-web/",
+    Github: "https://github.com/HamsterStudent/pfizer-web",
+    projectImg: "img/coding/pf.png",
   },
   {
     title: "🐥댓글창 수정",
@@ -93,7 +98,6 @@ const data = [
     tags: ["HTML", "SASS", "JavavScirpt"],
     postComponent: ["ProdList"],
     Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
-    Github: "https://github.com/HamsterStudent/name-sticker",
     projectImg: "https://huchu.link/MAZKzk3",
   },
 ];
@@ -129,21 +133,26 @@ const Coding = () => {
                     })}
                   </ul>
                   <div>
-                    <h3>code</h3>
-                    <a
-                      href="https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Demo
-                    </a>
-                    <a
-                      href="https://github.com/HamsterStudent/name-sticker"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Github
-                    </a>
+                    {data.Demo || data.Github ? <h3>code</h3> : null}
+                    {data.Demo ? (
+                      <a
+                        href={data.Demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Demo
+                      </a>
+                    ) : null}
+
+                    {data.Github ? (
+                      <a
+                        href={data.Github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Github
+                      </a>
+                    ) : null}
                     <h3>log</h3>
                     <button
                       onClick={() => {

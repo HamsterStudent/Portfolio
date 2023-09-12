@@ -15,7 +15,12 @@ const Dungeon = () => {
     >
       <div>dungeon</div>
       {displaySticker ? (
-        <Sticker name={stickerName} setSricker={setDisplaySticker} />
+        <Sticker
+          name={stickerName}
+          width={150}
+          defaultPosition={{ x: 300, y: 200 }}
+          setSricker={setDisplaySticker}
+        />
       ) : null}
     </ModalWindow>
   );
