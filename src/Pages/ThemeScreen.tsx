@@ -23,6 +23,11 @@ const PreviewScreen = styled.div`
   width: 200px;
   height: 150px;
   border: 0.7px solid;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 const WallpaperWrap = styled.section`
@@ -130,7 +135,9 @@ const ChooseTheme = () => {
       defaultPosition={{ x: 150, y: 50 }}
     >
       <ScreenWrap>
-        <PreviewScreen></PreviewScreen>
+        <PreviewScreen>
+          <img src={`img/${selected}.gif`} alt="" />
+        </PreviewScreen>
       </ScreenWrap>
       <WallpaperWrap>
         <Wallpaper>
