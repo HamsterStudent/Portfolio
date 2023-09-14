@@ -33,30 +33,55 @@ export const displayLauncherAtom = atom({
 export const collectSticker = atom<IStickerTypes[]>({
   key: `collectSticker/${v1()}`,
   default: [
-    { name: "hamster", isGet: false, describe: "Hamster is cute" },
+    {
+      name: "html",
+      isGet: true,
+      describe: "HTML",
+      fruit: "img/sticker/fruits/html.png",
+      img: "img/sticker/html.png",
+    },
     {
       name: "graphql",
       isGet: false,
       describe: "graphQL",
-      fruit: "img/sticker/watermalon.png",
+      fruit: "img/sticker/fruits/graphql.png",
       img: "img/sticker/graphql.png",
     },
     {
       name: "typescript",
       isGet: false,
-      describe: "jelly is delicious",
-      fruit: "img/sticker/mango.png",
+      describe: "Typescript",
+      fruit: "img/sticker/fruits/typescript.png",
       img: "img/sticker/typescript.png",
     },
     {
       name: "css",
       isGet: false,
-      describe: "css",
-      fruit: "img/sticker/orange.png",
+      describe: "CSS",
+      fruit: "img/sticker/fruits/css.png",
       img: "img/sticker/css.png",
     },
-    { name: "cat", isGet: false, describe: "cat is good" },
-    { name: "dog", isGet: false, describe: "dog is good" },
+    {
+      name: "flutter",
+      isGet: true,
+      describe: "Flutter",
+      fruit: "img/sticker/fruits/flutter.png",
+      img: "img/sticker/flutter.png",
+    },
+    {
+      name: "react",
+      isGet: true,
+      describe: "React",
+      fruit: "img/sticker/fruits/react.png",
+      img: "img/sticker/react.png",
+    },
+    {
+      name: "javascript",
+      isGet: true,
+      describe: "Javascript",
+      fruit: "img/sticker/fruits/javascript.png",
+      img: "img/sticker/javascript.png",
+    },
   ],
 });
 
@@ -72,7 +97,7 @@ export const windowDisplayAtom = atom<IWindowDisplayAtom>({
     Theme: false,
     // 런처 아이콘
     Resume: false,
-    Coding: false,
+    Project: false,
     Tools: false,
     Blog: false,
     About: false,
