@@ -3,18 +3,30 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { ToolsAlertAtom, themeAtom, windowDisplayAtom } from "../recoil/atom";
 
-const IconWrap = styled.div`
-  padding: 10px 0;
+const IconWrap = styled.div<{ currentheme: string }>`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
   width: 16.6%;
   text-align: center;
   box-shadow: -1px -1px 0px 0px inset,
     rgba(255, 255, 255, 0.3) 1px 1px 0px 0px inset;
+
   p {
     text-align: center;
+    width: 100%;
+    color: ${(props) => props.theme.textColor};
   }
-  img {
-    width: 50%;
-    object-fit: contain;
+  .imgWrap {
+    width: 48%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 `;
 
@@ -27,40 +39,20 @@ const LauncherIcon = ({ name, index }: ILauncherIcon) => {
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
   const currentheme = useRecoilValue(themeAtom);
-
+  const [countIndex, setCountIndex] = useState(-1);
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const {
       currentTarget: { innerText },
     } = e;
-    if (innerText === "resume") {
+    if (innerText === name) {
       setIsDisplay((cur) => {
-        return { ...cur, Resume: true };
-      });
-    } else if (innerText === "Coding") {
-      setIsDisplay((cur) => {
-        return { ...cur, Coding: true };
-      });
-    } else if (innerText === "Blog") {
-      setIsDisplay((cur) => {
-        return { ...cur, Blog: true };
-      });
-    } else if (innerText === "Tools") {
-      setIsDisplay((cur) => {
-        return { ...cur, Tools: true };
-      });
-      setToolsEnter(false);
-    } else if (innerText === "About") {
-      setIsDisplay((cur) => {
-        return { ...cur, About: true };
+        return { ...cur, [name]: true };
       });
     }
   };
-  const [countIndex, setCountIndex] = useState(-1);
   return (
     <IconWrap
-      className={`${name === "Tools" && toolsEnter ? "active" : ""} ${
-        countIndex === index && "pressed"
-      }`}
+      className={`${countIndex === index && "pressed"}`}
       key={index}
       onClick={(e) => {
         onClick(e);
@@ -71,8 +63,11 @@ const LauncherIcon = ({ name, index }: ILauncherIcon) => {
       onMouseUp={() => {
         setCountIndex(-1);
       }}
+      currentheme={currentheme.name}
     >
-      <img src={`img/theme/${currentheme.name}/${name}.png`} alt={name} />
+      <div className="imgWrap">
+        <img src={`img/theme/${currentheme.name}/${name}.png`} alt={name} />
+      </div>
       <p>{name}</p>
     </IconWrap>
   );

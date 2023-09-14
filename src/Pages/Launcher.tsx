@@ -19,13 +19,13 @@ const Container = styled.div<IContainer>`
   position: absolute;
   z-index: ${(props) => props.zIndex};
   border: 0.7px solid;
-  color: ${(props) => props.theme.textColor};
 `;
 const Bar = styled.div`
   width: 100%;
   height: 20px;
   padding-left: 5px;
   position: relative;
+  color: ${(props) => props.theme.textColor};
   div {
     width: 15px;
     height: 15px;
@@ -78,7 +78,6 @@ const animation = keyframes`
     opacity: 1;
 
   }
- 
 `;
 
 const QuickBtnWrap = styled.div`
@@ -122,7 +121,7 @@ function Launcher() {
   let [zIndex, setZIndex] = useState(0);
 
   useEffect(() => {
-    setIcons(["resume", "Coding", "Project", "Tools", "Blog", "About"]);
+    setIcons(["Resume", "Theme", "Project", "Tools", "Blog", "About"]);
   }, []);
 
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {

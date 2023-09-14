@@ -25,7 +25,7 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 120.7px;
+  width: 95px;
   display: flex;
   align-items: center;
   border-right: 0.7px dotted;
@@ -37,7 +37,7 @@ const Logo = styled.div`
 `;
 
 const Dropdown = styled.div`
-  width: 120px;
+  width: 95px;
   border-right: dotted 0.7px;
   box-sizing: border-box;
   position: absolute;
@@ -88,7 +88,7 @@ function Header({ enter }: FullScreenHandle) {
         {menu ? (
           <>
             <Logo onClick={toggleMenu} className={menu ? "active" : undefined}>
-              SeedMiner
+              <p>SeedMiner</p>
               <img src={`img/arrow.png`} alt="" />
             </Logo>
             <Dropdown>

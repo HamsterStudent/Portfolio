@@ -1,6 +1,6 @@
 export const darkTheme = {
   name: "darkTheme",
-  textColor: "#111",
+  textColor: "#dfdfdf;",
   backgroundColor: "#252525",
   windowBg: "#3e3e3e",
   windowBarColor: "#224434",

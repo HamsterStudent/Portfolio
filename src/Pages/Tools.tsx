@@ -5,46 +5,65 @@ import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 
 const CardWrap = styled.section`
+  font-family: "galmuri11";
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  background-color: white;
+  border: solid 0.7px;
+  margin: 5px;
+  h3 {
+    width: 100%;
+    text-align: center;
+    background-color: aqua;
+    border-bottom: solid 0.7px;
+  }
 `;
 const CardPlace = styled.div`
   width: 120px;
-  height: 150px;
+  /* height: 150px; */
   margin-bottom: 10px;
-  /* border: 0.7px dotted; */
 `;
 
 const Card = styled.div`
-  width: 100%;
-  height: 100%;
+  text-align: center;
   position: relative;
   transition: 0.4s;
-`;
-const CardFront = styled.div`
-  /*
-  background-color: pink;
-  width: 100%;
-  height: 100%; */
-  img {
+  div {
     width: 100%;
-    position: absolute;
-    :last-child {
-      width: 50%;
-      top: 50%;
-      left: 50%;
+    height: 100px;
+    img {
+      width: 85%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 `;
-const CardBack = styled.div``;
+
 const DanceFloor = styled.div`
   width: 100%;
   height: 150px;
+  background-color: pink;
 `;
 
 const Tools = () => {
   const [cardList, setCardList] = useRecoilState(collectSticker);
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    let count = 0;
+    cardList.map((x) => {
+      if (!x.isGet) {
+        count++;
+      }
+    });
+    if (count > 0) {
+      setIsComplete(false);
+    } else {
+      setIsComplete(true);
+      allComplete();
+    }
+  }, [cardList]);
 
   const allComplete = () => {
     console.log("!!!!congratulation!!!!");
@@ -62,27 +81,26 @@ const Tools = () => {
       windowName="Tools"
       defaultPosition={{ x: 300, y: 200 }}
     >
-      <div>
-        <CardWrap>
-          {cardList.map((card, index) => (
-            <CardPlace key={index}>
-              {card.isGet ? (
-                <Card onClick={cardFlip}>
-                  <CardFront>
-                    {card.name}
-                    <div>
-                      <img src={`${card.fruit}`} alt={`${card.name}`} />
-                      <img src={`${card.img}`} alt={`${card.name}`} />
-                    </div>
-                  </CardFront>
-                  {/* <CardBack>{card.describe}</CardBack> */}
-                </Card>
-              ) : null}
-            </CardPlace>
-          ))}
-        </CardWrap>
-      </div>
-      <DanceFloor></DanceFloor>
+      <CardWrap>
+        <h3>8 items</h3>
+        {cardList.map((card, index) => (
+          <CardPlace key={index}>
+            {card.isGet ? (
+              <Card onClick={cardFlip}>
+                <div>
+                  <img src={`${card.fruit}`} alt={`${card.name}`} />
+                </div>
+                <p>{card.describe}</p>
+              </Card>
+            ) : null}
+          </CardPlace>
+        ))}
+        <DanceFloor>
+          {isComplete === false
+            ? "find more sticker"
+            : "!!!!congratulation!!!!"}
+        </DanceFloor>
+      </CardWrap>
     </ModalWindow>
   );
 };

@@ -16,9 +16,11 @@ const ContentWrap = styled.section`
     font-size: 22px;
     padding: 10px 0;
     border-bottom: solid 1px;
+    color: ${(props) => props.theme.textColor};
   }
   p {
     margin: 10px 0;
+    color: ${(props) => props.theme.textColor};
   }
 `;
 
@@ -56,11 +58,13 @@ const ContentBox = styled.div`
   h3 {
     font-size: 16px;
     font-weight: 400;
+    color: ${(props) => props.theme.textColor};
   }
   p {
     /* text-indent: 5px; */
     font-size: 14px;
     word-break: keep-all;
+    color: ${(props) => props.theme.textColor};
   }
   a {
     :hover {
@@ -88,6 +92,7 @@ const FlexBox = styled.div`
     }
     li {
       font-size: 12px;
+      color: ${(props) => props.theme.textColor};
     }
   }
 `;
