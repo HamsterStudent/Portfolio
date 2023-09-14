@@ -174,13 +174,6 @@ const ChooseTheme = () => {
               <div></div>
               <span>summerTheme</span>
             </li>
-            <li
-              onClick={themeClick}
-              className={selected === "cherryBlossom" ? "active" : undefined}
-            >
-              <div></div>
-              <span>cherryBlossom</span>
-            </li>
           </ThemeList>
           <button
             className={btnClick ? "clicked" : undefined}

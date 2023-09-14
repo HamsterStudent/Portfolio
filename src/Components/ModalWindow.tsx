@@ -19,7 +19,6 @@ export const Container = styled.div<IContainer>`
   position: absolute;
   z-index: ${(props) => props.zIndex};
   border: 0.7px solid;
-  color: ${(props) => props.theme.textColor};
 `;
 const Bar = styled.div`
   width: 100%;
@@ -29,10 +28,17 @@ const Bar = styled.div`
   div {
     width: 15px;
     height: 15px;
-    border: solid 1px;
+    border: solid 1px ${(props) => props.theme.textColor};
     top: 5px;
     right: 6px;
     position: absolute;
+  }
+  span {
+    width: 50%;
+  }
+  p {
+    display: inline-block;
+    color: ${(props) => props.theme.textColor};
   }
 `;
 const style = {
@@ -96,8 +102,8 @@ const ModalWindow = ({
         zIndex={zIndex}
       >
         <Bar className="bar">
-          {windowName}
           <div onClick={clickClose}></div>
+          <p>{windowName}</p>
         </Bar>
         {resize ? (
           <Resizable

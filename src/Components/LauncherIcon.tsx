@@ -17,6 +17,7 @@ const IconWrap = styled.div<{ currentheme: string }>`
   p {
     text-align: center;
     width: 100%;
+    color: ${(props) => props.theme.textColor};
   }
   .imgWrap {
     width: 48%;
@@ -51,9 +52,7 @@ const LauncherIcon = ({ name, index }: ILauncherIcon) => {
   };
   return (
     <IconWrap
-      className={`${name === "Tools" && toolsEnter ? "active" : ""} ${
-        countIndex === index && "pressed"
-      }`}
+      className={`${countIndex === index && "pressed"}`}
       key={index}
       onClick={(e) => {
         onClick(e);
