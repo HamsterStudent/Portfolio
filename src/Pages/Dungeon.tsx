@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
 import useDisplaySticker from "../Hooks/useDisplaySticker";
+import Construction from "../Components/Construction";
 
 const Dungeon = () => {
   const stickerName = "graphql";
@@ -13,7 +14,7 @@ const Dungeon = () => {
       windowName="Dungeon"
       defaultPosition={{ x: 30, y: 50 }}
     >
-      <div>dungeon</div>
+      <Construction />
       {displaySticker ? (
         <Sticker
           name={stickerName}
