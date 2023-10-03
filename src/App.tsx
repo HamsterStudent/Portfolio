@@ -17,11 +17,14 @@ import Blog from "./Pages/Blog";
 import Dungeon from "./Pages/Dungeon";
 import Project from "./Pages/Project";
 import Tools from "./Pages/Tools";
-import ProdList from "./Pages/CodingPosts/ProdList";
 import About from "./Pages/About";
 import useDisplaySticker from "./Hooks/useDisplaySticker";
 import Sticker from "./Components/Sticker";
 import { darkTheme } from "./style/theme";
+import ProdListPost from "./Pages/CodingPosts/ProdListPost";
+import SessionPost from "./Pages/CodingPosts/SessionPost";
+import ProxyPost from "./Pages/CodingPosts/ProxyPost";
+import MapRefact from "./Pages/CodingPosts/MapRefact";
 
 const AppWrap = styled.section`
   position: relative;
@@ -61,7 +64,10 @@ function App() {
             {isDisplay["Dungeon"] ? <Dungeon /> : null}
             {isDisplay["Project"] ? <Project /> : null}
             {isDisplay["Tools"] ? <Tools /> : null}
-            {isDisplay["ProdList"] ? <ProdList /> : null}
+            {isDisplay["ProdListPost"] ? <ProdListPost /> : null}
+            {isDisplay["SessionPost"] ? <SessionPost /> : null}
+            {isDisplay["ProxyPost"] ? <ProxyPost /> : null}
+            {isDisplay["MapRefact"] ? <MapRefact /> : null}
             {isDisplay["About"] ? <About /> : null}
           </AppWrap>
         </FullScreen>

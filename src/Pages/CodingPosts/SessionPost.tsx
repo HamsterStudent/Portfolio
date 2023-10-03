@@ -85,11 +85,11 @@ onChange이벤트에서 값을 저장할 때 { key : 값 }의 형태로 저장�
 에러에서 언급하는데로, value를 defaultValue로 변경하면 된다.
 `;
 
-const ProdList = () => {
+const SessionPost = () => {
   return (
     <ModalWindow
       width={300}
-      windowName="ProdList"
+      windowName="SessionPost"
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}
     >
@@ -100,4 +100,4 @@ const ProdList = () => {
   );
 };
 
-export default ProdList;
+export default SessionPost;

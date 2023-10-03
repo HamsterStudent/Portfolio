@@ -17,13 +17,21 @@ const Blog = () => {
     >
       <div>
         <span>Github : </span>
-        <a href="https://github.com/HamsterStudent">
+        <a
+          href="https://github.com/HamsterStudent"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           https://github.com/HamsterStudent
         </a>
       </div>
       <div>
         <span>Blog : </span>
-        <a href="https://hamsterstudent.github.io/">
+        <a
+          href="https://hamsterstudent.github.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           https://hamsterstudent.github.io/
         </a>
       </div>
