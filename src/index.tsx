@@ -84,10 +84,8 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <RecoilRoot>
-    <RecoilRoot>
-      <GlobalStyle />
-      <App />
-    </RecoilRoot>
+    <GlobalStyle />
+    <App />
   </RecoilRoot>,
 
   // </React.StrictMode>,
