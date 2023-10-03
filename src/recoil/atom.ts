@@ -104,7 +104,10 @@ export const windowDisplayAtom = atom<IWindowDisplayAtom>({
     // 배경화면 아이콘
     Dungeon: false,
     // 포스트 리스트
-    ProdList: false,
+    ProdListPost: false,
+    SessionPost: false,
+    ProxyPost: false,
+    MapRefact: false,
   },
 });
 
