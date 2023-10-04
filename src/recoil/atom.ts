@@ -35,7 +35,7 @@ export const collectSticker = atom<IStickerTypes[]>({
   default: [
     {
       name: "html",
-      isGet: true,
+      isGet: false,
       describe: "HTML",
       fruit: "img/sticker/fruits/html.png",
       img: "img/sticker/html.png",
@@ -63,21 +63,21 @@ export const collectSticker = atom<IStickerTypes[]>({
     },
     {
       name: "flutter",
-      isGet: true,
+      isGet: false,
       describe: "Flutter",
       fruit: "img/sticker/fruits/flutter.png",
       img: "img/sticker/flutter.png",
     },
     {
       name: "react",
-      isGet: true,
+      isGet: false,
       describe: "React",
       fruit: "img/sticker/fruits/react.png",
       img: "img/sticker/react.png",
     },
     {
       name: "javascript",
-      isGet: true,
+      isGet: false,
       describe: "Javascript",
       fruit: "img/sticker/fruits/javascript.png",
       img: "img/sticker/javascript.png",

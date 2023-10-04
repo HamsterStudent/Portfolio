@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
+import Sticker from "../Components/Sticker";
+import useDisplaySticker from "../Hooks/useDisplaySticker";
 
 const ContentWrap = styled.section`
   /* width: 100%; */
@@ -48,6 +50,15 @@ const ImageWrap = styled.div`
 
 const ContentBox = styled.div`
   line-height: 20px;
+  .imageWrap {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
   :nth-child(1) {
     width: 38%;
   }
@@ -115,6 +126,9 @@ const SkillSetWrap = styled.div`
 `;
 
 function Resume() {
+  const stickerName = "javascript";
+  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
+
   return (
     <ModalWindow
       width={850}
@@ -142,8 +156,14 @@ function Resume() {
             <a href="mailto:deerinmymind@gmail.com">deerinmymind@gmail.com</a>
           </p>
           <h2>Notion Resume</h2>
-          <a href="https://respected-honey-7eb.notion.site/8f80be93ee194cff9a99b188a1c6651f?pvs=4">
-            notion
+          <a
+            href="https://respected-honey-7eb.notion.site/8f80be93ee194cff9a99b188a1c6651f?pvs=4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="imageWrap">
+              <img src="img/skill/notion.png" alt="" />
+            </div>
           </a>
         </ContentBox>
         <ContentBox>
@@ -230,6 +250,14 @@ function Resume() {
           </SkillSetWrap>
         </ContentBox>
       </ContentWrap>
+      {displaySticker ? (
+        <Sticker
+          name={stickerName}
+          width={100}
+          defaultPosition={{ x: 350, y: 120 }}
+          setSricker={setDisplaySticker}
+        />
+      ) : null}
     </ModalWindow>
   );
 }

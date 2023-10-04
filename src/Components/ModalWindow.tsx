@@ -39,6 +39,8 @@ const Bar = styled.div`
   p {
     display: inline-block;
     color: ${(props) => props.theme.textColor};
+    position: absolute;
+    top: 3px;
   }
 `;
 const style = {
