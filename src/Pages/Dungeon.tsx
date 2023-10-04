@@ -19,7 +19,7 @@ const Dungeon = () => {
         <Sticker
           name={stickerName}
           width={150}
-          defaultPosition={{ x: 300, y: 200 }}
+          defaultPosition={{ x: 300, y: 100 }}
           setSricker={setDisplaySticker}
         />
       ) : null}
