@@ -154,7 +154,7 @@ function Launcher() {
           </ImageWrap>
           <QuickBtnWrap>
             {icons.map((name, index) => (
-              <LauncherIcon name={name} index={index} />
+              <LauncherIcon key={name} name={name} index={index} />
             ))}
           </QuickBtnWrap>
         </ContentWrap>
