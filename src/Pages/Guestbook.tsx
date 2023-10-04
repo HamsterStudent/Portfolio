@@ -20,6 +20,8 @@ import {
 } from "firebase/firestore";
 import { dbService } from "../firebase";
 import ModalWindow from "../Components/ModalWindow";
+import Sticker from "../Components/Sticker";
+import useDisplaySticker from "../Hooks/useDisplaySticker";
 
 const ContentWrap = styled.section`
   padding: 20px;
@@ -75,6 +77,9 @@ const GuestText = styled.div`
 `;
 
 function Guestbook() {
+  const stickerName = "flutter";
+  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
+
   const [showEmojis, setShowEmojis] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("");
   const [memo, setMemo] = useState("");
@@ -187,6 +192,14 @@ function Guestbook() {
         ))}
         <div onClick={temp}>next</div>
       </ContentWrap>
+      {displaySticker ? (
+        <Sticker
+          name={stickerName}
+          width={100}
+          defaultPosition={{ x: 20, y: 10 }}
+          setSricker={setDisplaySticker}
+        />
+      ) : null}
     </ModalWindow>
   );
 }

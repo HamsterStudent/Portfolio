@@ -5,6 +5,8 @@ import { Hamster } from "./CodingPosts/PostList";
 import ModalWindow from "../Components/ModalWindow";
 import { useSetRecoilState } from "recoil";
 import { windowDisplayAtom } from "../recoil/atom";
+import useDisplaySticker from "../Hooks/useDisplaySticker";
+import Sticker from "../Components/Sticker";
 
 const CodingWrap = styled.section`
   padding: 5px;
@@ -20,6 +22,7 @@ const CodingWrap = styled.section`
   }
   p {
     margin: 10px 0;
+    color: ${(props) => props.theme.textColor};
   }
 `;
 
@@ -93,6 +96,7 @@ const InfoWrap = styled.div`
   padding: 5px;
   margin-top: 3px;
   margin-right: 5px;
+
   h2 {
     font: 600 18px "Source Sans Pro";
   }
@@ -177,17 +181,12 @@ const data: IData[] = [
     Github: "https://github.com/HamsterStudent/pfizer-web",
     projectImg: "img/coding/pf.png",
   },
-  {
-    title: "댓글창 수정",
-    describe: "웹사이트를 유지보수하며 생긴 수정사항 기록",
-    tags: ["HTML", "SASS", "JavavScirpt"],
-
-    Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
-    projectImg: "https://huchu.link/MAZKzk3",
-  },
 ];
 
 const Project = () => {
+  const stickerName = "react";
+  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
+
   const [image, setImage] = useState(`${data[0].projectImg}`);
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [tags, setTags] = useState<IData>();
@@ -207,7 +206,7 @@ const Project = () => {
     <ModalWindow
       width={600}
       windowName="Project"
-      defaultPosition={{ x: 300, y: 100 }}
+      defaultPosition={{ x: 200, y: 100 }}
     >
       <CodingWrap>
         <ImageSection>
@@ -310,6 +309,14 @@ const Project = () => {
           </InfoWrap>
         </ChooseProject>
       </CodingWrap>
+      {displaySticker ? (
+        <Sticker
+          name={stickerName}
+          width={100}
+          defaultPosition={{ x: 400, y: 400 }}
+          setSricker={setDisplaySticker}
+        />
+      ) : null}
     </ModalWindow>
   );
 };
