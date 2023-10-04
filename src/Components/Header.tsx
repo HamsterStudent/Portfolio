@@ -25,7 +25,7 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 95px;
+  width: 120px;
   display: flex;
   align-items: center;
   border-right: 0.7px dotted;
@@ -37,7 +37,7 @@ const Logo = styled.div`
 `;
 
 const Dropdown = styled.div`
-  width: 95px;
+  width: 120px;
   border-right: dotted 0.7px;
   box-sizing: border-box;
   position: absolute;
