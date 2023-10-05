@@ -34,11 +34,19 @@ const WallpaperWrap = styled.section`
   display: flex;
   padding: 15px 0;
   justify-content: center;
+  p {
+    color: ${(props) => props.theme.textColor};
+  }
+  .info {
+    color: ${(props) => props.theme.textColor};
+  }
+
   button {
     margin-top: 10px;
     background-color: transparent;
     padding: 7px 10px;
     border: solid 0.7px;
+    color: ${(props) => props.theme.textColor};
   }
   .clicked {
     background-color: #252525;
@@ -142,7 +150,7 @@ const ChooseTheme = () => {
       <WallpaperWrap>
         <Wallpaper>
           <p>Wallpaper</p>
-          <div>
+          <div className="info">
             <U>S</U>elete an HTML Document or a picture:
           </div>
           <ThemeList>

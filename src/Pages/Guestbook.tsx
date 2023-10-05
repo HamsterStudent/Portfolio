@@ -25,6 +25,7 @@ import useDisplaySticker from "../Hooks/useDisplaySticker";
 
 const ContentWrap = styled.section`
   padding: 20px;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const InputWrap = styled.div`
@@ -37,20 +38,23 @@ const IconButton = styled.button`
   height: 30px;
   background-color: transparent;
   border-radius: 50%;
-  border: solid 1px;
+  border: solid 1px ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.textColor};
 `;
 
 const EmojiBox = styled.div`
   position: fixed;
   top: 80px;
   left: 20px;
+  z-index: 2;
 `;
 
 const FormBox = styled.form`
   display: inline;
   input {
     background-color: transparent;
-    border: solid 1px;
+    border: solid 1px ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.textColor};
     height: 30px;
     border-radius: 15px;
     margin-left: 10px;
@@ -58,7 +62,7 @@ const FormBox = styled.form`
 `;
 
 const GuestMemo = styled.div`
-  border: solid 1px;
+  border: solid 1px ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   padding: 10px 5px;
   p {
@@ -67,12 +71,18 @@ const GuestMemo = styled.div`
 `;
 const GuestText = styled.div`
   /* background-color: azure; */
+  color: ${(props) => props.theme.textColor};
   display: flex;
   align-items: center;
   font-size: 16px;
   div {
     font-size: 22px;
     margin-right: 10px;
+  }
+  .blank {
+    width: 22px;
+    margin-right: 10px;
+    border: solid 1px ${(props) => props.theme.textColor};
   }
 `;
 
@@ -105,7 +115,7 @@ function Guestbook() {
     });
   }, []);
 
-  const temp = async () => {
+  const onNextClick = async () => {
     const queryRef = query(
       collection(dbService, "memos"),
       orderBy("createdAt", "desc"),
@@ -185,18 +195,23 @@ function Guestbook() {
           <GuestMemo key={eachMemo.id}>
             {/* <p>{eachMemo.createdAt.toDate().toISOString()}</p> */}
             <GuestText>
-              <div>{eachMemo.emojiIcon}</div>
+              {eachMemo.emojiIcon ? (
+                <div>{eachMemo.emojiIcon}</div>
+              ) : (
+                <div className="blank"></div>
+              )}
+
               <p>{eachMemo.memo}</p>
             </GuestText>
           </GuestMemo>
         ))}
-        <div onClick={temp}>next</div>
+        <div onClick={onNextClick}>next</div>
       </ContentWrap>
       {displaySticker ? (
         <Sticker
           name={stickerName}
           width={100}
-          defaultPosition={{ x: 20, y: 10 }}
+          defaultPosition={{ x: 300, y: 150 }}
           setSricker={setDisplaySticker}
         />
       ) : null}
