@@ -20,10 +20,6 @@ const CodingWrap = styled.section`
     padding: 10px 0;
     /* border-bottom: solid 1px; */
   }
-  p {
-    margin: 10px 0;
-    color: ${(props) => props.theme.textColor};
-  }
 `;
 
 const CardWrap = styled.ul`
@@ -37,6 +33,10 @@ const CardWrap = styled.ul`
   scrollbar-width: none; /* 파이어폭스 */
   border: solid 0.7px;
   padding: 5px;
+  p {
+    margin: 10px 0;
+    color: ${(props) => props.theme.textColor};
+  }
 `;
 const Card = styled.li`
   width: 100%;
@@ -46,9 +46,7 @@ const Card = styled.li`
   :hover {
     border: solid 0.7px white;
   }
-  h3 {
-    margin: 10px 0;
-  }
+
   a {
     border: dotted 0.7px;
     padding: 3px 5px;
@@ -82,7 +80,6 @@ const ChooseProject = styled.div`
 `;
 
 const InfoWrap = styled.div`
-  /* border: solid 0.7px; */
   width: 37.5%;
   height: 342px;
   background-color: rgb(255, 255, 255);
@@ -93,24 +90,22 @@ const InfoWrap = styled.div`
     rgb(224, 222, 222) -2px 2px, black -3px 2px, white -3px 4px, white 4px 4px,
     white 4px 0px, white 0px 4px, black 2px -3px, white 4px -3px;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 5px 15px;
   margin-top: 3px;
   margin-right: 5px;
 
   h2 {
-    font: 600 18px "Source Sans Pro";
+    font: 600 18px "galmuri11";
   }
-  h3 {
-    margin: 5px 0;
+  p {
+    margin: 10px 0;
+    font: 400 16px;
   }
   ul {
     li {
       display: inline-block;
-      border: solid 0.7px;
-      padding: 2px 5px;
       margin-right: 5px;
       margin-bottom: 5px;
-      cursor: pointer;
     }
   }
   a {
@@ -118,6 +113,19 @@ const InfoWrap = styled.div`
     border: solid 0.7px;
     padding: 2px 5px;
     margin-right: 5px;
+    :hover {
+      background-color: ${(props) => props.theme.backgroundColor};
+      color: ${(props) => props.theme.invertTextColor};
+    }
+  }
+`;
+
+const LogList = styled.div`
+  li {
+    :hover {
+      color: #aaaaaa;
+      cursor: pointer;
+    }
   }
 `;
 
@@ -137,7 +145,8 @@ const data: IData[] = [
     title: "Portfolio",
     describe: "포트폴리오 웹사이트",
     tags: ["React", "TypeScript", "Recoil", "styled-components"],
-    postComponent: [{ name: "ProdListPost 만들기", post: "ProdListPost" }],
+    Notion:
+      "https://shahn92.notion.site/GuardTips-2c4734253ee54304b954080d6cdae770?pvs=4",
     projectImg: "img/coding/portfolio.png",
   },
   {
@@ -242,13 +251,15 @@ const Project = () => {
               <div>
                 <h2>{tags.title}</h2>
                 <ul>
-                  <h3>Using Tools</h3>
+                  <p>USING TOOLS</p>
                   {tags?.tags.map((x) => {
-                    return <li key={x}>{x}</li>;
+                    return <li key={x}>▪︎ {x}</li>;
                   })}
                 </ul>
                 <div>
-                  {tags?.Demo || tags?.Github ? <h3>Code</h3> : null}
+                  {tags?.Demo || tags?.Github || tags?.Notion ? (
+                    <p>CODE</p>
+                  ) : null}
                   {tags?.Demo ? (
                     <a
                       href={tags.Demo}
@@ -281,8 +292,8 @@ const Project = () => {
                 </div>
                 <div>
                   {tags.postComponent ? (
-                    <div>
-                      <h3>log</h3>
+                    <LogList>
+                      <p>LOG</p>
                       <ul>
                         {tags.postComponent.map((x, index) => {
                           return (
@@ -294,12 +305,12 @@ const Project = () => {
                                 });
                               }}
                             >
-                              {x.name}
+                              ▪︎ {x.name}
                             </li>
                           );
                         })}
                       </ul>
-                    </div>
+                    </LogList>
                   ) : null}
                 </div>
               </div>

@@ -7,6 +7,7 @@ import { displayLauncherAtom, windowDisplayAtom } from "../recoil/atom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 const Nav = styled.div`
+  color: ${(props) => props.theme.textColor};
   width: 100%;
   height: 20px;
   background-color: ${(props) => props.theme.windowBg};
