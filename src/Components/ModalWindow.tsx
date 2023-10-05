@@ -23,24 +23,35 @@ export const Container = styled.div<IContainer>`
 const Bar = styled.div`
   width: 100%;
   height: 20px;
-  padding-left: 5px;
+  padding-top: 5px;
   position: relative;
-  div {
+  display: flex;
+  align-items: center;
+
+  .closebtn {
     width: 15px;
     height: 15px;
+    margin: 0 5px;
     border: solid 1px ${(props) => props.theme.textColor};
-    top: 5px;
-    right: 6px;
-    position: absolute;
-  }
-  span {
-    width: 50%;
-  }
-  p {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: ${(props) => props.theme.textColor};
-    position: absolute;
-    top: 3px;
+  }
+  .lineWrap {
+    flex: 1;
+    i {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: ${(props) => props.theme.textColor};
+      border-bottom: 2px solid ${(props) => props.theme.windowBg};
+    }
+  }
+  .title {
+    display: inline-block;
+    margin: 0 5px;
+    color: ${(props) => props.theme.textColor};
   }
 `;
 const style = {
@@ -53,9 +64,9 @@ const bottomRight = {
   bottomRight: {
     bottom: "0",
     right: "0",
-    width: "60px",
+    width: "30px",
     height: "30px",
-    background: "plum",
+    background: "url('img/arrow_resize.png')",
   },
 };
 
@@ -104,8 +115,15 @@ const ModalWindow = ({
         zIndex={zIndex}
       >
         <Bar className="bar">
-          <div onClick={clickClose}></div>
-          <p>{windowName}</p>
+          <div className="closebtn" onClick={clickClose}>
+            x
+          </div>
+          <div className="lineWrap">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+          <div className="title">{windowName}</div>
         </Bar>
         {resize ? (
           <Resizable
