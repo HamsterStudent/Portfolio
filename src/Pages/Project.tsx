@@ -146,7 +146,7 @@ const data: IData[] = [
     describe: "포트폴리오 웹사이트",
     tags: ["React", "TypeScript", "Recoil", "styled-components"],
     Notion:
-      "https://shahn92.notion.site/GuardTips-2c4734253ee54304b954080d6cdae770?pvs=4",
+      "https://respected-honey-7eb.notion.site/c6b75d5e4dd340f8a237dc4e8f5c7eee?pvs=4",
     projectImg: "img/coding/portfolio.png",
   },
   {
