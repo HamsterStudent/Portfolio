@@ -200,7 +200,7 @@ const Project = () => {
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [tags, setTags] = useState<IData>();
   const [curname, setCurname] = useState("");
-  const [curImg, setCurImg] = useState("");
+  const [curImg, setCurImg] = useState("img/blank_project.png");
 
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const {

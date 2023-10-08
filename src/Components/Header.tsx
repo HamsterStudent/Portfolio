@@ -74,8 +74,13 @@ function Header({ enter }: FullScreenHandle) {
   useEffect(() => {
     let time = new Date();
     const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    setDate(week[time.getDay() - 1] + " " + time.getDate());
-  }, []);
+    if (week[time.getDay() - 1] === undefined) {
+      setDate(week[6] + " " + time.getDate());
+    } else {
+      setDate(week[time.getDay() - 1] + " " + time.getDate());
+    }
+    console.log(week[time.getDay() - 1]);
+  }, [date]);
 
   const Timer = setInterval(() => {
     setClock(hours + ":" + minute);
