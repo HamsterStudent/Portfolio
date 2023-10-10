@@ -37,6 +37,9 @@ const CardWrap = styled.ul`
     margin: 10px 0;
     color: ${(props) => props.theme.textColor};
   }
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 const Card = styled.li`
   width: 100%;
