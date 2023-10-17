@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { defaultTheme } from "../style/theme";
+import { defaultTheme, summerTheme } from "../style/theme";
 import { v1 } from "uuid";
 
 export interface IStickerTypes {
@@ -9,6 +9,11 @@ export interface IStickerTypes {
   fruit?: string;
   img?: string;
 }
+
+export const musicPlayAtom = atom({
+  key: `musicplay/${v1()}`,
+  default: true,
+});
 
 export const basicZIndexAtom = atom({
   key: `basicIndex/${v1()}`,
@@ -22,7 +27,7 @@ export const highestZIndexAtom = atom({
 
 export const themeAtom = atom({
   key: `theme/${v1()}`,
-  default: defaultTheme,
+  default: summerTheme,
 });
 
 export const displayLauncherAtom = atom({
@@ -103,6 +108,7 @@ export const windowDisplayAtom = atom<IWindowDisplayAtom>({
     About: false,
     // 배경화면 아이콘
     Dungeon: false,
+    MusicPlayer: true,
     // 포스트 리스트
     ProdListPost: false,
     SessionPost: false,
