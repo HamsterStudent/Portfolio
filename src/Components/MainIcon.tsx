@@ -56,7 +56,7 @@ const MainIcon = () => {
   const [curname, setCurname] = useState("");
 
   useEffect(() => {
-    setIcons(["Launcher", "Guestbook", "Dungeon", "Design", "Tools"]);
+    setIcons(["Launcher", "Guestbook", "Dungeon", "MusicPlayer", "Tools"]);
   }, []);
 
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
