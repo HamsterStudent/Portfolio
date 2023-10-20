@@ -61,18 +61,18 @@ const MainIcon = () => {
 
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const {
-      currentTarget: { innerText, className },
+      currentTarget: { textContent, className },
     } = e;
 
-    setCurname(innerText);
+    setCurname(`${textContent}`);
 
     if (className.indexOf("active") > -1) {
-      if (innerText === "Launcher") {
+      if (textContent === "Launcher") {
         setIsLauncher(true);
         setCurname("");
       } else {
         setIsDisplay((cur) => {
-          return { ...cur, [innerText]: true };
+          return { ...cur, [`${textContent}`]: true };
         });
         setCurname("");
       }
