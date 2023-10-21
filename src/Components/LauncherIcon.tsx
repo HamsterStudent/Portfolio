@@ -42,9 +42,9 @@ const LauncherIcon = ({ name, index }: ILauncherIcon) => {
   const [countIndex, setCountIndex] = useState(-1);
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const {
-      currentTarget: { innerText },
+      currentTarget: { textContent },
     } = e;
-    if (innerText === name) {
+    if (textContent === name) {
       setIsDisplay((cur) => {
         return { ...cur, [name]: true };
       });
