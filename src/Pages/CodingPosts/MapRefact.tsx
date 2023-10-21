@@ -116,7 +116,7 @@ useEffect(() => {
 const MapRefact = () => {
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="MapRefact"
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}

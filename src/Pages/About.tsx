@@ -74,7 +74,7 @@ const About = () => {
 
   return (
     <ModalWindow
-      width={500}
+      width={"500px"}
       windowName="About"
       defaultPosition={{ x: 350, y: 50 }}
     >

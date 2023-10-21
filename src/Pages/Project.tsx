@@ -216,7 +216,7 @@ const Project = () => {
   };
   return (
     <ModalWindow
-      width={600}
+      width={"600px"}
       windowName="Project"
       defaultPosition={{ x: 200, y: 100 }}
     >

@@ -3,8 +3,15 @@ import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
 import useDisplaySticker from "../Hooks/useDisplaySticker";
+import { useMediaQuery } from "react-responsive";
 
-const ContentWrap = styled.section`
+interface IDisplay {
+  isDesktop: boolean;
+}
+
+const ContentWrap = styled.section<IDisplay>`
+  height: ${(props) => (props.isDesktop ? "auto" : "80vh")};
+  overflow-y: ${(props) => (props.isDesktop ? "none" : "scroll")};
   /* width: 100%; */
   font-size: 14px;
   border: solid 1px;
@@ -26,9 +33,9 @@ const ContentWrap = styled.section`
   }
 `;
 
-const ImageWrap = styled.div`
-  width: 301px;
-  height: 203px;
+const ImageWrap = styled.div<IDisplay>`
+  width: ${(props) => (props.isDesktop ? "301px" : "100%")};
+  height: ${(props) => (props.isDesktop ? "203px" : "auto")};
   margin-bottom: 10px;
   position: relative;
   img {
@@ -48,7 +55,7 @@ const ImageWrap = styled.div`
   }
 `;
 
-const ContentBox = styled.div`
+const ContentBox = styled.div<IDisplay>`
   line-height: 20px;
   .imageWrap {
     width: 30px;
@@ -61,9 +68,11 @@ const ContentBox = styled.div`
   }
   :nth-child(1) {
     width: 38%;
+    width: ${(props) => (props.isDesktop ? "38%" : "100%")};
   }
   :nth-child(2) {
     width: 60%;
+    width: ${(props) => (props.isDesktop ? "60%" : "100%")};
     margin-right: 0;
   }
   h3 {
@@ -129,15 +138,20 @@ function Resume() {
   const stickerName = "javascript";
   const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
+
   return (
     <ModalWindow
-      width={850}
+      width={isDesktop ? "850px" : "100%"}
       windowName="Resume"
       defaultPosition={{ x: 30, y: 50 }}
+      isDesktop={isDesktop}
     >
-      <ContentWrap>
-        <ContentBox>
-          <ImageWrap>
+      <ContentWrap isDesktop={isDesktop}>
+        <ContentBox isDesktop={isDesktop}>
+          <ImageWrap isDesktop={isDesktop}>
             <img src="img/profile.jpg" alt="" />
             <div className="overlay" data-overlay></div>
           </ImageWrap>
@@ -166,7 +180,7 @@ function Resume() {
             </div>
           </a>
         </ContentBox>
-        <ContentBox>
+        <ContentBox isDesktop={isDesktop}>
           <h2>Education</h2>
           <FlexBox>
             <div className="education">

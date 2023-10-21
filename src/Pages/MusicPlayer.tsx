@@ -78,11 +78,11 @@ export default function MusicPlayer() {
   const playerRef = useRef() as MutableRefObject<ReactPlayer>;
   const [playing, setPlaying] = useRecoilState(musicPlayAtom);
 
-  console.log(playedSeconds.toFixed(0));
+  // console.log(playedSeconds.toFixed(0));
 
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="MusicPlayer"
       defaultPosition={{ x: 100, y: 350 }}
     >

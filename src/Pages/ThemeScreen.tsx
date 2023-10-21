@@ -138,7 +138,7 @@ const ChooseTheme = () => {
   };
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="Theme"
       defaultPosition={{ x: 150, y: 50 }}
     >

@@ -161,7 +161,7 @@ const Tools = () => {
   };
   return (
     <ModalWindow
-      width={500}
+      width={"500px"}
       windowName="Tools"
       defaultPosition={{ x: 300, y: 200 }}
     >

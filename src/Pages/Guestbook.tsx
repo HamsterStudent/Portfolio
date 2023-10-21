@@ -159,7 +159,7 @@ function Guestbook() {
 
   return (
     <ModalWindow
-      width={400}
+      width={"400px"}
       defaultPosition={{ x: 30, y: 150 }}
       windowName={"Guestbook"}
     >

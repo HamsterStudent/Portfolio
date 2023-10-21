@@ -133,7 +133,7 @@ source에는 “/api(뒤에오는모든 주소)” 에 대해 이 변경을 진�
 const ProxyPost = () => {
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="ProxyPost"
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}

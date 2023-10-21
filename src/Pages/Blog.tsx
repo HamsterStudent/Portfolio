@@ -26,7 +26,7 @@ const Blog = () => {
 
   return (
     <ModalWindow
-      width={400}
+      width={"400px"}
       windowName="Blog"
       defaultPosition={{ x: 300, y: 200 }}
     >
