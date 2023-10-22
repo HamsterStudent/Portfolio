@@ -22,6 +22,7 @@ import { dbService } from "../firebase";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
 import useDisplaySticker from "../Hooks/useDisplaySticker";
+import { useMediaQuery } from "react-responsive";
 
 const ContentWrap = styled.section`
   padding: 20px;
@@ -97,6 +98,10 @@ function Guestbook() {
   const [key, setKey] = useState<QueryDocumentSnapshot<DocumentData>>();
   const [noMore, setNoMore] = useState(false);
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
+
   const start = query(
     collection(dbService, "memos"),
     orderBy("createdAt", "desc"),
@@ -159,9 +164,10 @@ function Guestbook() {
 
   return (
     <ModalWindow
-      width={"400px"}
+      width={isDesktop ? "400px" : "100%"}
       defaultPosition={{ x: 30, y: 150 }}
       windowName={"Guestbook"}
+      isDesktop={isDesktop}
     >
       <ContentWrap>
         <InputWrap>
@@ -211,7 +217,7 @@ function Guestbook() {
         <Sticker
           name={stickerName}
           width={100}
-          defaultPosition={{ x: 300, y: 150 }}
+          defaultPosition={isDesktop ? { x: 300, y: 150 } : { x: 100, y: 150 }}
           setSricker={setDisplaySticker}
         />
       ) : null}

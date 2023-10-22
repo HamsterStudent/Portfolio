@@ -11,6 +11,7 @@ import {
 } from "../style/theme";
 import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
+import { useMediaQuery } from "react-responsive";
 
 const ScreenWrap = styled.div`
   height: 200px;
@@ -111,6 +112,9 @@ const ChooseTheme = () => {
   const [theme, setTheme] = useRecoilState(themeAtom);
   const [chooseTheme, setChooseTheme] = useState(theme);
   const [btnClick, setBtnClick] = useState(false);
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
 
   useEffect(() => {
     setSelected(`${theme.name}`);
@@ -141,6 +145,7 @@ const ChooseTheme = () => {
       width={"300px"}
       windowName="Theme"
       defaultPosition={{ x: 150, y: 50 }}
+      isDesktop={isDesktop}
     >
       <ScreenWrap>
         <PreviewScreen>

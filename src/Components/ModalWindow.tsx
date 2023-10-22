@@ -137,10 +137,17 @@ const ModalWindow = ({
         {resize ? (
           <Resizable
             style={style}
-            defaultSize={{
-              width: 600,
-              height: 200,
-            }}
+            defaultSize={
+              isDesktop
+                ? {
+                    width: 600,
+                    height: 200,
+                  }
+                : {
+                    width: 350,
+                    height: 500,
+                  }
+            }
             maxWidth={900}
             minWidth={200}
             minHeight={200}

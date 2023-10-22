@@ -3,13 +3,15 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { ToolsAlertAtom, themeAtom, windowDisplayAtom } from "../recoil/atom";
 
-const IconWrap = styled.div<{ currentheme: string }>`
+const IconWrap = styled.div<{ currentheme: string; isDesktop: boolean }>`
   padding: 10px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   box-sizing: border-box;
   width: 16.6%;
+  width: ${(props) => (props.isDesktop ? "16.6%" : "25%")};
+
   text-align: center;
   box-shadow: -1px -1px 0px 0px inset,
     rgba(255, 255, 255, 0.3) 1px 1px 0px 0px inset;
@@ -33,9 +35,10 @@ const IconWrap = styled.div<{ currentheme: string }>`
 interface ILauncherIcon {
   name: string;
   index: number;
+  isDesktop: boolean;
 }
 
-const LauncherIcon = ({ name, index }: ILauncherIcon) => {
+const LauncherIcon = ({ name, index, isDesktop }: ILauncherIcon) => {
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
   const currentheme = useRecoilValue(themeAtom);
@@ -64,6 +67,7 @@ const LauncherIcon = ({ name, index }: ILauncherIcon) => {
         setCountIndex(-1);
       }}
       currentheme={currentheme.name}
+      isDesktop={isDesktop}
     >
       <div className="imgWrap">
         <img src={`img/theme/${currentheme.name}/${name}.png`} alt={name} />

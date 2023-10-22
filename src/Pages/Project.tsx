@@ -7,8 +7,13 @@ import { useSetRecoilState } from "recoil";
 import { windowDisplayAtom } from "../recoil/atom";
 import useDisplaySticker from "../Hooks/useDisplaySticker";
 import Sticker from "../Components/Sticker";
+import { useMediaQuery } from "react-responsive";
+interface IDisplay {
+  isDesktop: boolean;
+}
 
-const CodingWrap = styled.section`
+const CodingWrap = styled.section<IDisplay>`
+  height: ${(props) => (props.isDesktop ? "auto" : "580px")};
   padding: 5px;
   font-size: 14px;
   border: solid 1px;
@@ -22,7 +27,7 @@ const CodingWrap = styled.section`
   }
 `;
 
-const CardWrap = styled.ul`
+const CardWrap = styled.ul<IDisplay>`
   width: 60%;
   height: 350px;
   display: flex;
@@ -46,6 +51,7 @@ const Card = styled.li`
   border: solid 0.7px;
   padding: 5px;
   margin-bottom: 5px;
+  word-break: keep-all;
   :hover {
     border: solid 0.7px white;
   }
@@ -82,9 +88,12 @@ const ChooseProject = styled.div`
   }
 `;
 
-const InfoWrap = styled.div`
+const InfoWrap = styled.div<IDisplay>`
   width: 37.5%;
+  width: ${(props) => (props.isDesktop ? "37.5%" : "50%")};
+
   height: 342px;
+  overflow-y: scroll;
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(129, 129, 129) -2px -2px, rgb(129, 129, 129) -2px 0px,
     rgb(129, 129, 129) 0px -2px, black -3px -3px, black -3px 0px, black 0px -3px,
@@ -116,6 +125,7 @@ const InfoWrap = styled.div`
     border: solid 0.7px;
     padding: 2px 5px;
     margin-right: 5px;
+    margin-bottom: 5px;
     :hover {
       background-color: ${(props) => props.theme.backgroundColor};
       color: ${(props) => props.theme.invertTextColor};
@@ -205,27 +215,39 @@ const Project = () => {
   const [curname, setCurname] = useState("");
   const [curImg, setCurImg] = useState("img/blank_project.png");
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
+
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const {
       currentTarget: { children },
     } = e;
-    var found = data.find((e) => e.title === children[0].children[0].innerHTML);
+    const found = data.find(
+      (e) => e.title === children[0].children[0].innerHTML,
+    );
+    if (!found) return;
     setTags(found);
     setCurname(children[0].children[0].innerHTML);
-    setCurImg(image);
+    if (isDesktop) {
+      setCurImg(image);
+    } else {
+      setImage(found.projectImg);
+    }
   };
   return (
     <ModalWindow
-      width={"600px"}
+      width={isDesktop ? "600px" : "100%"}
       windowName="Project"
       defaultPosition={{ x: 200, y: 100 }}
+      isDesktop={isDesktop}
     >
-      <CodingWrap>
+      <CodingWrap isDesktop={isDesktop}>
         <ImageSection>
           <img src={image} alt={curname} />
         </ImageSection>
         <ChooseProject>
-          <CardWrap>
+          <CardWrap isDesktop={isDesktop}>
             {data.map((data) => {
               return (
                 <Card
@@ -243,13 +265,14 @@ const Project = () => {
                 >
                   <div>
                     <p>{data.title}</p>
+                    {/* {isDesktop ? <p>{data.describe}</p> : null} */}
                     <p>{data.describe}</p>
                   </div>
                 </Card>
               );
             })}
           </CardWrap>
-          <InfoWrap>
+          <InfoWrap isDesktop={isDesktop}>
             {tags ? (
               <div>
                 <h2>{tags.title}</h2>
@@ -327,7 +350,7 @@ const Project = () => {
         <Sticker
           name={stickerName}
           width={100}
-          defaultPosition={{ x: 400, y: 400 }}
+          defaultPosition={isDesktop ? { x: 350, y: 400 } : { x: 200, y: 400 }}
           setSricker={setDisplaySticker}
         />
       ) : null}

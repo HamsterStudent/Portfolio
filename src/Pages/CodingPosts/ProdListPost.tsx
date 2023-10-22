@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MarkdownRenderer from "../../Components/MarkdownRenderer";
 import ModalWindow from "../../Components/ModalWindow";
+import { useMediaQuery } from "react-responsive";
 
 const MarkdownWrap = styled.div`
   width: 100%;
@@ -86,12 +87,16 @@ onChange이벤트에서 값을 저장할 때 { key : 값 }의 형태로 저장�
 `;
 
 const ProdListPost = () => {
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
   return (
     <ModalWindow
       width={"300px"}
       windowName="ProdListPost"
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}
+      isDesktop={isDesktop}
     >
       <MarkdownWrap>
         <MarkdownRenderer>{Content}</MarkdownRenderer>
