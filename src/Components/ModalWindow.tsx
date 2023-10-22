@@ -112,7 +112,7 @@ const ModalWindow = ({
   return (
     <Draggable
       bounds="parent"
-      handle=".bar"
+      handle=".lineWrap"
       // defaultPosition={defaultPosition}
       defaultPosition={
         isDesktop !== undefined && !isDesktop ? { x: 0, y: 0 } : defaultPosition
