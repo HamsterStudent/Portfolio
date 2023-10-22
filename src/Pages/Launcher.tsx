@@ -87,10 +87,6 @@ interface ILauncher {
 function Launcher() {
   const dragRef = useRef<HTMLDivElement>(null);
   const [icons, setIcons] = useState<string[]>([]);
-  const setIsdisplay = useSetRecoilState(displayLauncherAtom);
-
-  let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
-  let [zIndex, setZIndex] = useState(0);
 
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
@@ -99,13 +95,6 @@ function Launcher() {
   useEffect(() => {
     setIcons(["Resume", "Theme", "Project", "Tools", "Blog", "About"]);
   }, []);
-
-  const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (highestZIndex >= zIndex) {
-      setZIndex(highestZIndex++);
-      setHighestZIndex(highestZIndex++);
-    }
-  };
 
   return (
     <ModalWindow
