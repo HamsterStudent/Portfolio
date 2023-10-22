@@ -10,7 +10,7 @@ const Dungeon = () => {
 
   return (
     <ModalWindow
-      width={400}
+      width={"400px"}
       windowName="Dungeon"
       defaultPosition={{ x: 30, y: 50 }}
     >

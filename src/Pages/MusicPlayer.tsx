@@ -10,6 +10,7 @@ import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { musicPlayAtom } from "../recoil/atom";
+import { useMediaQuery } from "react-responsive";
 
 const ContentsWrap = styled.div`
   padding: 10px;
@@ -78,13 +79,17 @@ export default function MusicPlayer() {
   const playerRef = useRef() as MutableRefObject<ReactPlayer>;
   const [playing, setPlaying] = useRecoilState(musicPlayAtom);
 
-  console.log(playedSeconds.toFixed(0));
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
+  // console.log(playedSeconds.toFixed(0));
 
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="MusicPlayer"
       defaultPosition={{ x: 100, y: 350 }}
+      isDesktop={isDesktop}
     >
       <ContentsWrap>
         <MusicPlayerWrap>

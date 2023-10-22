@@ -4,65 +4,9 @@ import Draggable from "react-draggable";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { displayLauncherAtom, highestZIndexAtom } from "../recoil/atom";
 import LauncherIcon from "../Components/LauncherIcon";
+import { useMediaQuery } from "react-responsive";
+import ModalWindow from "../Components/ModalWindow";
 
-interface IContainer {
-  zIndex: number;
-  windowWidth?: string;
-}
-const Container = styled.div<IContainer>`
-  width: ${(props) => props.windowWidth};
-  height: auto;
-  background-color: ${(props) => props.theme.windowBg};
-  box-shadow: ${(props) => props.theme.windowShadow};
-  margin: 0;
-  box-sizing: content-box;
-  position: absolute;
-  z-index: ${(props) => props.zIndex};
-  border: 0.7px solid;
-`;
-const Bar = styled.div`
-  width: 100%;
-  height: 20px;
-  padding-top: 5px;
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  .closebtn {
-    width: 15px;
-    height: 15px;
-    margin: 0 5px;
-    border: solid 1px ${(props) => props.theme.textColor};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: ${(props) => props.theme.textColor};
-  }
-  .lineWrap {
-    flex: 1;
-    i {
-      display: block;
-      width: 100%;
-      height: 3px;
-      background: ${(props) => props.theme.textColor};
-      border-bottom: 2px solid ${(props) => props.theme.windowBg};
-    }
-  }
-  .title {
-    display: inline-block;
-    margin: 0 5px;
-    color: ${(props) => props.theme.textColor};
-  }
-`;
-
-const LauncherContainer = styled(Container)<ILauncher>`
-  width: 600px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: solid 0.7px;
-  box-sizing: border-box;
-`;
 const ContentWrap = styled.section`
   width: 100%;
   height: auto;
@@ -127,6 +71,15 @@ const QuickBtnWrap = styled.div`
   }
 `;
 
+const LauncherBlank = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "galmuri11";
+  color: ${(props) => props.theme.textColor};
+`;
+
 interface ILauncher {
   zIndex?: number;
 }
@@ -138,6 +91,10 @@ function Launcher() {
 
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
+
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
 
   useEffect(() => {
     setIcons(["Resume", "Theme", "Project", "Tools", "Blog", "About"]);
@@ -151,43 +108,32 @@ function Launcher() {
   };
 
   return (
-    <Draggable
-      nodeRef={dragRef}
-      bounds="parent"
-      handle=".bar"
-      defaultPosition={{ x: -300, y: -310 }}
+    <ModalWindow
+      width={isDesktop ? "600px" : "100%"}
+      windowName="Launcher"
+      defaultPosition={isDesktop ? { x: 150, y: 100 } : { x: 150, y: 100 }}
+      isDesktop={isDesktop}
     >
-      <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}>
-        <Bar className="bar" onClick={clickFront}>
-          <div
-            className="closebtn"
-            onClick={() => {
-              setIsdisplay(false);
-            }}
-          >
-            x
-          </div>
-          <div className="lineWrap">
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-          <div className="title">Launcher</div>
-        </Bar>
-
-        <ContentWrap>
-          <ImageWrap>
-            <img src="img/temp.jpg" alt="temp" />
-            <div className="overlay" data-overlay></div>
-          </ImageWrap>
-          <QuickBtnWrap>
-            {icons.map((name, index) => (
-              <LauncherIcon key={name} name={name} index={index} />
-            ))}
-          </QuickBtnWrap>
-        </ContentWrap>
-      </LauncherContainer>
-    </Draggable>
+      {/* <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}> */}
+      <ContentWrap>
+        <ImageWrap>
+          <img src="img/temp.jpg" alt="temp" />
+          <div className="overlay" data-overlay></div>
+        </ImageWrap>
+        <QuickBtnWrap>
+          {icons.map((name, index) => (
+            <LauncherIcon
+              key={name}
+              name={name}
+              index={index}
+              isDesktop={isDesktop}
+            />
+          ))}
+          {isDesktop ? null : <LauncherBlank>Press the button</LauncherBlank>}
+        </QuickBtnWrap>
+      </ContentWrap>
+      {/* </LauncherContainer> */}
+    </ModalWindow>
   );
 }
 

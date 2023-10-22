@@ -73,11 +73,12 @@ const bottomRight = {
 const ContentsWrap = styled.section``;
 
 interface IWindow {
-  width: number;
+  width: number | string;
   windowName: string;
   defaultPosition: { x: number; y: number };
   children?: any;
   resize?: boolean;
+  isDesktop?: boolean;
 }
 const ModalWindow = ({
   width,
@@ -85,6 +86,7 @@ const ModalWindow = ({
   defaultPosition,
   children,
   resize,
+  isDesktop,
 }: IWindow) => {
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
@@ -108,9 +110,16 @@ const ModalWindow = ({
   };
 
   return (
-    <Draggable bounds="parent" handle=".bar" defaultPosition={defaultPosition}>
+    <Draggable
+      bounds="parent"
+      handle=".lineWrap"
+      // defaultPosition={defaultPosition}
+      defaultPosition={
+        isDesktop !== undefined && !isDesktop ? { x: 0, y: 0 } : defaultPosition
+      }
+    >
       <Container
-        windowWidth={resize ? "auto" : `${width}px`}
+        windowWidth={resize ? "auto" : `${width}`}
         onClick={clickFront}
         zIndex={zIndex}
       >
@@ -128,10 +137,17 @@ const ModalWindow = ({
         {resize ? (
           <Resizable
             style={style}
-            defaultSize={{
-              width: 600,
-              height: 200,
-            }}
+            defaultSize={
+              isDesktop
+                ? {
+                    width: 600,
+                    height: 200,
+                  }
+                : {
+                    width: 350,
+                    height: 500,
+                  }
+            }
             maxWidth={900}
             minWidth={200}
             minHeight={200}

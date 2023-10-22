@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MarkdownRenderer from "../../Components/MarkdownRenderer";
 import ModalWindow from "../../Components/ModalWindow";
+import { useMediaQuery } from "react-responsive";
 
 const MarkdownWrap = styled.div`
   width: 100%;
@@ -131,12 +132,16 @@ source에는 “/api(뒤에오는모든 주소)” 에 대해 이 변경을 진�
 `;
 
 const ProxyPost = () => {
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="ProxyPost"
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}
+      isDesktop={isDesktop}
     >
       <MarkdownWrap>
         <MarkdownRenderer>{Content}</MarkdownRenderer>

@@ -64,6 +64,7 @@ function Header({ enter }: FullScreenHandle) {
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
+
   let time = new Date();
   const hours = String(time.getHours()).padStart(2, "0");
   const minute = String(time.getMinutes()).padStart(2, "0");
@@ -79,7 +80,6 @@ function Header({ enter }: FullScreenHandle) {
     } else {
       setDate(week[time.getDay() - 1] + " " + time.getDate());
     }
-    console.log(week[time.getDay() - 1]);
   }, [date]);
 
   const Timer = setInterval(() => {

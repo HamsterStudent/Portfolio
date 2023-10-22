@@ -5,6 +5,7 @@ import { collectSticker } from "../recoil/atom";
 import { useRecoilState } from "recoil";
 import useDisplaySticker from "../Hooks/useDisplaySticker";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 
 const ContentsWrap = styled.section`
   padding: 5px;
@@ -23,12 +24,15 @@ const AddressWrap = styled.div`
 const Blog = () => {
   const stickerName = "css";
   const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
-
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
   return (
     <ModalWindow
-      width={400}
+      width={"400px"}
       windowName="Blog"
       defaultPosition={{ x: 300, y: 200 }}
+      isDesktop={isDesktop}
     >
       <ContentsWrap>
         <AddressWrap>

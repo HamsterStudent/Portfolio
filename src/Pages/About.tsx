@@ -2,7 +2,15 @@ import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
 import useDisplaySticker from "../Hooks/useDisplaySticker";
-const ContentBox = styled.div`
+import { useMediaQuery } from "react-responsive";
+
+interface IDisplay {
+  isDesktop: boolean;
+}
+
+const ContentBox = styled.div<IDisplay>`
+  height: ${(props) => (props.isDesktop ? "auto" : "80vh")};
+  overflow-y: ${(props) => (props.isDesktop ? "none" : "scroll")};
   padding: 5px;
   line-height: 20px;
   color: ${(props) => props.theme.textColor};
@@ -52,7 +60,7 @@ const SelectWrap = styled(AboutText)`
 `;
 
 const Select = styled.div`
-  width: 49%;
+  width: 45%;
   .imageWrap {
     width: 30px;
     height: 30px;
@@ -71,14 +79,17 @@ const Select = styled.div`
 const About = () => {
   const stickerName = "html";
   const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
-
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
   return (
     <ModalWindow
-      width={500}
+      width={isDesktop ? "500px" : "100%"}
       windowName="About"
       defaultPosition={{ x: 350, y: 50 }}
+      isDesktop={isDesktop}
     >
-      <ContentBox>
+      <ContentBox isDesktop={isDesktop}>
         <Keyword>
           <li>responsibility</li>
           <li>persistent</li>

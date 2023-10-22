@@ -88,7 +88,7 @@ onChange이벤트에서 값을 저장할 때 { key : 값 }의 형태로 저장�
 const SessionPost = () => {
   return (
     <ModalWindow
-      width={300}
+      width={"300px"}
       windowName="SessionPost"
       defaultPosition={{ x: 30, y: 50 }}
       resize={true}

@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { collectSticker } from "../recoil/atom";
 import styled, { keyframes } from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
+import { useMediaQuery } from "react-responsive";
 
 const CardWrap = styled.section`
   font-family: "galmuri11";
@@ -134,6 +135,10 @@ const Tools = () => {
   const [cardList, setCardList] = useRecoilState(collectSticker);
   const [isComplete, setIsComplete] = useState(false);
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width : 700px) and (max-width :1920px)",
+  });
+
   useEffect(() => {
     let count = 0;
     cardList.map((x) => {
@@ -161,9 +166,10 @@ const Tools = () => {
   };
   return (
     <ModalWindow
-      width={500}
+      width={isDesktop ? "500px" : "100%"}
       windowName="Tools"
       defaultPosition={{ x: 300, y: 200 }}
+      isDesktop={isDesktop}
     >
       <CardWrap>
         <h3>8 items</h3>
