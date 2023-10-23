@@ -67,15 +67,10 @@ const MainIcon = () => {
     setCurname(`${textContent}`);
 
     if (className.indexOf("active") > -1) {
-      if (textContent === "Launcher") {
-        setIsLauncher(true);
-        setCurname("");
-      } else {
-        setIsDisplay((cur) => {
-          return { ...cur, [`${textContent}`]: true };
-        });
-        setCurname("");
-      }
+      setIsDisplay((cur) => {
+        return { ...cur, [`${textContent}`]: true };
+      });
+      setCurname("");
     }
   };
 
