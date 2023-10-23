@@ -99,8 +99,13 @@ function Header({ enter }: FullScreenHandle) {
             </Logo>
             <Dropdown>
               <Item
-                onClick={() => {
-                  setIsLauncher(true);
+                onClick={(e) => {
+                  const {
+                    currentTarget: { textContent },
+                  } = e;
+                  setIsDisplay((cur) => {
+                    return { ...cur, [`${textContent}`]: true };
+                  });
                   toggleMenu();
                 }}
               >

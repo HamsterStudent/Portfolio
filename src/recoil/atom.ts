@@ -12,7 +12,7 @@ export interface IStickerTypes {
 
 export const musicPlayAtom = atom({
   key: `musicplay/${v1()}`,
-  default: true,
+  default: false,
 });
 
 export const basicZIndexAtom = atom({

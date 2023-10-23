@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import ReactPlayer from "react-player";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { musicPlayAtom } from "../recoil/atom";
@@ -15,6 +15,67 @@ import { useMediaQuery } from "react-responsive";
 const ContentsWrap = styled.div`
   padding: 10px;
 `;
+const rotate = keyframes`
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+`;
+
+interface IPlay {
+  isPlay: boolean;
+}
+
+const RotateCD = styled.div<IPlay>`
+  width: 100%;
+  height: 280px;
+  margin-bottom: 5px;
+  border: solid 1px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: url("img/dot.png");
+    background-size: 2px 2px;
+    position: absolute;
+    top: 0;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+    object-fit: contain;
+    animation: ${(props) =>
+        props.isPlay
+          ? css`
+              ${rotate}
+            `
+          : ""}
+      1s infinite linear;
+  }
+`;
+
+const CenterImg = styled.div`
+  width: 30%;
+  height: 30%;
+  img {
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+    border: solid 1px;
+    border-radius: 50%;
+  }
+`;
 
 const MusicPlayerWrap = styled.div`
   display: none;
@@ -22,6 +83,7 @@ const MusicPlayerWrap = styled.div`
 
 const ControlBar = styled.div`
   progress {
+    width: 100%;
     margin: 5px 0;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -47,6 +109,23 @@ const ControlBar = styled.div`
 
 const PlayPauseIcon = styled.div`
   width: 20px;
+`;
+
+const TimeRanges = styled.div`
+  font-size: 12px;
+  margin-bottom: 5px;
+  p {
+    display: inline-block;
+  }
+`;
+const MusicInfo = styled.div`
+  margin-bottom: 5px;
+  h2 {
+    font-size: 16px;
+  }
+  p {
+    font-size: 14px;
+  }
 `;
 
 type ControlsProps = {
@@ -78,25 +157,64 @@ export default function MusicPlayer() {
   const [durationSeconds, setDurationSeconds] = useState(0);
   const playerRef = useRef() as MutableRefObject<ReactPlayer>;
   const [playing, setPlaying] = useRecoilState(musicPlayAtom);
-
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
-  // console.log(playedSeconds.toFixed(0));
+
+  let displayDuration;
+  let displayDurationMinute = Math.floor(+durationSeconds.toFixed(0) / 60);
+  let displayDurationSeconds = +durationSeconds.toFixed(0) % 60;
+  displayDuration = `${
+    displayDurationMinute < 10
+      ? `0${displayDurationMinute}`
+      : displayDurationMinute
+  }:${
+    displayDurationSeconds < 10
+      ? `0${displayDurationSeconds}`
+      : displayDurationSeconds
+  }`;
+
+  let displayPlayed;
+  let displayPlayedTime = +playedSeconds.toFixed(0);
+  let displayPlayedMinute = Math.floor(displayPlayedTime / 60);
+  let displayPlayedSecondes = displayPlayedTime % 60;
+  if (displayPlayedTime < 60) {
+    displayPlayed = `00:${
+      displayPlayedTime < 10 ? `0${displayPlayedTime}` : displayPlayedTime
+    }`;
+  } else {
+    displayPlayed = `${
+      displayPlayedMinute < 10
+        ? `0${displayPlayedMinute}`
+        : `${displayPlayedMinute}`
+    }:${
+      displayPlayedSecondes < 10
+        ? `0${displayPlayedSecondes}`
+        : displayPlayedSecondes
+    }`;
+  }
 
   return (
     <ModalWindow
       width={"300px"}
       windowName="MusicPlayer"
-      defaultPosition={{ x: 100, y: 350 }}
+      defaultPosition={{ x: 100, y: 250 }}
       isDesktop={isDesktop}
     >
       <ContentsWrap>
+        <RotateCD isPlay={playing}>
+          <img src="img/album/Perfidia.png" alt="" />
+          <CenterImg>
+            <img src="img/album/cd.png" alt="" />
+          </CenterImg>
+          <div className="overlay" data-overlay></div>
+        </RotateCD>
+
         <MusicPlayerWrap>
           <ReactPlayer
             ref={playerRef}
             playsinline={true}
-            url="https://www.youtube.com/watch?v=7Q-MLPZDW1Q"
+            url="https://youtu.be/xTnHFqCrrDM?si=Mt9C5EQX2dlbaour"
             muted={false}
             volume={0.3}
             playing={playing}
@@ -106,13 +224,19 @@ export default function MusicPlayer() {
             onDuration={setDurationSeconds}
           />
         </MusicPlayerWrap>
-
         <Controls
           playerRef={playerRef}
           playedSeconds={playedSeconds}
           duration={durationSeconds}
         />
-        <h2>WYS - Ōrora</h2>
+        <TimeRanges>
+          <p>{displayPlayed}</p> / <p>{displayDuration}</p>
+        </TimeRanges>
+        <MusicInfo>
+          <h2>Perfidia</h2>
+          <p>Xavier Cugat</p>
+        </MusicInfo>
+
         <div
           onClick={() => {
             setPlaying((prev) => !prev);
@@ -122,27 +246,36 @@ export default function MusicPlayer() {
             {playing ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                fill="none"
                 viewBox="0 0 24 24"
-                fill="currentColor"
+                strokeWidth={1.5}
+                stroke="currentColor"
                 className="w-6 h-6"
               >
                 <path
-                  fillRule="evenodd"
-                  d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z"
-                  clipRule="evenodd"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                fill="none"
                 viewBox="0 0 24 24"
-                fill="currentColor"
+                strokeWidth={1.5}
+                stroke="currentColor"
                 className="w-6 h-6"
               >
                 <path
-                  fillRule="evenodd"
-                  d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                  clipRule="evenodd"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
                 />
               </svg>
             )}
