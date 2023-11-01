@@ -100,7 +100,7 @@ function Launcher() {
     <ModalWindow
       width={isDesktop ? "600px" : "100%"}
       windowName="Launcher"
-      defaultPosition={isDesktop ? { x: 150, y: 100 } : { x: 150, y: 100 }}
+      defaultPosition={{ x: -300, y: -250 }}
       isDesktop={isDesktop}
     >
       {/* <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}> */}

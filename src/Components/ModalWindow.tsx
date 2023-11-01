@@ -8,6 +8,7 @@ import { Resizable } from "re-resizable";
 interface IContainer {
   zIndex: number;
   windowWidth?: string;
+  windowCenter?: boolean;
 }
 export const Container = styled.div<IContainer>`
   width: ${(props) => props.windowWidth};
@@ -19,6 +20,9 @@ export const Container = styled.div<IContainer>`
   position: absolute;
   z-index: ${(props) => props.zIndex};
   border: 0.7px solid;
+  position: ${(props) => (props.windowCenter ? "absolute" : "none")};
+  top: ${(props) => (props.windowCenter ? "50%" : "none")};
+  left: ${(props) => (props.windowCenter ? "50%" : "none")};
 `;
 const Bar = styled.div`
   width: 100%;
@@ -91,9 +95,13 @@ const ModalWindow = ({
   let [highestZIndex, setHighestZIndex] = useRecoilState(highestZIndexAtom);
   let [zIndex, setZIndex] = useState(0);
   const setIsdisplay = useSetRecoilState(windowDisplayAtom);
+  const [windowCenter, setWindowCenter] = useState(false);
 
   useEffect(() => {
     setZIndex(highestZIndex);
+    if (windowName === "Launcher" && isDesktop) {
+      setWindowCenter(true);
+    }
   }, []);
 
   const clickFront = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -113,7 +121,6 @@ const ModalWindow = ({
     <Draggable
       bounds="parent"
       handle=".lineWrap"
-      // defaultPosition={defaultPosition}
       defaultPosition={
         isDesktop !== undefined && !isDesktop ? { x: 0, y: 0 } : defaultPosition
       }
@@ -122,6 +129,7 @@ const ModalWindow = ({
         windowWidth={resize ? "auto" : `${width}`}
         onClick={clickFront}
         zIndex={zIndex}
+        windowCenter={windowCenter}
       >
         <Bar className="bar">
           <div className="closebtn" onClick={clickClose}>
