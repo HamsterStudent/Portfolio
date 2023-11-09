@@ -134,6 +134,13 @@ const SkillSetWrap = styled.div`
   }
 `;
 
+const ResumeWrap = styled.div`
+  display: flex;
+  div {
+    margin-right: 30px;
+  }
+`;
+
 function Resume() {
   const stickerName = "javascript";
   const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
@@ -169,16 +176,23 @@ function Resume() {
           <p>
             <a href="mailto:deerinmymind@gmail.com">deerinmymind@gmail.com</a>
           </p>
-          <h2>Notion Resume</h2>
-          <a
-            href="https://respected-honey-7eb.notion.site/8f80be93ee194cff9a99b188a1c6651f?pvs=4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="imageWrap">
-              <img src="img/skill/notion.png" alt="" />
-            </div>
-          </a>
+          <h2>Resume</h2>
+          <ResumeWrap>
+            <a href="img/resume.pdf" download="엄진주_이력서">
+              <div className="imageWrap">
+                <img src="img/pdf.png" alt="" />
+              </div>
+            </a>
+            <a
+              href="https://respected-honey-7eb.notion.site/8f80be93ee194cff9a99b188a1c6651f?pvs=4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="imageWrap">
+                <img src="img/skill/notion.png" alt="" />
+              </div>
+            </a>
+          </ResumeWrap>
         </ContentBox>
         <ContentBox isDesktop={isDesktop}>
           <h2>Education</h2>
