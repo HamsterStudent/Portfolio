@@ -82,58 +82,21 @@ function App() {
         <FullScreen handle={handle}>
           <Header {...handle} />
           <AppWrap>
-            <div className="marquee">
+            {/* <div className="marquee">
               <a
                 href="https://respected-honey-7eb.notion.site/8f80be93ee194cff9a99b188a1c6651f?pvs=4"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <div>
-                  {/* <span>
-                  Welcome to my Website!! Shortcut to Notion Resume. Please
-                  Click Me 🍈
-                </span> */}
-                  notion 이력서 페이지로 가시려면 이곳을 눌러주세요. 🍈 notion
-                  이력서 페이지로 가시려면 이곳을 눌러주세요. 🍈 notion 이력서
-                  페이지로 가시려면 이곳을 눌러주세요. 🍈 notion 이력서 페이지로
-                  가시려면 이곳을 눌러주세요. 🍈 notion 이력서 페이지로 가시려면
-                  이곳을 눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈 notion 이력서 페이지로 가시려면 이곳을
-                  눌러주세요. 🍈
+                  <span>
+                    Welcome to my Website!! Shortcut to Notion Resume. Please
+                    Click Me 🍈
+                  </span>
+                  notion 이력서 페이지로 가시려면 이곳을 눌러주세요.🍈
                 </div>
               </a>
-            </div>
+            </div> */}
             {displaySticker ? (
               <Sticker
                 width={220}
