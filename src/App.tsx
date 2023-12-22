@@ -107,7 +107,7 @@ function App() {
             ) : null}
             <MainIcon />
             {isDisplay["Launcher"] ? <Launcher /> : null}
-            {isDisplay["Resume"] ? <Resume /> : null}
+            {isDisplay["resume"] ? <Resume /> : null}
             {isDisplay["Guestbook"] ? <Guestbook /> : null}
             {isDisplay["Theme"] ? <ChooseTheme /> : null}
             {isDisplay["Blog"] ? <Blog /> : null}

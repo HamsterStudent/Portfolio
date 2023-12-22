@@ -101,7 +101,7 @@ export const windowDisplayAtom = atom<IWindowDisplayAtom>({
     Guestbook: false,
     Theme: false,
     // 런처 아이콘
-    Resume: false,
+    resume: false,
     Project: false,
     Tools: false,
     Blog: false,
