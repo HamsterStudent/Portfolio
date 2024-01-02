@@ -26,10 +26,14 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 120px;
+  width: 100px;
+  padding-right: 10px;
   display: flex;
   align-items: center;
   border-right: 0.7px dotted;
+  p {
+    line-height: 38px;
+  }
   img {
     height: 5px;
     transform: rotate(180deg);
@@ -38,7 +42,7 @@ const Logo = styled.div`
 `;
 
 const Dropdown = styled.div`
-  width: 120px;
+  width: 100px;
   border-right: dotted 0.7px;
   box-sizing: border-box;
   position: absolute;
@@ -49,11 +53,16 @@ const Dropdown = styled.div`
 const Right = styled.div`
   display: flex;
   justify-content: space-between;
+  div {
+    border-right: dotted 0.7px;
+    border-left: dotted 0.7px;
+    border-bottom: 0;
+  }
 `;
 
 const Item = styled.div`
   padding: 0 10px;
-  border: dotted 0.7px;
+  border-bottom: dotted 0.7px;
   background: ${(props) => props.theme.windowBg};
 `;
 
@@ -135,7 +144,7 @@ function Header({ enter }: FullScreenHandle) {
           </>
         ) : (
           <Logo onClick={toggleMenu} className={menu ? "active" : undefined}>
-            SeedMiner
+            <p>SeedMiner</p>
             <img src={`img/arrow.png`} alt="" />
           </Logo>
         )}
