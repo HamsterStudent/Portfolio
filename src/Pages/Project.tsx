@@ -157,7 +157,7 @@ const data: IData[] = [
     tags: ["React", "TypeScript", "Recoil", "styled-components"],
     Notion:
       "https://respected-honey-7eb.notion.site/c6b75d5e4dd340f8a237dc4e8f5c7eee?pvs=4",
-    projectImg: "img/coding/portfolio.png",
+    projectImg: "assets/coding/portfolio.png",
   },
   {
     title: "Guard Tips",
@@ -168,7 +168,7 @@ const data: IData[] = [
     Github: "https://github.com/potenday-project/GuardTips",
     Notion:
       "https://shahn92.notion.site/GuardTips-2c4734253ee54304b954080d6cdae770?pvs=4",
-    projectImg: "img/coding/guardtips.png",
+    projectImg: "assets/coding/guardtips.png",
   },
   {
     title: "Name Sticker",
@@ -180,7 +180,7 @@ const data: IData[] = [
     ],
     Demo: "https://name-sticker-i5fmwei8c-hamsterstudent.vercel.app/",
     Github: "https://github.com/HamsterStudent/name-sticker",
-    projectImg: "img/coding/sticker.png",
+    projectImg: "assets/coding/sticker.png",
   },
   {
     title: "Designer Portfolio",
@@ -189,7 +189,7 @@ const data: IData[] = [
 
     Demo: "https://mika7174.github.io/Nomad.github.io/",
     Github: "https://github.com/mika7174/Nomad.github.io",
-    projectImg: "img/coding/mika_portfolio.png",
+    projectImg: "assets/coding/mika_portfolio.png",
   },
   {
     title: "Pfizer",
@@ -198,7 +198,7 @@ const data: IData[] = [
 
     Demo: "https://hamsterstudent.github.io/pfizer-web/",
     Github: "https://github.com/HamsterStudent/pfizer-web",
-    projectImg: "img/coding/pf.png",
+    projectImg: "assets/coding/pf.png",
   },
 ];
 
@@ -209,7 +209,7 @@ const Project = () => {
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
   const [tags, setTags] = useState<IData>();
   const [curname, setCurname] = useState("");
-  const [curImg, setCurImg] = useState("img/blank_project.png");
+  const [curImg, setCurImg] = useState("assets/blank_project.png");
 
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
