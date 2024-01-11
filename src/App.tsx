@@ -74,7 +74,6 @@ function App() {
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);
   const stickerName = "typescript";
-  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
 
   return (
     <>
@@ -97,14 +96,11 @@ function App() {
                 </div>
               </a>
             </div> */}
-            {displaySticker ? (
-              <Sticker
-                width={220}
-                name={stickerName}
-                defaultPosition={{ x: 100, y: 250 }}
-                setSricker={setDisplaySticker}
-              />
-            ) : null}
+            <Sticker
+              width={220}
+              name={stickerName}
+              defaultPosition={{ x: 100, y: 250 }}
+            />
             <MainIcon />
             {isDisplay["Launcher"] ? <Launcher /> : null}
             {isDisplay["resume"] ? <Resume /> : null}

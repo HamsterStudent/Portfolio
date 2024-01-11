@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MarkdownRenderer from "../Components/MarkdownRenderer";
-import { Hamster } from "./CodingPosts/PostList";
 import ModalWindow from "../Components/ModalWindow";
 import { useSetRecoilState } from "recoil";
 import { windowDisplayAtom } from "../recoil/atom";
-import useDisplaySticker from "../Hooks/useDisplaySticker";
 import Sticker from "../Components/Sticker";
 import { useMediaQuery } from "react-responsive";
 interface IDisplay {
@@ -207,7 +204,6 @@ const data: IData[] = [
 
 const Project = () => {
   const stickerName = "react";
-  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
 
   const [image, setImage] = useState(`${data[0].projectImg}`);
   const setIsDisplay = useSetRecoilState(windowDisplayAtom);
@@ -346,14 +342,11 @@ const Project = () => {
           </InfoWrap>
         </ChooseProject>
       </CodingWrap>
-      {displaySticker ? (
-        <Sticker
-          name={stickerName}
-          width={100}
-          defaultPosition={isDesktop ? { x: 350, y: 400 } : { x: 200, y: 400 }}
-          setSricker={setDisplaySticker}
-        />
-      ) : null}
+      <Sticker
+        name={stickerName}
+        width={100}
+        defaultPosition={isDesktop ? { x: 350, y: 400 } : { x: 200, y: 400 }}
+      />
     </ModalWindow>
   );
 };

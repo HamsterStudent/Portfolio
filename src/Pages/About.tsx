@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
-import useDisplaySticker from "../Hooks/useDisplaySticker";
 import { useMediaQuery } from "react-responsive";
 
 interface IDisplay {
@@ -78,7 +77,6 @@ const Select = styled.div`
 
 const About = () => {
   const stickerName = "html";
-  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
@@ -143,14 +141,11 @@ const About = () => {
           </Select>
         </SelectWrap>
       </ContentBox>
-      {displaySticker ? (
-        <Sticker
-          name={stickerName}
-          width={100}
-          defaultPosition={{ x: 20, y: 250 }}
-          setSricker={setDisplaySticker}
-        />
-      ) : null}
+      <Sticker
+        name={stickerName}
+        width={100}
+        defaultPosition={{ x: 20, y: 250 }}
+      />
     </ModalWindow>
   );
 };

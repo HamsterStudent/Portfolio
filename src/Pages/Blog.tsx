@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
-import { collectSticker } from "../recoil/atom";
-import { useRecoilState } from "recoil";
-import useDisplaySticker from "../Hooks/useDisplaySticker";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 
@@ -23,7 +20,6 @@ const AddressWrap = styled.div`
 
 const Blog = () => {
   const stickerName = "css";
-  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
   });
@@ -56,14 +52,11 @@ const Blog = () => {
               https://hamsterstudent.github.io/
             </a>
           </div>
-          {displaySticker ? (
-            <Sticker
-              name={stickerName}
-              width={100}
-              defaultPosition={{ x: 300, y: 20 }}
-              setSricker={setDisplaySticker}
-            />
-          ) : null}
+          <Sticker
+            name={stickerName}
+            width={100}
+            defaultPosition={{ x: 300, y: 20 }}
+          />
         </AddressWrap>
       </ContentsWrap>
     </ModalWindow>

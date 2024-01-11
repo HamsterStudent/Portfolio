@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SetterOrUpdater, useRecoilState, useSetRecoilState } from "recoil";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { IStickerTypes, ToolsAlertAtom, collectSticker } from "../recoil/atom";
+import useDisplaySticker from "../Hooks/useDisplaySticker";
 
 type ITool = {
   name: string;
   width: number;
   defaultPosition: { x: number; y: number };
-  setSricker?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type ICard = {
@@ -30,6 +30,24 @@ const animation = keyframes`
     transform:rotate(0deg);
   }
 `;
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+`;
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+
+  }
+  100%{
+    opacity: 0;
+
+  }
+`;
 
 const Card = styled.div<ICard>`
   position: absolute;
@@ -43,40 +61,37 @@ const Card = styled.div<ICard>`
     width: 100%;
     object-fit: contain;
   }
+  &.fadeIn {
+    animation: ${fadeIn} 0.3s ease-in-out forwards;
+  }
+  &.fadeOut {
+    animation: ${fadeOut} 0.3s ease-in-out forwards;
+  }
 `;
 
-const Sticker = ({ name, width, defaultPosition, setSricker }: ITool) => {
-  const [cards, setCards] = useRecoilState(collectSticker);
-  const setToolsEnter = useSetRecoilState(ToolsAlertAtom);
-
-  const onClick = (iconName: string) => {
-    setCards(
-      cards.map((card: IStickerTypes) => {
-        return card.name === iconName ? { ...card, isGet: true } : card;
-      }),
-    );
-    setSricker!(false);
-  };
+export default function Sticker({ name, width, defaultPosition }: ITool) {
+  const { displaySticker, getSticker } = useDisplaySticker(name);
+  const [mount, setMount] = useState(false);
 
   useEffect(() => {
-    return () => {
-      console.log("unmount");
-      setToolsEnter(true);
-    };
-  }, []);
+    if (displaySticker) setMount(true);
+  }, [displaySticker]);
 
   return (
-    <Card
-      onClick={() => {
-        onClick(name);
-      }}
-      width={width}
-      top={defaultPosition.y}
-      left={defaultPosition.x}
-    >
-      <img src={`img/sticker/${name}.png`} alt={`${name}`} />
-    </Card>
+    <>
+      {mount && (
+        <Card
+          onClick={() => {
+            getSticker(name);
+          }}
+          className={`${displaySticker ? "fadeIn" : "fadeOut"}`}
+          width={width}
+          top={defaultPosition.y}
+          left={defaultPosition.x}
+        >
+          <img src={`img/sticker/${name}.png`} alt={`${name}`} />
+        </Card>
+      )}
+    </>
   );
-};
-
-export default Sticker;
+}
