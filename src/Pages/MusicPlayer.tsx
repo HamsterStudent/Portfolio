@@ -203,7 +203,7 @@ export default function MusicPlayer() {
     >
       <ContentsWrap>
         <RotateCD isPlay={playing}>
-          <img src="img/album/Perfidia.png" alt="" />
+          <img src="img/album/mii_maker.jpg" alt="" />
           <CenterImg>
             <img src="img/album/cd.png" alt="" />
           </CenterImg>
@@ -214,7 +214,7 @@ export default function MusicPlayer() {
           <ReactPlayer
             ref={playerRef}
             playsinline={true}
-            url="https://youtu.be/xTnHFqCrrDM?si=Mt9C5EQX2dlbaour"
+            url="https://youtu.be/oTu4WcpB9Iw?si=IgHbQqsh7xg8J46B"
             muted={false}
             volume={0.3}
             playing={playing}
@@ -233,8 +233,8 @@ export default function MusicPlayer() {
           <p>{displayPlayed}</p> / <p>{displayDuration}</p>
         </TimeRanges>
         <MusicInfo>
-          <h2>Perfidia</h2>
-          <p>Xavier Cugat</p>
+          <h2>Mill Maker</h2>
+          <p>Nintendo wii u</p>
         </MusicInfo>
 
         <div
