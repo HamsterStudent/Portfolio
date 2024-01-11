@@ -24,7 +24,7 @@ const ImageWrap = styled.div`
   .overlay {
     width: 100%;
     height: 100%;
-    background: url("img/dot.png");
+    background: url("assets/dot.png");
     background-size: 2px 2px;
     position: absolute;
     top: 0;
@@ -93,7 +93,7 @@ function Launcher() {
   });
 
   useEffect(() => {
-    setIcons(["resume", "Theme", "Project", "Tools", "Blog", "About"]);
+    setIcons(["Resume", "Theme", "Project", "Tools", "Blog", "About"]);
   }, []);
 
   return (
@@ -106,7 +106,7 @@ function Launcher() {
       {/* <LauncherContainer ref={dragRef} className="container" zIndex={zIndex}> */}
       <ContentWrap>
         <ImageWrap>
-          <img src="img/temp.jpg" alt="temp" />
+          <img src="assets/temp.jpg" alt="temp" />
           <div className="overlay" data-overlay></div>
         </ImageWrap>
         <QuickBtnWrap>

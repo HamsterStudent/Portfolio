@@ -46,7 +46,7 @@ const RotateCD = styled.div<IPlay>`
   .overlay {
     width: 100%;
     height: 100%;
-    background: url("img/dot.png");
+    background: url("assets/dot.png");
     background-size: 2px 2px;
     position: absolute;
     top: 0;
@@ -203,9 +203,9 @@ export default function MusicPlayer() {
     >
       <ContentsWrap>
         <RotateCD isPlay={playing}>
-          <img src="img/album/mii_maker.jpg" alt="" />
+          <img src="assets/album/mii_maker.jpg" alt="" />
           <CenterImg>
-            <img src="img/album/cd.png" alt="" />
+            <img src="assets/album/cd.png" alt="" />
           </CenterImg>
           <div className="overlay" data-overlay></div>
         </RotateCD>

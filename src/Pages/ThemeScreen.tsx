@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Draggable from "react-draggable";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { themeAtom } from "../recoil/atom";
 import {
@@ -149,7 +148,7 @@ const ChooseTheme = () => {
     >
       <ScreenWrap>
         <PreviewScreen>
-          <img src={`img/${selected}.png`} alt="" />
+          <img src={`assets/${selected}.png`} alt="" />
         </PreviewScreen>
       </ScreenWrap>
       <WallpaperWrap>

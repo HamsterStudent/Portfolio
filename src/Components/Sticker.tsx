@@ -89,7 +89,7 @@ export default function Sticker({ name, width, defaultPosition }: ITool) {
           top={defaultPosition.y}
           left={defaultPosition.x}
         >
-          <img src={`img/sticker/${name}.png`} alt={`${name}`} />
+          <img src={`assets/sticker/${name}.png`} alt={`${name}`} />
         </Card>
       )}
     </>

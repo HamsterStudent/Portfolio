@@ -135,7 +135,7 @@ const About = () => {
               rel="noopener noreferrer"
             >
               <div className="imageWrap">
-                <img src="img/skill/notion.png" alt="" />
+                <img src="assets/skill/notion.png" alt="" />
               </div>
             </a>
           </Select>

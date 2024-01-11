@@ -87,7 +87,10 @@ const MainIcon = () => {
               className={curname === icon ? "active" : undefined}
             >
               <IconImgWrap currentheme={currentheme.name}>
-                <img src={`img/theme/${currentheme.name}/${icon}.png`} alt="" />
+                <img
+                  src={`assets/theme/${currentheme.name}/${icon}.png`}
+                  alt=""
+                />
               </IconImgWrap>
               <IconTitle>{icon}</IconTitle>
             </IconLi>

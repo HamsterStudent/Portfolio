@@ -46,7 +46,7 @@ const ImageWrap = styled.div<IDisplay>`
   .overlay {
     width: 100%;
     height: 100%;
-    background: url("img/dot.png");
+    background: url("assets/dot.png");
     background-size: 2px 2px;
     position: absolute;
     top: 0;
@@ -157,7 +157,7 @@ function Resume() {
       <ContentWrap isDesktop={isDesktop}>
         <ContentBox isDesktop={isDesktop}>
           <ImageWrap isDesktop={isDesktop}>
-            <img src="img/profile.jpg" alt="" />
+            <img src="assets/profile.jpg" alt="" />
             <div className="overlay" data-overlay></div>
           </ImageWrap>
           <h2>엄진주 | JINJU UM</h2>
@@ -176,9 +176,9 @@ function Resume() {
           </p>
           <h2>Resume</h2>
           <ResumeWrap>
-            <a href="img/resume.pdf" download="엄진주_이력서">
+            <a href="assets/resume.pdf" download="엄진주_이력서">
               <div className="imageWrap">
-                <img src="img/pdf.png" alt="" />
+                <img src="assets/pdf.png" alt="" />
               </div>
             </a>
             <a
@@ -187,7 +187,7 @@ function Resume() {
               rel="noopener noreferrer"
             >
               <div className="imageWrap">
-                <img src="img/skill/notion.png" alt="" />
+                <img src="assets/skill/notion.png" alt="" />
               </div>
             </a>
           </ResumeWrap>
@@ -226,52 +226,52 @@ function Resume() {
           <SkillSetWrap>
             <h3>Javascript library</h3>
             <div>
-              <img src="img/skill/React.png" alt="" />
+              <img src="assets/skill/React.png" alt="" />
             </div>
           </SkillSetWrap>
 
           <SkillSetWrap>
             <h3>Languages</h3>
             <div>
-              <img src="img/skill/TypeScript.png" alt="" />
+              <img src="assets/skill/TypeScript.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/Javascript.png" alt="" />
+              <img src="assets/skill/Javascript.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/Dart.png" alt="" />
+              <img src="assets/skill/Dart.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/Flutter.png" alt="" />
+              <img src="assets/skill/Flutter.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/c.png" alt="" />
+              <img src="assets/skill/c.png" alt="" />
             </div>
           </SkillSetWrap>
 
           <SkillSetWrap>
             <h3>Markup & Style sheet</h3>
             <div>
-              <img src="img/skill/html.png" alt="" />
+              <img src="assets/skill/html.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/css.png" alt="" />
+              <img src="assets/skill/css.png" alt="" />
             </div>
           </SkillSetWrap>
 
           <SkillSetWrap>
             <h3>API & Git & Testing</h3>
             <div>
-              <img src="img/skill/GraphQL.png" alt="" />
+              <img src="assets/skill/GraphQL.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/git.png" alt="" />
+              <img src="assets/skill/git.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/Firebase.png" alt="" />
+              <img src="assets/skill/Firebase.png" alt="" />
             </div>
             <div>
-              <img src="img/skill/Jest.png" alt="" />
+              <img src="assets/skill/Jest.png" alt="" />
             </div>
           </SkillSetWrap>
         </ContentBox>

@@ -13,7 +13,7 @@ const CardWrap = styled.section`
   background-color: white;
   border: solid 0.7px;
   margin: 5px;
-  background: url("img/paper.jpg");
+  background: url("assets/paper.jpg");
   background-position: center;
   background-size: cover;
   h3 {
@@ -192,7 +192,7 @@ const Tools = () => {
             <>
               <div className="test_obj">
                 <span>
-                  <img src="img/icon/basket_metal.png" alt="" />
+                  <img src="assets/icon/basket_metal.png" alt="" />
                 </span>
                 <span>C</span>
                 <span>o</span>
@@ -210,7 +210,7 @@ const Tools = () => {
                 <span>n</span>
                 <span>!</span>
                 <span>
-                  <img src="img/icon/basket_yellow.png" alt="" />
+                  <img src="assets/icon/basket_yellow.png" alt="" />
                 </span>
                 <p>You collected all sticker</p>
               </div>

@@ -103,7 +103,7 @@ function App() {
             />
             <MainIcon />
             {isDisplay["Launcher"] ? <Launcher /> : null}
-            {isDisplay["resume"] ? <Resume /> : null}
+            {isDisplay["Resume"] ? <Resume /> : null}
             {isDisplay["Guestbook"] ? <Guestbook /> : null}
             {isDisplay["Theme"] ? <ChooseTheme /> : null}
             {isDisplay["Blog"] ? <Blog /> : null}

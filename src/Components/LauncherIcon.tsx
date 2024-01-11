@@ -70,7 +70,7 @@ const LauncherIcon = ({ name, index, isDesktop }: ILauncherIcon) => {
       isDesktop={isDesktop}
     >
       <div className="imgWrap">
-        <img src={`img/theme/${currentheme.name}/${name}.png`} alt={name} />
+        <img src={`assets/theme/${currentheme.name}/${name}.png`} alt={name} />
       </div>
       <p>{name}</p>
     </IconWrap>

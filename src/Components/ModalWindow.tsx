@@ -151,7 +151,7 @@ const ModalWindow = ({
           </div>
           <div className="closebtn" onClick={clickClose}>
             <div className="img_wrap">
-              <img src="img/icon_cancel.png" alt="" />
+              <img src="assets/icon_cancel.png" alt="" />
             </div>
           </div>
         </Bar>
