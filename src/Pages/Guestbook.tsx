@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Draggable from "react-draggable";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import EmojiPicker, { EmojiStyle } from "emoji-picker-react";
 
-import { highestZIndexAtom } from "../recoil/atom";
 import {
   collection,
   addDoc,
@@ -90,7 +87,6 @@ const GuestText = styled.div`
 function Guestbook() {
   const stickerName = "flutter";
   const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
-
   const [showEmojis, setShowEmojis] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("");
   const [memo, setMemo] = useState("");
@@ -102,42 +98,42 @@ function Guestbook() {
     query: "(min-width : 700px) and (max-width :1920px)",
   });
 
-  const start = query(
-    collection(dbService, "memos"),
-    orderBy("createdAt", "desc"),
-    limit(5),
-  );
-
   useEffect(() => {
-    onSnapshot(start, (snapshot) => {
+    const firstPage = query(
+      collection(dbService, "memos"),
+      orderBy("createdAt", "desc"),
+      limit(5),
+    );
+
+    onSnapshot(firstPage, (snapshot) => {
       const memoArr = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      console.log(memoArr);
       setMemos(memoArr);
       setKey(snapshot.docs[snapshot.docs.length - 1]);
     });
   }, []);
 
   const onNextClick = async () => {
-    const queryRef = query(
+    const nextPage = query(
       collection(dbService, "memos"),
       orderBy("createdAt", "desc"),
       startAfter(key),
       limit(5),
     );
 
-    const snap = await getDocs(queryRef);
-    snap.empty ? setNoMore(true) : setKey(snap.docs[snap.docs.length - 1]);
-
-    onSnapshot(queryRef, (snapshot) => {
-      const memoArr = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setMemos(memoArr);
-    });
+    const snap = await getDocs(nextPage);
+    if (!snap.empty) {
+      onSnapshot(nextPage, (snapshot) => {
+        const memoArr = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setMemos(memoArr);
+        setKey(snap.docs[snap.docs.length - 1]);
+      });
+    }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -152,6 +148,7 @@ function Guestbook() {
     } catch (error) {
       console.error("error : ", error);
     }
+
     setEmojiIcon("");
     setMemo("");
   };

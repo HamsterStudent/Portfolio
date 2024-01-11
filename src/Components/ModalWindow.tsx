@@ -41,6 +41,17 @@ const Bar = styled.div`
     justify-content: center;
     align-items: center;
     color: ${(props) => props.theme.textColor};
+    .img_wrap {
+      width: 10px;
+      height: 10px;
+      position: relative;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        position: absolute;
+      }
+    }
   }
   .lineWrap {
     flex: 1;
@@ -132,15 +143,17 @@ const ModalWindow = ({
         windowCenter={windowCenter}
       >
         <Bar className="bar">
-          <div className="closebtn" onClick={clickClose}>
-            x
-          </div>
+          <div className="title">{windowName}</div>
           <div className="lineWrap">
             <i></i>
             <i></i>
             <i></i>
           </div>
-          <div className="title">{windowName}</div>
+          <div className="closebtn" onClick={clickClose}>
+            <div className="img_wrap">
+              <img src="img/icon_cancel.png" alt="" />
+            </div>
+          </div>
         </Bar>
         {resize ? (
           <Resizable

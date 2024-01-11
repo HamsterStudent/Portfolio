@@ -152,7 +152,7 @@ function Resume() {
   return (
     <ModalWindow
       width={isDesktop ? "850px" : "100%"}
-      windowName="Resume"
+      windowName="resume"
       defaultPosition={{ x: 30, y: 50 }}
       isDesktop={isDesktop}
     >

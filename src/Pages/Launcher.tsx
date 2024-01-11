@@ -93,7 +93,7 @@ function Launcher() {
   });
 
   useEffect(() => {
-    setIcons(["Resume", "Theme", "Project", "Tools", "Blog", "About"]);
+    setIcons(["resume", "Theme", "Project", "Tools", "Blog", "About"]);
   }, []);
 
   return (

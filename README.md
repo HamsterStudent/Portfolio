@@ -1,6 +1,9 @@
-### 2023 portfolio
+### Portfolio
 
 <!-- [![Notion](/coconut/images/notion.png)](https://respected-honey-7eb.notion.site/Getting-Started-77fd5f68dd0248818cf654362471fcb2) -->
+
+![image](https://github.com/HamsterStudent/2023Portfolio/assets/60914441/d9d67497-f197-4de6-a218-559a026f38e7)
+
 
 ### 사용 라이브러리
 
