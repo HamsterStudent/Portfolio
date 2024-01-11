@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import ModalWindow from "../Components/ModalWindow";
 import Sticker from "../Components/Sticker";
-import useDisplaySticker from "../Hooks/useDisplaySticker";
 import { useMediaQuery } from "react-responsive";
 
 interface IDisplay {
@@ -143,7 +142,6 @@ const ResumeWrap = styled.div`
 
 function Resume() {
   const stickerName = "javascript";
-  const { displaySticker, setDisplaySticker } = useDisplaySticker(stickerName);
 
   const isDesktop = useMediaQuery({
     query: "(min-width : 700px) and (max-width :1920px)",
@@ -278,14 +276,11 @@ function Resume() {
           </SkillSetWrap>
         </ContentBox>
       </ContentWrap>
-      {displaySticker ? (
-        <Sticker
-          name={stickerName}
-          width={100}
-          defaultPosition={{ x: 350, y: 120 }}
-          setSricker={setDisplaySticker}
-        />
-      ) : null}
+      <Sticker
+        name={stickerName}
+        width={100}
+        defaultPosition={{ x: 350, y: 120 }}
+      />
     </ModalWindow>
   );
 }
