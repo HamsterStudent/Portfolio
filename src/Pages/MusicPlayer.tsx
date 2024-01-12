@@ -51,17 +51,18 @@ const RotateCD = styled.div<IPlay>`
     position: absolute;
     top: 0;
   }
+  &.paused {
+    img {
+      animation-play-state: paused;
+      -webkit-animation-play-state: paused;
+    }
+  }
   img {
     position: absolute;
     width: 100%;
     object-fit: contain;
-    animation: ${(props) =>
-        props.isPlay
-          ? css`
-              ${rotate}
-            `
-          : ""}
-      1s infinite linear;
+    animation-play-state: running;
+    animation: ${rotate} 1s infinite linear;
   }
 `;
 
@@ -202,7 +203,7 @@ export default function MusicPlayer() {
       isDesktop={isDesktop}
     >
       <ContentsWrap>
-        <RotateCD isPlay={playing}>
+        <RotateCD isPlay={playing} className={playing ? undefined : "paused"}>
           <img src="assets/album/mii_maker.jpg" alt="" />
           <CenterImg>
             <img src="assets/album/cd.png" alt="" />
