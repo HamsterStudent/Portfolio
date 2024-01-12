@@ -84,7 +84,7 @@ const ControlBar = styled.div`
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: ${(props) => props.theme.backgroundColor};
+    background-color: transparent;
     height: 5px;
     border: solid 1px;
     border-radius: 10px;
