@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { collectSticker } from "../recoil/atom";
 import styled, { keyframes } from "styled-components";
-import ModalWindow from "../Components/ModalWindow";
+import ModalWindow from "../shared/components/ModalWindow";
 import { useMediaQuery } from "react-responsive";
 
 const CardWrap = styled.section`

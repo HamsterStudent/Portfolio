@@ -9,7 +9,7 @@ import {
   defaultTheme,
 } from "../style/theme";
 import styled from "styled-components";
-import ModalWindow from "../Components/ModalWindow";
+import ModalWindow from "../shared/components/ModalWindow";
 import { useMediaQuery } from "react-responsive";
 
 const ScreenWrap = styled.div`

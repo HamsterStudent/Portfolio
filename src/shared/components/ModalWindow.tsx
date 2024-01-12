@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { highestZIndexAtom, windowDisplayAtom } from "../recoil/atom";
+import { highestZIndexAtom, windowDisplayAtom } from "../../recoil/atom";
 import styled from "styled-components";
 import { Resizable } from "re-resizable";
 

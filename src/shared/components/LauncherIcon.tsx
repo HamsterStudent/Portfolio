@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { ToolsAlertAtom, themeAtom, windowDisplayAtom } from "../recoil/atom";
+import {
+  ToolsAlertAtom,
+  themeAtom,
+  windowDisplayAtom,
+} from "../../recoil/atom";
 
 const IconWrap = styled.div<{ currentheme: string; isDesktop: boolean }>`
   padding: 10px;

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FullScreenHandle } from "react-full-screen";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
-import Guestbook from "../Pages/Guestbook";
-import { displayLauncherAtom, windowDisplayAtom } from "../recoil/atom";
+import Guestbook from "../../Pages/Guestbook";
+import { displayLauncherAtom, windowDisplayAtom } from "../../recoil/atom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 const Nav = styled.div`

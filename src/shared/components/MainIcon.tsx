@@ -5,7 +5,7 @@ import {
   displayLauncherAtom,
   themeAtom,
   windowDisplayAtom,
-} from "../recoil/atom";
+} from "../../recoil/atom";
 
 const MainIconWrap = styled.section`
   position: absolute;

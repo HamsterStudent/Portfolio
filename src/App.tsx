@@ -5,10 +5,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Header from "./Components/Header";
+import Header from "./shared/components/Header";
 import styled, { ThemeProvider, keyframes } from "styled-components";
 import Launcher from "./Pages/Launcher";
-import MainIcon from "./Components/MainIcon";
+import MainIcon from "./shared/components/MainIcon";
 import Guestbook from "./Pages/Guestbook";
 import ChooseTheme from "./Pages/ThemeScreen";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
@@ -25,14 +25,14 @@ import Dungeon from "./Pages/Dungeon";
 import Project from "./Pages/Project";
 import Tools from "./Pages/Tools";
 import About from "./Pages/About";
-import useDisplaySticker from "./Hooks/useDisplaySticker";
-import Sticker from "./Components/Sticker";
+import useDisplaySticker from "./shared/hooks/useDisplaySticker";
+import Sticker from "./shared/components/Sticker";
 import { darkTheme } from "./style/theme";
 import ProdListPost from "./Pages/CodingPosts/ProdListPost";
 import SessionPost from "./Pages/CodingPosts/SessionPost";
 import ProxyPost from "./Pages/CodingPosts/ProxyPost";
 import MapRefact from "./Pages/CodingPosts/MapRefact";
-import MusicPlayer from "./Pages/MusicPlayer";
+import MusicPlayer from "./Pages/musicPlayer/MusicPlayer";
 import ReactPlayer from "react-player";
 
 const marquee = keyframes`

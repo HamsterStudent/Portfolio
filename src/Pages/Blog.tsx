@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ModalWindow from "../Components/ModalWindow";
-import Sticker from "../Components/Sticker";
+import ModalWindow from "../shared/components/ModalWindow";
+import Sticker from "../shared/components/Sticker";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import ModalWindow from "../Components/ModalWindow";
+import ModalWindow from "../shared/components/ModalWindow";
 import { useSetRecoilState } from "recoil";
 import { windowDisplayAtom } from "../recoil/atom";
-import Sticker from "../Components/Sticker";
+import Sticker from "../shared/components/Sticker";
 import { useMediaQuery } from "react-responsive";
 interface IDisplay {
   isDesktop: boolean;

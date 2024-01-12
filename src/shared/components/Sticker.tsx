@@ -1,8 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { SetterOrUpdater, useRecoilState, useSetRecoilState } from "recoil";
 import styled, { css, keyframes } from "styled-components";
-import { IStickerTypes, ToolsAlertAtom, collectSticker } from "../recoil/atom";
-import useDisplaySticker from "../Hooks/useDisplaySticker";
+import {
+  IStickerTypes,
+  ToolsAlertAtom,
+  collectSticker,
+} from "../../recoil/atom";
+import useDisplaySticker from "../hooks/useDisplaySticker";
 
 type ITool = {
   name: string;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { IStickerTypes, collectSticker } from "../recoil/atom";
+import { IStickerTypes, collectSticker } from "../../recoil/atom";
 
 export default function useDisplaySticker(stickerName: string) {
   const [stickers, setStickers] = useRecoilState(collectSticker); // 스티커 종류들을 담은 객체를 가지고 있습니다.
