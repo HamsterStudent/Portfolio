@@ -1,10 +1,3 @@
-import React, {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
 import Header from "./shared/components/Header";
 import styled, { ThemeProvider, keyframes } from "styled-components";
 import Launcher from "./Pages/Launcher";
@@ -12,10 +5,9 @@ import MainIcon from "./shared/components/MainIcon";
 import Guestbook from "./Pages/Guestbook";
 import ChooseTheme from "./Pages/ThemeScreen";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
   displayLauncherAtom,
-  musicPlayAtom,
   themeAtom,
   windowDisplayAtom,
 } from "./recoil/atom";
@@ -25,15 +17,12 @@ import Dungeon from "./Pages/Dungeon";
 import Project from "./Pages/Project";
 import Tools from "./Pages/Tools";
 import About from "./Pages/About";
-import useDisplaySticker from "./shared/hooks/useDisplaySticker";
 import Sticker from "./shared/components/Sticker";
-import { darkTheme } from "./style/theme";
 import ProdListPost from "./Pages/CodingPosts/ProdListPost";
 import SessionPost from "./Pages/CodingPosts/SessionPost";
 import ProxyPost from "./Pages/CodingPosts/ProxyPost";
 import MapRefact from "./Pages/CodingPosts/MapRefact";
 import MusicPlayer from "./Pages/musicPlayer/MusicPlayer";
-import ReactPlayer from "react-player";
 
 const marquee = keyframes`
   0% { left: 0; }
@@ -42,7 +31,11 @@ const marquee = keyframes`
 const AppWrap = styled.section`
   position: relative;
   height: calc(100vh - 20px);
-  background-color: ${(props) => props.theme.backgroundColor};
+  background: ${(props) =>
+    props.theme.name === "summerTheme"
+      ? `url(${props.theme.backgroundColor})`
+      : `${props.theme.backgroundColor}`};
+  background-size: cover;
   overflow: hidden;
   .marquee {
     margin: 10px auto;
@@ -69,7 +62,6 @@ const AppWrap = styled.section`
 `;
 
 function App() {
-  const isLauncher = useRecoilValue(displayLauncherAtom);
   const isDisplay = useRecoilValue(windowDisplayAtom);
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);

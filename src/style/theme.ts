@@ -40,8 +40,8 @@ export const defaultTheme = {
 export const summerTheme = {
   name: "summerTheme",
   textColor: "#111",
-  backgroundColor: "teal",
-  windowBg: "teal",
+  backgroundColor: "assets/theme/summerTheme/bg.gif",
+  windowBg: "#256bb0",
   windowBarColor: "#224434",
   windowShadow:
     "inset -1px -1px 0 0, inset 1px 1px 0 0 rgba(255, 255, 255, 0.3), 5px 5px 0 #0003;",
