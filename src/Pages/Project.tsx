@@ -8,135 +8,32 @@ import { useMediaQuery } from "react-responsive";
 interface IDisplay {
   isDesktop: boolean;
 }
-
-const CodingWrap = styled.section<IDisplay>`
-  height: ${(props) => (props.isDesktop ? "auto" : "580px")};
-  padding: 5px;
+/* height: ${(props) => (props.isDesktop ? "auto" : "580px")}; */
+const ContentsWrap = styled.section<IDisplay>`
+  height: calc(100% - 20px);
+  max-width: 1200px;
+  padding: 15px;
+  margin: 10px auto;
   font-size: 14px;
   border: solid 1px;
-  margin: 5px;
-  /* display: flex; */
-  justify-content: space-between;
-  h2 {
-    font-size: 22px;
-    padding: 10px 0;
-    /* border-bottom: solid 1px; */
-  }
-`;
-
-const CardWrap = styled.ul<IDisplay>`
-  width: 60%;
-  height: 350px;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
-  border: solid 0.7px;
-  padding: 5px;
-  p {
-    margin: 10px 0;
-    color: ${(props) => props.theme.textColor};
-  }
-  ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
-`;
-const Card = styled.li`
-  width: 100%;
-  border: solid 0.7px;
-  padding: 5px;
-  margin-bottom: 5px;
-  word-break: keep-all;
-  :hover {
-    border: solid 0.7px white;
-  }
-
-  a {
-    border: dotted 0.7px;
-    padding: 3px 5px;
-    margin-right: 5px;
-    border-radius: 5px;
-  }
 `;
 
-const ImageSection = styled.div`
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  border: solid 0.7px;
-  box-sizing: border-box;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    box-sizing: content-box;
-  }
-`;
-
-const ChooseProject = styled.div`
+const CategoryWrap = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  margin-top: 5px;
-  .active {
-    border: solid 0.7px white;
-  }
+  border-right: solid 1px;
 `;
 
-const InfoWrap = styled.div<IDisplay>`
-  width: 37.5%;
-  width: ${(props) => (props.isDesktop ? "37.5%" : "50%")};
+const ProjectList = styled.ul``;
 
-  height: 342px;
+const SNS = styled.ul``;
+
+const InfoWrap = styled.div`
+  padding: 15px;
   overflow-y: scroll;
-  background-color: rgb(255, 255, 255);
-  box-shadow: rgb(129, 129, 129) -2px -2px, rgb(129, 129, 129) -2px 0px,
-    rgb(129, 129, 129) 0px -2px, black -3px -3px, black -3px 0px, black 0px -3px,
-    rgb(224, 222, 222) 2px 2px, rgb(224, 222, 222) 0px 2px,
-    rgb(224, 222, 222) 2px 0px, rgb(129, 129, 129) 2px -2px,
-    rgb(224, 222, 222) -2px 2px, black -3px 2px, white -3px 4px, white 4px 4px,
-    white 4px 0px, white 0px 4px, black 2px -3px, white 4px -3px;
-  box-sizing: border-box;
-  padding: 5px 15px;
-  margin-top: 3px;
-  margin-right: 5px;
-
-  h2 {
-    font: 600 18px "galmuri11";
-  }
-  p {
-    margin: 10px 0;
-    font: 400 16px;
-  }
-  ul {
-    li {
-      display: inline-block;
-      margin-right: 5px;
-      margin-bottom: 5px;
-    }
-  }
-  a {
-    display: inline-block;
-    border: solid 0.7px;
-    padding: 2px 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    :hover {
-      background-color: ${(props) => props.theme.backgroundColor};
-      color: ${(props) => props.theme.invertTextColor};
-    }
-  }
-`;
-
-const LogList = styled.div`
-  li {
-    :hover {
-      color: #aaaaaa;
-      cursor: pointer;
-    }
-  }
+  scrollbar-width: none;
 `;
 
 interface IData {
@@ -150,7 +47,15 @@ interface IData {
   projectImg: string;
 }
 
-const data: IData[] = [
+const projects: IData[] = [
+  {
+    title: "overview",
+    describe: "포트폴리오 웹사이트",
+    tags: ["React", "TypeScript", "Recoil", "styled-components"],
+    Notion:
+      "https://respected-honey-7eb.notion.site/c6b75d5e4dd340f8a237dc4e8f5c7eee?pvs=4",
+    projectImg: "assets/coding/portfolio.png",
+  },
   {
     title: "Portfolio",
     describe: "포트폴리오 웹사이트",
@@ -203,10 +108,7 @@ const data: IData[] = [
 ];
 
 const Project = () => {
-  const stickerName = "react";
-
-  const [image, setImage] = useState(`${data[0].projectImg}`);
-  const setIsDisplay = useSetRecoilState(windowDisplayAtom);
+  const [image, setImage] = useState(`${projects[0].projectImg}`);
   const [tags, setTags] = useState<IData>();
   const [curname, setCurname] = useState("");
   const [curImg, setCurImg] = useState("assets/blank_project.png");
@@ -219,7 +121,7 @@ const Project = () => {
     const {
       currentTarget: { children },
     } = e;
-    const found = data.find(
+    const found = projects.find(
       (e) => e.title === children[0].children[0].innerHTML,
     );
     if (!found) return;
@@ -232,21 +134,14 @@ const Project = () => {
     }
   };
   return (
-    <ModalWindow
-      width={isDesktop ? "600px" : "100%"}
-      windowName="Project"
-      defaultPosition={{ x: 200, y: 100 }}
-      isDesktop={isDesktop}
-    >
-      <CodingWrap isDesktop={isDesktop}>
-        <ImageSection>
-          <img src={image} alt={curname} />
-        </ImageSection>
-        <ChooseProject>
-          <CardWrap isDesktop={isDesktop}>
-            {data.map((data) => {
+    <>
+      <ContentsWrap isDesktop={isDesktop}>
+        <CategoryWrap>
+          <h2>Project</h2>
+          <ProjectList>
+            {projects.map((data) => {
               return (
-                <Card
+                <li
                   key={data.title}
                   onMouseEnter={() => {
                     setImage(data.projectImg);
@@ -261,93 +156,126 @@ const Project = () => {
                 >
                   <div>
                     <p>{data.title}</p>
-                    {/* {isDesktop ? <p>{data.describe}</p> : null} */}
-                    <p>{data.describe}</p>
                   </div>
-                </Card>
+                </li>
               );
             })}
-          </CardWrap>
-          <InfoWrap isDesktop={isDesktop}>
-            {tags ? (
+          </ProjectList>
+          <SNS>
+            <li>Github</li>
+            <li>hwanyamyu@gmail.com</li>
+          </SNS>
+        </CategoryWrap>
+
+        {/* <InfoWrap>
+          {tags ? (
+            <div>
+              <h2>{tags.title}</h2>
+              <ul>
+                <p>USING TOOLS</p>
+                {tags?.tags.map((x) => {
+                  return <li key={x}>▪︎ {x}</li>;
+                })}
+              </ul>
               <div>
-                <h2>{tags.title}</h2>
-                <ul>
-                  <p>USING TOOLS</p>
-                  {tags?.tags.map((x) => {
-                    return <li key={x}>▪︎ {x}</li>;
-                  })}
-                </ul>
-                <div>
-                  {tags?.Demo || tags?.Github || tags?.Notion ? (
-                    <p>CODE</p>
-                  ) : null}
-                  {tags?.Demo ? (
-                    <a
-                      href={tags.Demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Demo
-                    </a>
-                  ) : null}
+                {tags?.Demo || tags?.Github || tags?.Notion ? (
+                  <p>CODE</p>
+                ) : null}
+                {tags?.Demo ? (
+                  <a href={tags.Demo} target="_blank" rel="noopener noreferrer">
+                    Demo
+                  </a>
+                ) : null}
 
-                  {tags?.Github ? (
-                    <a
-                      href={tags.Github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Github
-                    </a>
-                  ) : null}
+                {tags?.Github ? (
+                  <a
+                    href={tags.Github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Github
+                  </a>
+                ) : null}
 
-                  {tags?.Notion ? (
-                    <a
-                      href={tags.Notion}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Notion
-                    </a>
-                  ) : null}
-                </div>
-                <div>
-                  {tags.postComponent ? (
-                    <LogList>
-                      <p>LOG</p>
-                      <ul>
-                        {tags.postComponent.map((x, index) => {
-                          return (
-                            <li
-                              key={x.post}
-                              onClick={() => {
-                                setIsDisplay((cur) => {
-                                  return { ...cur, [x.post]: true };
-                                });
-                              }}
-                            >
-                              ▪︎ {x.name}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </LogList>
-                  ) : null}
-                </div>
+                {tags?.Notion ? (
+                  <a
+                    href={tags.Notion}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Notion
+                  </a>
+                ) : null}
               </div>
-            ) : (
-              <div>Select Project</div>
-            )}
-          </InfoWrap>
-        </ChooseProject>
-      </CodingWrap>
+              <div>
+                {tags.postComponent ? (
+                  <LogList>
+                    <p>LOG</p>
+                    <ul>
+                      {tags.postComponent.map((x, index) => {
+                        return (
+                          <li
+                            key={x.post}
+                            onClick={() => {
+                              setIsDisplay((cur) => {
+                                return { ...cur, [x.post]: true };
+                              });
+                            }}
+                          >
+                            ▪︎ {x.name}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </LogList>
+                ) : null}
+              </div>
+            </div>
+          ) : (
+            <div>Select Project</div>
+          )}
+        </InfoWrap> */}
+        <InfoWrap>
+          <h2>About</h2>
+          <p>
+            안녕하세요.
+            <br /> 책상을 보면 그 사람의 관심사나 개성을 짐작할 수 있듯, 저는
+            어떤 하나의 공간을 꾸리는 것에 관심이 많습니다. 이 생각은 점차
+            확장되고 구체화되어, 물리적 공간을 마련하는 것이 귀해진 이 시대에서
+            사람들, 개인 혹은 기업이 자신의 공간을 가상에서 가질 수 있게 돕고
+            싶다는 생각이 강해졌고, 그런 공간들을 웹사이트로써 만들어 보고
+            있습니다.
+          </p>
+          <h2>Project Preview</h2>
+          <div style={{ width: "49%", height: "150px", border: "solid 1px" }}>
+            hamshu
+          </div>
+          <div style={{ width: "49%", height: "150px", border: "solid 1px" }}>
+            thisbrainbitesyou
+          </div>
+          <div style={{ width: "100%", height: "150px", border: "solid 1px" }}>
+            Portfolio
+          </div>
+          <div style={{ width: "100%", height: "150px", border: "solid 1px" }}>
+            GuardTips
+          </div>
+          <div style={{ width: "49%", height: "150px", border: "solid 1px" }}>
+            Nomad
+          </div>
+          <div style={{ width: "49%", height: "150px", border: "solid 1px" }}>
+            Namesticker
+          </div>
+          <div style={{ width: "49%", height: "150px", border: "solid 1px" }}>
+            Namesticker
+          </div>
+        </InfoWrap>
+      </ContentsWrap>
       <Sticker
-        name={stickerName}
+        name={"react"}
         width={100}
         defaultPosition={isDesktop ? { x: 350, y: 400 } : { x: 200, y: 400 }}
       />
-    </ModalWindow>
+    </>
   );
 };
 
