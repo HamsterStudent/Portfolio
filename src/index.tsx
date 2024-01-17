@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createGlobalStyle } from "styled-components";
 import App from "./App";
 import { RecoilRoot } from "recoil";
+import { BrowserRouter } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css');
@@ -87,8 +88,10 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <RecoilRoot>
-    <GlobalStyle />
-    <App />
+    <BrowserRouter>
+      <GlobalStyle />
+      <App />
+    </BrowserRouter>
   </RecoilRoot>,
 
   // </React.StrictMode>,

@@ -23,6 +23,7 @@ import SessionPost from "./Pages/CodingPosts/SessionPost";
 import ProxyPost from "./Pages/CodingPosts/ProxyPost";
 import MapRefact from "./Pages/CodingPosts/MapRefact";
 import MusicPlayer from "./Pages/musicPlayer/MusicPlayer";
+import Router from "./router/router";
 
 const marquee = keyframes`
   0% { left: 0; }
@@ -62,10 +63,8 @@ const AppWrap = styled.section`
 `;
 
 function App() {
-  const isDisplay = useRecoilValue(windowDisplayAtom);
   const handle = useFullScreenHandle();
   const currentTheme = useRecoilValue(themeAtom);
-  const stickerName = "typescript";
 
   return (
     <>
@@ -73,41 +72,7 @@ function App() {
         <FullScreen handle={handle}>
           <Header {...handle} />
           <AppWrap>
-            {/* <div className="marquee">
-              <a
-                href="https://respected-honey-7eb.notion.site/8f80be93ee194cff9a99b188a1c6651f?pvs=4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div>
-                  <span>
-                    Welcome to my Website!! Shortcut to Notion Resume. Please
-                    Click Me 🍈
-                  </span>
-                  notion 이력서 페이지로 가시려면 이곳을 눌러주세요.🍈
-                </div>
-              </a>
-            </div> */}
-            <Sticker
-              width={220}
-              name={stickerName}
-              defaultPosition={{ x: 100, y: 250 }}
-            />
-            <MainIcon />
-            {isDisplay["Launcher"] ? <Launcher /> : null}
-            {isDisplay["Resume"] ? <Resume /> : null}
-            {isDisplay["Guestbook"] ? <Guestbook /> : null}
-            {isDisplay["Theme"] ? <ChooseTheme /> : null}
-            {isDisplay["Blog"] ? <Blog /> : null}
-            {isDisplay["Dungeon"] ? <Dungeon /> : null}
-            {isDisplay["Project"] ? <Project /> : null}
-            {isDisplay["Tools"] ? <Tools /> : null}
-            {isDisplay["ProdListPost"] ? <ProdListPost /> : null}
-            {isDisplay["SessionPost"] ? <SessionPost /> : null}
-            {isDisplay["ProxyPost"] ? <ProxyPost /> : null}
-            {isDisplay["MapRefact"] ? <MapRefact /> : null}
-            {isDisplay["About"] ? <About /> : null}
-            {isDisplay["MusicPlayer"] ? <MusicPlayer /> : null}
+            <Router />
           </AppWrap>
         </FullScreen>
       </ThemeProvider>
