@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');         
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -44,6 +44,7 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
+html { font-size:62.5%; }
 body {
   line-height: 1;
 }
@@ -67,7 +68,7 @@ table {
 }
 body {
   font-weight: 300;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
   font-stretch: condensed;
   line-height: 1.2;
   background-color: transparent;
