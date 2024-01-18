@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Guestbook from "../../Pages/Guestbook";
 import { displayLauncherAtom, windowDisplayAtom } from "../../recoil/atom";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { Link } from "react-router-dom";
 
 const Nav = styled.div`
   color: ${(props) => props.theme.textColor};
@@ -139,6 +140,9 @@ function Header({ enter }: FullScreenHandle) {
                 }}
               >
                 Guestbook
+              </Item>
+              <Item>
+                <Link to={"/project"}>Project</Link>
               </Item>
             </Dropdown>
           </>
