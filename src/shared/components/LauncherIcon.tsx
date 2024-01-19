@@ -6,6 +6,7 @@ import {
   themeAtom,
   windowDisplayAtom,
 } from "../../recoil/atom";
+import { useNavigate } from "react-router-dom";
 
 const IconWrap = styled.div<{ currentheme: string; isDesktop: boolean }>`
   padding: 10px;
@@ -47,14 +48,18 @@ const LauncherIcon = ({ name, index, isDesktop }: ILauncherIcon) => {
   const [toolsEnter, setToolsEnter] = useRecoilState(ToolsAlertAtom);
   const currentheme = useRecoilValue(themeAtom);
   const [countIndex, setCountIndex] = useState(-1);
+  const navigate = useNavigate();
+
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const {
       currentTarget: { textContent },
     } = e;
-    if (textContent === name) {
+    if (textContent === name && textContent !== "Project") {
       setIsDisplay((cur) => {
         return { ...cur, [name]: true };
       });
+    } else if (textContent === "Project") {
+      navigate(`/project`);
     }
   };
   return (
