@@ -9,7 +9,7 @@ import Guestbook from "../Guestbook";
 import ChooseTheme from "../ThemeScreen";
 import Blog from "../Blog";
 import Dungeon from "../Dungeon";
-import Project from "../Project";
+import Project from "../Project/Project";
 import Tools from "../Tools";
 import ProdListPost from "../CodingPosts/ProdListPost";
 import SessionPost from "../CodingPosts/SessionPost";
