@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Project from "../Pages/Project";
+import Project from "../Pages/Project/Project";
 import Main from "../Pages/Main/Main";
 import { useTransition, animated } from "@react-spring/web";
+import NotFound from "../Pages/NotFound";
 
 export default function Router() {
   const location = useLocation();
@@ -34,6 +35,7 @@ export default function Router() {
           <Routes location={item}>
             <Route path="/" element={<Main />} />
             <Route path="/project" element={<Project />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </animated.div>
       ))}
