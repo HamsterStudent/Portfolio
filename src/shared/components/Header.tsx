@@ -142,7 +142,9 @@ function Header({ enter }: FullScreenHandle) {
                 Guestbook
               </Item>
               <Item>
-                <Link to={"/project"}>Project</Link>
+                <Link to={"/project"} onClick={toggleMenu}>
+                  Project
+                </Link>
               </Item>
             </Dropdown>
           </>
