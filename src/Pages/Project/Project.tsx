@@ -54,6 +54,7 @@ const SNS = styled.ul``;
 
 const Project = () => {
   const [tabName, setTabName] = useState("overview");
+  const navigate = useNavigate();
 
   const handleTabClick = (tabName: string) => {
     setTabName(tabName);
@@ -79,7 +80,17 @@ const Project = () => {
     <>
       <ContentsWrap isDesktop={isDesktop}>
         <CategoryWrap>
-          <h2>Project</h2>
+          <div>
+            <h2>Project</h2>
+            <p
+              onClick={() => {
+                navigate(`/`);
+              }}
+            >
+              ← Back
+            </p>
+          </div>
+
           <ProjectList>
             {tabList.map((data) => {
               return (
