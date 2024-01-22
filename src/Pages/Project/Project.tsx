@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import ModalWindow from "../../shared/components/ModalWindow";
-import { useSetRecoilState } from "recoil";
-import { windowDisplayAtom } from "../../recoil/atom";
 import Sticker from "../../shared/components/Sticker";
 import { useMediaQuery } from "react-responsive";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -20,6 +17,7 @@ const ContentsWrap = styled.section<IDisplay>`
   font-size: 14px;
   border: solid 1px;
   display: flex;
+  background-color: #b5c2ee4b;
 `;
 
 const CategoryWrap = styled.section`
@@ -66,12 +64,12 @@ const Project = () => {
 
   const tabList = [
     "overview",
-    "duckyworld",
-    "hamshu",
-    "thisbrainbitesyou",
-    "portfolio",
     "guardtips",
+    "thisbrainbitesyou",
+    "hamshu",
+    "portfolio",
     "bustago",
+    "duckyworld",
     "nomad",
     "namesticker",
   ];
