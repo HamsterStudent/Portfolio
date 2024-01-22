@@ -148,7 +148,7 @@ const ChooseTheme = () => {
     >
       <ScreenWrap>
         <PreviewScreen>
-          <img src={`assets/${selected}.png`} alt="" />
+          <img src={`assets/theme/preview/${selected}.png`} alt="" />
         </PreviewScreen>
       </ScreenWrap>
       <WallpaperWrap>

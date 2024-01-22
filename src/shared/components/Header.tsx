@@ -105,7 +105,7 @@ function Header({ enter }: FullScreenHandle) {
           <>
             <Logo onClick={toggleMenu} className={menu ? "active" : undefined}>
               <p>SeedMiner</p>
-              <img src={`img/arrow.png`} alt="" />
+              <img src={`assets/icon/arrow.png`} alt="" />
             </Logo>
             <Dropdown>
               <Item
@@ -151,7 +151,7 @@ function Header({ enter }: FullScreenHandle) {
         ) : (
           <Logo onClick={toggleMenu} className={menu ? "active" : undefined}>
             <p>SeedMiner</p>
-            <img src={`img/arrow.png`} alt="" />
+            <img src={`assets/icon/arrow.png`} alt="" />
           </Logo>
         )}
 
