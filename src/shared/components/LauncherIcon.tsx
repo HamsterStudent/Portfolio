@@ -16,6 +16,7 @@ const IconWrap = styled.div<{ currentheme: string; isDesktop: boolean }>`
   box-sizing: border-box;
   width: 16.6%;
   width: ${(props) => (props.isDesktop ? "16.6%" : "25%")};
+  font: 400 1.4rem "Source Sans 3";
 
   text-align: center;
   box-shadow: -1px -1px 0px 0px inset,
