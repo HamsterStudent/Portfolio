@@ -31,7 +31,7 @@ const Bar = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-
+  font: 400 1.4rem "Source Sans 3";
   .closebtn {
     width: 15px;
     height: 15px;

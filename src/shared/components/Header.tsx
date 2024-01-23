@@ -15,6 +15,7 @@ const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: solid 0.7px;
+  font: 400 1.4rem "Source Sans 3";
   z-index: 1;
   .active {
     background-color: #252525;

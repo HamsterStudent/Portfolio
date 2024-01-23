@@ -65,11 +65,13 @@ const Wallpaper = styled.div`
     position: absolute;
     top: -8px;
     padding: 0 7px 0 5px;
-    font-size: 14px;
+    font: 400 1.4rem "Source Sans 3";
+
     background-color: ${(props) => props.theme.windowBg};
   }
   div {
-    font-size: 14px;
+    font: 400 1.4rem "Source Sans 3";
+
     margin-bottom: 5px;
   }
 `;
@@ -80,7 +82,8 @@ const ThemeList = styled.ul`
   height: 80px;
   box-shadow: inset -1px -1px 0 0, inset 1px 1px 0 0 rgba(255, 255, 255, 0.3),
     1px 1px 0 0 rgba(255, 255, 255, 0.3);
-  font-size: 14px;
+  font: 400 1.2rem "Source Sans 3";
+
   overflow-y: scroll;
 
   div {
@@ -162,28 +165,31 @@ const ChooseTheme = () => {
               onClick={themeClick}
               className={selected === "defaultTheme" ? "active" : undefined}
             >
-              <div></div>
+              <img src="assets/icon/paint_file.png" alt="" />
               <span>defaultTheme</span>
             </li>
             <li
               onClick={themeClick}
               className={selected === "darkTheme" ? "active" : undefined}
             >
-              <div></div>
+              <img src="assets/icon/paint_file.png" alt="" />
+
               <span>darkTheme</span>
             </li>
             <li
               onClick={themeClick}
               className={selected === "lightTheme" ? "active" : undefined}
             >
-              <div></div>
+              <img src="assets/icon/paint_file.png" alt="" />
+
               <span>lightTheme</span>
             </li>
             <li
               onClick={themeClick}
               className={selected === "summerTheme" ? "active" : undefined}
             >
-              <div></div>
+              <img src="assets/icon/paint_file.png" alt="" />
+
               <span>summerTheme</span>
             </li>
           </ThemeList>
