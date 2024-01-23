@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import MarkdownRenderer from "../../Components/MarkdownRenderer";
-import ModalWindow from "../../Components/ModalWindow";
+import MarkdownRenderer from "../../shared/components/MarkdownRenderer";
+import ModalWindow from "../../shared/components/ModalWindow";
 import { useMediaQuery } from "react-responsive";
 
 const MarkdownWrap = styled.div`

@@ -3,9 +3,9 @@ import styled, { keyframes } from "styled-components";
 import Draggable from "react-draggable";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { displayLauncherAtom, highestZIndexAtom } from "../recoil/atom";
-import LauncherIcon from "../Components/LauncherIcon";
+import LauncherIcon from "../shared/components/LauncherIcon";
 import { useMediaQuery } from "react-responsive";
-import ModalWindow from "../Components/ModalWindow";
+import ModalWindow from "../shared/components/ModalWindow";
 
 const ContentWrap = styled.section`
   width: 100%;

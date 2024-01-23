@@ -16,8 +16,8 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { dbService } from "../firebase";
-import ModalWindow from "../Components/ModalWindow";
-import Sticker from "../Components/Sticker";
+import ModalWindow from "../shared/components/ModalWindow";
+import Sticker from "../shared/components/Sticker";
 import { useMediaQuery } from "react-responsive";
 
 const ContentWrap = styled.section`

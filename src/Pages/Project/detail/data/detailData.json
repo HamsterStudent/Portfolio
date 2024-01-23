@@ -1,0 +1,245 @@
+{
+  "hamshu": {
+    "name": "Hamshu",
+    "isReleased": false,
+    "keyword": "PROJECT",
+    "summary": "지구 정복을 꿈꾸는 햄스터 햄슈🐹의 지구 정복 자금을 위한 쇼핑몰🛸",
+    "about": "Next.js로 만든 햄슈 캐릭터 굿즈 판매 쇼핑몰입니다.\n포트원API를 사용하여 결제 기능을 연동하였고,\nFirebase를 통해 결제 검증, 회원가입과 로그인 기능을 구현하였습니다.",
+    "duration": "2023.11.23-",
+    "duty": [
+      "합성 컴포넌트(Compound Component Pattern)를 사용하여 재사용 가능한 모달을 구현했습니다.",
+      "Api Routes를 사용하여 상품 데이터를 따로 분리, GraphQL로 필요한 데이터만 불러오는 작업을 수행하였습니다.",
+      "결제 검증을 위해 PortOne api로 인증 토큰을 발급, node.js를 사용하여 PortOne에서 전달받은 데이터와 DB에서 전달받은 데이터를 대조 검증하고 결과를 출력하였습니다.",
+      "Friebase를 사용하여 로그인과 회원가입을 구현하였습니다.",
+      "React Redux를 사용하여 장바구니 정보, 배송 정보 등의 데이터 상태 관리를 수행했습니다."
+    ],
+    "tag": ["Next.js", "Typescript", "Styled-components", "GraphQL", "Node.js"],
+    "links": {
+      "demo": "https://hamshu-store.vercel.app/"
+    },
+    "preview": ["assets/project/hamshu.png"],
+    "learned": [
+      "Apollo server를 연결하여 데이터를 만들고, 이를 쿼리 언어로 요청해 본 경험",
+      "비슷하지만 조금씩 다른 형식으로 자주 사용되는 모달(Modal)컴포넌트를 합성 컴포넌트 패턴으로 제작하여 재사용성과 수정 용이성을 높여본 경험",
+      "사이드바 컴포넌트 마운트 여부를 훅 내부에서 감지하고 제어할 수 있게 만들어 코드의 응집성을 높여 본 경험",
+      "결제 데이터를 검증하기 위해 Node.js를 사용해 본 경험"
+    ],
+    "comment": [
+      "귀여운 인터페이스 디자인 사이트를 코딩해 보고 싶어서 아는 디자이너분께 협업을 요청해서 만들어진 사이트."
+    ]
+  },
+  "thisbrainbitesyou": {
+    "name": "This brain bites you",
+    "isReleased": false,
+    "keyword": "PROJECT",
+    "summary": "this brain bites you 브랜드 웹사이트",
+    "about": "뇌와 심장 등, 인간의 장기를 모티브로 한 작품을 만들어 내는 작가 김하연의 웹사이트 프로젝트입니다.\n작가 요청에 따라 대부분의 asset들을 드로잉으로 삽입하였습니다.",
+    "duration": "2023.12.30-",
+    "duty": [
+      "웹페이지 내부에 Drag & Drop이 되는 요소를 삽입하였습니다.",
+      "방문자가 방명록을 작성할 수 있는 기능을 만들고, 웹 배포를 하기 위해 Firebase를 사용하였습니다.",
+      "동적 라우팅을 통해 각 상품의 상세페이지로 진입할 수 있도록 구현하였습니다."
+    ],
+    "tag": ["Next.js", "Typescript", "Styled-components"],
+    "links": {
+      "github": "https://github.com/HamsterStudent/this-brain-bites-you"
+    },
+    "preview": ["assets/project/thisbrainbitesyou.png"],
+    "learned": [
+      "Next.js에서 제안하는 폴더 구조가 굉장히 실용적인 걸 깨닫고 기존의 리액트 프로젝트에도 적용해 본 경험",
+      "Next.js에서 기본적으로 제공하는 Image모듈을 사용해 이미지를 최적화 해 봄"
+    ],
+    "comment": [""]
+  },
+  "portfolio": {
+    "name": "Portfolio",
+    "isReleased": true,
+    "keyword": "PROJECT",
+    "summary": "포트폴리오 웹사이트",
+    "about": "드래그 앤 드롭 & 창 이동이 되는 웹사이트 프로젝트를 만들었습니다.\n포트폴리오 포멧 자체를 페이지 추가나 삭제가 용이한 레이아웃으로 제작하여 확장성을 확보하려고 해 보았습니다.\n자기 소개를 제하고도 스티커 콜렉팅, 뮤직 플레이어 등의 요소를 넣어 자유로운 느낌을 제공합니다.\n 메인 화면 하단의 아이콘 위치는 제 작업 환경의 아이콘 위치에서 착안하였습니다.",
+    "duration": "2023.08.14-",
+    "duty": [
+      "웹 페이지 배포 이전에 오류를 발견하고, 가독성을 높이기 위해 Typescript를 사용했습니다.",
+      "각 컴포넌트 마운트 관리, 웹페이지 테마 관리, 스티커 수집 여부 관리를 위해 전역 상태 관리 툴인 Recoil을 사용하였습니다.",
+      "웹페이지 테마를 관리하고, 각 테마에 따른 조건부 스타일링을 위해 Styled Components를 사용하였습니다.",
+      "커스텀 훅을 사용하여 화면 각지에 흩어져 있는 각 스티커의 마운트 여부를 체크하고 상태를 전환하였습니다.",
+      "방문자가 방명록을 작성할 수 있는 기능을 만들고, 웹 배포를 하기 위해 Firebase를 사용하였습니다.",
+      "Router를 사용하여 페이지를 만들고, 페이지 이동시 애니메이션을 넣어 웹의 집중도를 높이려고 해 보았습니다."
+    ],
+    "tag": ["React", "Typescript", "Recoil", "Styled-components", "Firebase"],
+    "links": {
+      "github": "https://github.com/HamsterStudent/Portfolio",
+      "notion": "https://respected-honey-7eb.notion.site/c6b75d5e4dd340f8a237dc4e8f5c7eee?pvs=4"
+    },
+    "preview": ["assets/project/portfolio.png"],
+    "learned": [
+      "Firebase를 내 어플리케이션에 연결하고, 데이터를 전달하고 받는 방법에 대해 학습",
+      "기본적인 웹 레이아웃이 아닌 프로젝트를 꾸리며, 어떤 방법으로 폴더 구조를 만들어야 하는지에 대한 고민을 많이 해본 경험",
+      "Recoil을 굳이 사용하지 않아도 되는 곳에도 사용하다가 오히려 코드가 복잡해지는 문제를 겪고, 커스텀 훅으로 묶은 후에 더 사용하기 용이하다고 느낀 경험",
+      "React 컴포넌트를 단순 코드 분리용으로만 사용하다가, 오히려 유지보수가 어려워져 children props를 사용하여 다시 리팩토링 했을 때 가독성이 높아졌다고 느꼈던 경험"
+    ],
+    "comment": [
+      "포트폴리오라는 명목 하에 일종의 React Playground를 만들어 이것저것 해 보고 만들어 본 경험이 React를 학습하고 활용하는 데에 도움이 많이 된 것 같다."
+    ]
+  },
+  "guardtips": {
+    "name": "Guard Tips",
+    "isReleased": true,
+    "keyword": "PROJECT",
+    "summary": "안전에 관한 유용한 조언과 팁을 제공하는 서비스",
+    "about": "재난상황에서는 빠르게 정보를 찾고 활용할 수 있게 도와주는 서비스가 절실합니다.\n이같은 때에 대비하기 위해 많은 이들이 재난 시 사용할 수 있는 어플리케이션을 설치하지만, 출시된 앱들은 대체로 정확하지 않은 위치 정보, 중요도가 낮은 데이터 제공 등의 불편사항으로 많은 이들이 재난 대비 어플리케이션을 삭제하고는 합니다. \n가드팁스는 비슷한 정보는 취합하고, 중복 데이터는 제거하여 제공하는 정보의 정확성을 높여 편리성을 도모하고 사용성을 개선하기 위해 만들어진 서비스 입니다.",
+    "duration": "2023.09.14-2023.09.28",
+    "duty": [
+      "협업시 클래스 중복 사용을 방지하고, 컴포넌트별 유지보수를 용이하게 하기 위해 styled-components를 사용하였습니다.",
+      "가독성을 높이고 오류를 미리 찾아 안정적인 코드 작성을 위해 TypeScript를 사용하였습니다.",
+      "json으로 변환하는 과정을 축소시켜 간결한 코드를 만들고, 크로스 브라우징 최적화를 위헤 Axios 으로 API를 연동하였습니다.",
+      "웹서비스 전체 스타일링과 크로스브라우징을 전담하였습니다.",
+      "Recoil을 사용하여 전역 상태를 관리하였습니다.",
+      "대피소, 급수시설, 병원 등의 옵션을 필터링 해 주는 기능을 구현했습니다.",
+      "지도 상의 위도와 경도를 계산하여, 현위치에서 제일 가까운 대피소나, 급수시설 정보 제공 기능을 구현하였습니다",
+      "Custom Hook을 제작하여 코드를 모듈화하여 코드를 간결하게 만들었습니다.",
+      "배포 환경, develop환경, api 통신의 프로토콜이 상이한 상황에서, proxy를 사용하여 배포를 진행하고 API를 연동하였습니다."
+    ],
+    "tag": ["React", "Typescript", "Router", "Recoil", "Styled-components"],
+    "links": {
+      "demo": "https://guard-tips.vercel.app/",
+      "github": "https://github.com/HamsterStudent/GuardTips",
+      "notion": "https://shahn92.notion.site/GuardTips-2c4734253ee54304b954080d6cdae770?pvs=4"
+    },
+    "preview": ["assets/project/guardtips.png"],
+    "learned": [
+      "제한 시간 내에 성과를 보여줘야 하는 프로젝트를 급하게 진행하며 code drilling이 발생하는 것을 보고, 전역 상태 관리 라이브러리의 필요성 경험",
+      "code drilling 상황에서 받아오는 props들의 타입을 규정해 두지 않아 에러가 발생하는 것을 경험하고, Typescript의 필요성을 느낌",
+      "반복적으로 사용되는 요소들을 하드코딩했다가 코드가 필요 이상으로 길어져 컴포넌트를 분리해 본 경험",
+      "컴포넌트 폴더를 한 곳에 두었다가 수정이 필요한 컴포넌트를 찾기 어려운 문제를 겪고, 각 페이지별로 컴포넌트 폴더를 만들어 관리",
+      "브라우저의 보안 이슈중 하나인 동일 출처 정책에 대해 이해하게 되었으며, 프로토콜, 호스트, 포트가 달라 생기는 CROS문제에 대해 이해하게 됨",
+      "Proxy를 사용하여 백엔드에서 별도의 응답 헤더를 받을 필요 없이 데이터를 요청하고, 해당 요청을 백엔드 서비스로 전달하는 방법을 학습"
+    ],
+    "comment": [
+      "포텐데이 해커톤에 참여해서 감사하게도 1등상을 받은 프로젝트.\n백엔드 프로그래머와 발맞춰볼 기회였는데, 중간에 맴버 교체가 되기도 해서 말 많고 탈 많은 프로젝트였다."
+    ]
+  },
+
+  "bustago": {
+    "name": "Bustago",
+    "isReleased": false,
+    "keyword": "PROJECT",
+    "summary": "'버스타고'웹 리뉴얼 프로젝트",
+    "about": "'버스타고'웹 리뉴얼 프로젝트",
+    "duration": "2023.01.16-",
+    "duty": [
+      "합성 컴포넌트(Compound Component Pattern)를 사용하여 재사용 가능한 모달을 구현했습니다.",
+      "스크린 크기에 따른 반응형 웹사이트를 제작하였습니다."
+    ],
+    "tag": ["React", "Typescript", "Styled-components"],
+    "links": {
+      "notion": "https://respected-honey-7eb.notion.site/c6b75d5e4dd340f8a237dc4e8f5c7eee?pvs=4",
+      "github": "https://github.com/HamsterStudent/Portfolio"
+    },
+    "preview": [""],
+    "learned": [""],
+    "comment": [""]
+  },
+  "namesticker": {
+    "name": "NameSticker",
+    "isReleased": true,
+    "keyword": "MINI PROJECT",
+    "summary": "나만의 네임스티커를 만들어 프린트 할 수 있는 웹사이트",
+    "about": "귀여운 폰트를 활용해 보고 싶어서 프린트해서 잘라 쓸 수 있는 네임스티커를 간편하게 만들 수 있는 사이트를 만들어 보았습니다.",
+    "duration": "2023.09.03-2023.09.10",
+    "duty": [
+      "네임스티커 테마를 세가지로 고를 수 있게 만들었습니다.",
+      "각 input에 쓰고 싶은 글자를 쓸 수 있게 제작하였습니다.",
+      "네임스티커 크기에 벗어나지 않도록 글자수 제한을 두었습니다.",
+      "폰트를 선택할 수 있게 만들었고, 스티커에 맞는 최적의 크기로 폰트를 조정해 삽입하였습니다.",
+      "애써 만든 스티커가 새로고침으로 사라지지 않도록 SessionStorage를 사용하여 임시로 저장할 수 있게 만들었습니다.",
+      "리셋 버튼을 누르면 스티커를 다시 만들 수 있게 만들었습니다.",
+      "프린트 버튼을 누르면 컴포넌트가 출력될 수 있게 구현하였습니다."
+    ],
+    "tag": ["React", "Typescript", "Recoil", "Styled-components"],
+    "links": {
+      "demo": "https://name-sticker.vercel.app/",
+      "github": "https://github.com/HamsterStudent/name-sticker"
+    },
+    "preview": ["assets/project/namesticker.png"],
+    "learned": [
+      "세션에 데이터 저장하는 방법을 배웠습니다.",
+      "전역 상태 관리 툴을 사용하여 데이터 상태를 제어하는 방법을 배웠습니다.",
+      "styled components의 조건부 랜더링을 활용해 보았습니다."
+    ],
+    "comment": [
+      "리액트를 사용해 본지 얼마 안 됐을 때, 실용성을 고려하며 만들어 본 미니 프로젝트입니다.\n연필에 붙여 사용하던 띠지, 라벨기 등을 생각하며 만들었습니다."
+    ]
+  },
+
+  "nomad": {
+    "name": "Nomad",
+    "isReleased": true,
+    "keyword": "PROJECT",
+    "summary": "모션디자이너 웹 포트폴리오",
+    "about": "홈페이지 자체의 디자인보다 작업이 부각되는 공간을 요청받고 만든 사이트입니다.\n모션디자이너 특성상 영상을 효과적으로 보여줄 수 있는 포트폴리오를 제작했습니다.\n반응형으로 제작하여 모바일에서도 작업들을 확인할 수 있도록 제작하였습니다.",
+    "duration": "2023.05.20-2023.06.14",
+    "duty": [
+      "중요한 작업과 부각시키면 좋을 부분을 중요도 순으로 재배치하고, 웹사이트 전반의 디자인 작업을 수행했습니다.",
+      "상세페이지 내에 영상을 배치하고, 모션디자인 작업 특성을 고려하여 각 씬을 gif로 배치하는 작업을 진행했습니다.",
+      "웹사이트의 HTML 마크업, CSS 스타일링을 진행했습니다.",
+      "Javascript를 사용하여 스크린 크기에 따라 DOM 요소가 조작되도록 설정하였습니다."
+    ],
+    "tag": ["HTML", "CSS", "JavavScirpt"],
+    "links": {
+      "demo": "https://mika7174.github.io/Nomad.github.io/",
+      "github": "https://github.com/HamsterStudent/motion-portfolio"
+    },
+    "preview": ["assets/project/nomad.png"],
+    "learned": [
+      "Include로 header나 footer같은 비슷한 요소를 묶어 사용하는 방법을 알게 됨"
+    ],
+    "comment": [
+      "디자인 포트폴리오를 제작하면서 어떻게 해야 작업을 해치지 않고 효과적으로 보여줄 수 있을지 고민을 많이 했던 것 같다."
+    ]
+  },
+  "pfizer": {
+    "name": "Pfizer",
+    "isReleased": true,
+    "keyword": "MINI PROJECT",
+    "summary": "지구 정복을 꿈꾸는 햄스터 햄슈🐹의 지구 정복 자금을 위한 쇼핑몰🛸",
+    "about": "국내 화이자 메인 페이지 리디자인",
+    "duration": "2020.12.23-2021.01.14",
+    "duty": ["웹페이지 프로토타입과 디자인 전담", "홈페이지 마크업"],
+    "tag": ["HTML", "SASS", "JavavScirpt"],
+    "links": {
+      "notion": "https://respected-honey-7eb.notion.site/c6b75d5e4dd340f8a237dc4e8f5c7eee?pvs=4",
+      "github": "https://github.com/HamsterStudent/Portfolio"
+    },
+    "preview": ["assets/project/pf.png"],
+    "learned": [
+      "Include로 header나 footer같은 비슷한 요소를 묶어 사용하는 방법을 알게 됨"
+    ],
+    "comment": [""]
+  },
+  "duckyworld": {
+    "name": "Duckyworld",
+    "isReleased": true,
+    "keyword": "WORK",
+    "summary": "더키월드",
+    "about": "스타트업 기업인 더키월드의 카페24 호스팅 기반 자사몰의 유지보수와 리뉴얼 작업을 담당했습니다.",
+    "duration": "2021.11.15-2022.12.27",
+    "duty": [
+      "예약판매 상품과, 아닌 상품을 구분하여 판매를 진행하기 위한 스크립트 작업을 진행하였고, sessionStroage를 활용하여 팝업창을 제작함으로써, 홍보할 상품군을 효과적으로 드러내기 위한 작업을 진행했습니다.",
+      "상품 상세에서 사진과 댓글이 쓰여 있는 단순 댓글 리스트에서, 클릭하면 상세사진을 더 크게 볼 수 있는 모달창 제작하여 사용성 개선을 도모하였습니다.",
+      "상품 출시에 맞추어 랜딩페이지 작업을 진행하였으며, 홈페이지 리뉴얼 작업을 위해 Figma와 XD를 사용해 프로토타입 제작을 도맡았습니다",
+      "카페24 자체 모듈을 활용하여 상품 리스트 슬라이드를 만들어, 효과적으로 한 화면 내에 상품들을 볼 수 있도록 만들었습니다."
+    ],
+    "tag": ["HTML", "CSS", "JavavScirpt", "jQuery"],
+    "links": {
+      "notion": "https://respected-honey-7eb.notion.site/8a8d2872b36449049d70c4ceb8ec42f5?pvs=4",
+      "github": "https://github.com/HamsterStudent/Portfolio"
+    },
+    "preview": ["assets/project/duckyworld.png"],
+    "learned": [
+      "배열을 사용하여 데이터를 필터링해 본 경험",
+      "cafe24모듈을 활용해 웹페이지를 조작해 본 경험"
+    ],
+    "comment": [""]
+  }
+}

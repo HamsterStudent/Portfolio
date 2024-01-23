@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ModalWindow from "../Components/ModalWindow";
-import Sticker from "../Components/Sticker";
-import Construction from "../Components/Construction";
+import ModalWindow from "../shared/components/ModalWindow";
+import Sticker from "../shared/components/Sticker";
+import Construction from "../shared/components/Construction";
 
 const Dungeon = () => {
   const stickerName = "graphql";

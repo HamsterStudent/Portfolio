@@ -9,7 +9,7 @@ import {
   defaultTheme,
 } from "../style/theme";
 import styled from "styled-components";
-import ModalWindow from "../Components/ModalWindow";
+import ModalWindow from "../shared/components/ModalWindow";
 import { useMediaQuery } from "react-responsive";
 
 const ScreenWrap = styled.div`
@@ -148,7 +148,7 @@ const ChooseTheme = () => {
     >
       <ScreenWrap>
         <PreviewScreen>
-          <img src={`assets/${selected}.png`} alt="" />
+          <img src={`assets/theme/preview/${selected}.png`} alt="" />
         </PreviewScreen>
       </ScreenWrap>
       <WallpaperWrap>
