@@ -68,7 +68,7 @@ const Project = () => {
     "thisbrainbitesyou",
     "hamshu",
     "portfolio",
-    "bustago",
+    // "bustago",
     "duckyworld",
     "nomad",
     "namesticker",

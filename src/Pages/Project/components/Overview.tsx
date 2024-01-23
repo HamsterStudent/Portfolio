@@ -67,10 +67,14 @@ const PreviewWrap = styled.div`
 
 const ImgWrap = styled.div`
   width: 98%;
+  height: 300px;
   margin: 10px auto;
   border: solid 1px;
+  max-height: 350px;
+
   img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
   }
