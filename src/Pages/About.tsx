@@ -12,11 +12,11 @@ const ContentBox = styled.div<IDisplay>`
   overflow-y: ${(props) => (props.isDesktop ? "none" : "scroll")};
   padding: 5px;
   line-height: 20px;
+  font: 500 1.4rem "Source Sans 3";
   color: ${(props) => props.theme.textColor};
   :nth-child(2) {
     margin-right: 0;
   }
-
   a {
     :hover {
       color: #e4e4e4;

@@ -16,6 +16,7 @@ const CardWrap = styled.section`
   background: url("assets/paper.jpg");
   background-position: center;
   background-size: cover;
+  font: 500 1.4rem "Source Sans 3";
   h3 {
     width: 100%;
     text-align: center;

@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 
 const ContentsWrap = styled.section`
   padding: 5px;
+  font: 500 1.4rem "Source Sans 3";
   a {
     :hover {
       color: ${(props) => props.theme.invertTextColor};

@@ -23,6 +23,7 @@ import { useMediaQuery } from "react-responsive";
 const ContentWrap = styled.section`
   padding: 20px;
   color: ${(props) => props.theme.textColor};
+  font: 500 1.4rem "Source Sans 3";
 `;
 
 const InputWrap = styled.div`
