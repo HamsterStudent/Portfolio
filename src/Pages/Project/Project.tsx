@@ -119,7 +119,7 @@ const Project = () => {
       <Sticker
         name={"react"}
         width={100}
-        defaultPosition={isDesktop ? { x: 350, y: 400 } : { x: 200, y: 400 }}
+        defaultPosition={isDesktop ? { x: 600, y: 100 } : { x: 200, y: 400 }}
       />
     </>
   );
