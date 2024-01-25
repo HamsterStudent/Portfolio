@@ -23,8 +23,10 @@ export default function useDisplaySticker(stickerName: string) {
   // 스티커 클릭 시 획득 여부를 기록하고, 스티커를 unmount합니다
   const getSticker = (iconName: string) => {
     setStickers(
-      stickers.map((card: IStickerTypes) => {
-        return card.name === iconName ? { ...card, isGet: true } : card;
+      stickers.map((sticker: IStickerTypes) => {
+        return sticker.name === iconName
+          ? { ...sticker, isGet: true }
+          : sticker;
       }),
     );
   };
