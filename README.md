@@ -2,7 +2,7 @@
 
 <!-- [![Notion](/coconut/images/notion.png)](https://respected-honey-7eb.notion.site/Getting-Started-77fd5f68dd0248818cf654362471fcb2) -->
 
-![image](https://github.com/HamsterStudent/2023Portfolio/assets/60914441/d9d67497-f197-4de6-a218-559a026f38e7)
+![Screenshot 2024-01-26 at 10-40-45 Seed Miner](https://github.com/HamsterStudent/Portfolio/assets/60914441/5a7c5133-026f-4d47-affa-e4d4700b81a7)
 
 
 ### 사용 라이브러리
