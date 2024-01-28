@@ -52,6 +52,7 @@ const Wrap = styled.section`
     li {
       position: relative;
       margin-bottom: 10px;
+
       &:last-child {
         margin-bottom: 0;
       }
@@ -120,6 +121,10 @@ const Links = styled.section`
         white-space: nowrap;
         text-overflow: ellipsis;
         word-break: break-all;
+        &:hover {
+          color: #fff;
+          transition: 0.2s ease-out;
+        }
       }
     }
   }
