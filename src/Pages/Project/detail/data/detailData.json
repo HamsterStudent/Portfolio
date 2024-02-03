@@ -15,7 +15,7 @@
     ],
     "tag": ["Next.js", "Typescript", "Styled-components", "GraphQL", "Node.js"],
     "links": {
-      "demo": "https://hamshu-store.vercel.app/"
+      "github": "https://github.com/HamsterStudent/hamshu-store"
     },
     "preview": ["assets/project/hamshu.png"],
     "learned": [
