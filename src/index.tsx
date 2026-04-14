@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import App from "./App";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css');
